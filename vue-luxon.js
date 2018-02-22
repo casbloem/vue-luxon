@@ -22,7 +22,7 @@ export default (Vue, options) => {
       let dtObj = {
         cdt: null,
         parseString(string) {
-          this.cdt = DateTime.fromISO(string);
+          this.cdt = DateTime.fromSQL(string);
           return this;
         },
         diffForHumans() {
