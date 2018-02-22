@@ -1,5 +1,5 @@
 import { DateTime, Interval } from "luxon";
-export default (Vue, Options) => {
+export default (Vue, options) => {
       let objns = Object(options);
       let optionsDefault = {
         i18n: {
