@@ -3,19 +3,19 @@ export default (Vue, options) => {
       let objns = Object(options);
       let optionsDefault = {
         i18n: {
-          year: ["jaar", "jaar"],
-          month: ["maand", "maanden"],
-          day: ["dag", "dagen"],
-          hour: ["uur", "uren"],
-          minute: ["minuut", "minuten"],
-          second: ["seconden", "seconden"],
-          ago: "geleden"
+          year: ['year', 'years'],
+          month: ['month', 'months'],
+          day: ["day", "days"],
+          hour: ["hour", "hours"],
+          minute: ["minute", "minutes"],
+          second: ["second", "seconds"],
+          ago: "ago"
         }
       };
       for (const key in optionsDefault) {
-        const value = options[key];
-        if (value === undefined || !hasOwnProperty.call(options, key)) {
-          options[key] = optionsDefault[key];
+        const value = objns[key];
+        if (value === undefined || !hasOwnProperty.call(objns, key)) {
+          objns[key] = optionsDefault[key];
         }
       }
     
