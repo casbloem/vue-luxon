@@ -6,7 +6,7 @@ Providing a filter for datetime parsing and formating.
 
 ## Install
 ```
-npm install casbloem/vue-luxon --save
+npm install vue-luxon --save
 ```
 
 ## Use
