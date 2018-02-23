@@ -3,7 +3,7 @@ Easy use of Luxon in Vue
 Providing a filter for datetime parsing and formating.
 
 ## Install
-```javascript
+```
 npm install casbloem/vue-luxon --save
 ```
 
@@ -13,4 +13,13 @@ import VueLuxon from 'vue-luxon';
 Vue.use(VueLuxon);
 ```
 
-uc
+### Vue Filter usage
+```javascript
+{{ variable | function }}
+```
+
+```javascript
+{{ item.updated_at | diffForHumans }}
+```
+
+
