@@ -27,6 +27,9 @@ export default (Vue, options) => {
         toFormat(string, format) {
           return this.parseThis(string).toFormat(format);
         },
+        toLocale(string) {
+          return this.parseThis(string).toLocaleString();
+        },
         diffForHumans(string) {
           let cdt = this.parseThis(string);
           if (!cdt || !cdt.isValid) return null;
@@ -53,6 +56,10 @@ export default (Vue, options) => {
 
       Vue.filter("format", function(d, format) {
         return dtObj.toFormat(d, format);
+      });
+
+      Vue.filter("locale", function(d) {
+        return dtObj.toLocale(d);
       });
 
       Vue.filter("diffForHumans", function(d) {
