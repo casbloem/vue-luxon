@@ -20,13 +20,15 @@ export default (Vue, options) => {
       }
     
       let dtObj = {
-        cdt: null,
-        parseString(string) {
-          this.cdt = DateTime.fromSQL(string);
-          return this;
+        parseThis(string) {
+          let dtObj = DateTime.fromSQL(string);
+          return dtObj;
         },
-        diffForHumans() {
-          let cdt = this.cdt;
+        toFormat(string, format) {
+          return this.parseThis(string).toFormat(format);
+        },
+        diffForHumans(string) {
+          let cdt = this.parseThis(string);
           if (!cdt || !cdt.isValid) return null;
           let obj = cdt
             .until(DateTime.local())
@@ -48,9 +50,13 @@ export default (Vue, options) => {
           return `${a[0]} ${a[1][a[0] > 1 ? 1 : 0]} ${objns.i18n.ago}`;
         }
       };
+
+      Vue.filter("format", function(d, format) {
+        return dtObj.toFormat(d, format);
+      });
+
       Vue.filter("diffForHumans", function(d) {
-        let dt = dtObj.parseString(d);
-        return dt.diffForHumans();
+        return dtObj.diffForHumans(d);
       });
 }
     
