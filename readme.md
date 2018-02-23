@@ -3,6 +3,7 @@ Easy use of Luxon in Vue
 Providing a filter for datetime parsing and formating.
 
 ##### Still in alpha
+###### next update (02/23) will contain all the functions.
 
 ## Install
 ```
