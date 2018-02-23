@@ -2,7 +2,7 @@
 Easy use of Luxon in Vue
 Providing a filter for datetime parsing and formating.
 
-⋅⋅* Still in alpha
+##### Still in alpha
 
 ## Install
 ```
