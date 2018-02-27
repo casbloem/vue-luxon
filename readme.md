@@ -3,7 +3,7 @@ Easy use of Luxon in Vue
 Providing a filter for datetime parsing and formating.
 
 ##### Still in alpha
-###### next update (02/23) will contain all the functions.
+###### next update (02/28) will contain all the functions.
 
 ## Install
 ```
@@ -31,3 +31,6 @@ filter | arguments | description
 format | string | a string formatted according to the specified format string
 locale |  | a localized string representing the date
 diffForHumans |  | displaying humanized strings
+
+
+
