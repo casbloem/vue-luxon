@@ -2,7 +2,7 @@
 Easy use of Luxon in Vue
 Providing a filter for datetime parsing and formating.
 
-###### next update (03/01) will contain all functions
+###### next update (05/01) will contain all functions
 
 ## Install
 ```
@@ -12,7 +12,15 @@ npm install vue-luxon --save
 ## Use
 ```javascript
 import VueLuxon from 'vue-luxon';
-Vue.use(VueLuxon);
+Vue.use(VueLuxon,{
+   serverZone: 'UTC',
+   serverFormat: 'U',
+   clientZone: 'local',
+   clientFormat: 'local',
+   beforeFormat: (raw) => {},
+   
+   
+});
 ```
 
 ### Vue Filter usage
