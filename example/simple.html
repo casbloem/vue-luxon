@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue-luxon</title>
+
+</head>
+<body>
+    <div id="app">
+        
+        <div class="">
+            <span v-datetime="fakeServerTime"></span>
+        </div>
+
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                fakeServerTime: '2017-04-20T11:32:00.000-04:00' //UTC ISO
+            }
+        })
+    </script>
+</body>
+</html>
