@@ -1,7 +1,12 @@
 import { DateTime, Interval } from "luxon";
 export default (Vue, options) => {
-      let objns = Object(options);
+      let opts = Object(options);
       let optionsDefault = {
+        serverZone: 'UTC',
+        serverFormat: 'U',
+        clientZone: 'local',
+        clientFormat: 'local',
+        beforeParse: (str) => {},
         i18n: {
           year: ['year', 'years'],
           month: ['month', 'months'],
@@ -13,16 +18,28 @@ export default (Vue, options) => {
         }
       };
       for (const key in optionsDefault) {
-        const value = objns[key];
-        if (value === undefined || !hasOwnProperty.call(objns, key)) {
-          objns[key] = optionsDefault[key];
+        const value = opts[key];
+        if (value === undefined || !hasOwnProperty.call(opts, key)) {
+          opts[key] = optionsDefault[key];
         }
+      }
+
+      let error = (errorMessage) => {
+        let e = {
+          error: errorMessage,
+        }
+        console.error(e);
+        throw errorMessage;
+        return e;
       }
     
       let dtObj = {
-        parseThis(string) {
-          let dtObj = DateTime.fromSQL(string);
-          return dtObj;
+        parseThis(a) {
+          let b = a;
+          if (opts.beforeParse != false) { b = opts.beforeParse(b); } 
+          if (opts.serverFormat == 'U') return DateTime.fromSQL(b, { zone: opts.serverZone });
+          if (opts.serverFormat == 'ISO') return DateTime.fromISO(b, { zone: opts.serverZone });
+          return error('can not parse server datetime string');
         },
         toFormat(string, format) {
           return this.parseThis(string).toFormat(format);
@@ -38,19 +55,19 @@ export default (Vue, options) => {
             .toDuration(["years", "months", "days", "hours", "minutes", "seconds"])
             .toObject();
           let a = obj.years
-            ? [obj.years, objns.i18n.year]
+            ? [obj.years, opts.i18n.year]
             : obj.months
-              ? [obj.months, objns.i18n.month]
+              ? [obj.months, opts.i18n.month]
               : obj.days
-                ? [obj.days, objns.i18n.day]
+                ? [obj.days, opts.i18n.day]
                 : obj.hours
-                  ? [obj.hours, objns.i18n.hour]
+                  ? [obj.hours, opts.i18n.hour]
                   : obj.minutes
-                    ? [obj.minutes, objns.i18n.minute]
-                    : obj.seconds ? [obj.seconds, objns.i18n.second] : false;
+                    ? [obj.minutes, opts.i18n.minute]
+                    : obj.seconds ? [obj.seconds, opts.i18n.second] : false;
           if (a == false) return null;
     
-          return `${a[0]} ${a[1][a[0] > 1 ? 1 : 0]} ${objns.i18n.ago}`;
+          return `${a[0]} ${a[1][a[0] > 1 ? 1 : 0]} ${opts.i18n.ago}`;
         }
       };
 

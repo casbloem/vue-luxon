@@ -17,9 +17,8 @@ Vue.use(VueLuxon,{
    serverFormat: 'U',
    clientZone: 'local',
    clientFormat: 'local',
-   beforeFormat: (raw) => {},
+   beforeParse: () => {},
    
-   
 });
 ```
 
