@@ -1,6 +1,6 @@
 {
   "name": "vue-luxon",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Vue filters for datetimes using Luxon.",
   "main": "vue-luxon.js",
   "scripts": {

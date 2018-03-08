@@ -25,10 +25,10 @@ export default (Vue, options) => {
       }
 
       let parse = (str) => {
+        if(!str) return 'never';
         let a = str,
             sf = opts.serverFormat,
             sz = opts.serverZone;
-
         switch(sf.toLowerCase()) {
           case 'sql':
           case 'laravel':
