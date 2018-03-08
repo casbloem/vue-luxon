@@ -35,10 +35,11 @@ Vue.use(VueLuxon,{
 ```
 
 
-### Vue v-datetime usage
+### Vue v-dt usage
 ```javascript
-<span v-dt="..." v-dt:fromFormat=""></span>
+<span v-dt="..." v-dt:server.format="sql" v-dt:client.showTime="false" v-dt:client.format="local"></span>
 ```
+(next update)
 
 
 ## Formats
