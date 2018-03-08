@@ -39,6 +39,8 @@ export default (Vue, options) => {
             return DateTime.fromHTTP(a, { zone: sz });
           case 'jsdate':
             return DateTime.fromJSDate(a, { zone: sz });
+          case 'rfc2822':
+            return DateTime.fromRFC2822(a, { zone: sz });
           default:
             return DateTime.fromFormat(a, sf, { zone: sz });
         }

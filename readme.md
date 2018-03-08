@@ -41,11 +41,11 @@ Vue.use(VueLuxon,{
 
 format | example | description
 --- | --- | ---
-sql | `2017-05-15 09:24:15` | SQL dates, times, and datetimes
-iso | `2018-01-06T13:07:04.054` | ISO 8601 date time string
+sql | ```2017-05-15 09:24:15``` | SQL dates, times, and datetimes
+iso | ```2018-01-06T13:07:04.054``` | ISO 8601 date time string
 laravel | ```2018-01-08 18:35:21``` | Laravel / Carbon default format
-http | ` ` | 
-jsdate | ` ` | 
+rfc2822 | ``` Tue, 01 Nov 2016 13:23:12 +0630 ``` | RFC 2822
+http | ``` Sun, 06 Nov 1994 08:49:37 GMT ``` | HTTP header specs (RFC 850 and 1123)
 *custom* | `mm:yyyy hh-mm-ss` | tokens you can use: https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens
 
 
