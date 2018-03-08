@@ -31,6 +31,7 @@ export default (Vue, options) => {
 
         switch(sf.toLowerCase()) {
           case 'sql':
+          case 'laravel':
             return DateTime.fromSQL(a, { zone: sz });
           case 'iso':
             return DateTime.fromISO(a, { zone: sz });
