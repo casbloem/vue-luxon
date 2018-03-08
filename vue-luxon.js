@@ -24,31 +24,34 @@ export default (Vue, options) => {
         }
       }
 
-      let error = (errorMessage) => {
-        let e = {
-          error: errorMessage,
+      let parse = (str) => {
+        let a = str,
+            sf = opts.serverFormat,
+            sz = opts.serverZone;
+
+        switch(sf.toLowerCase()) {
+          case 'sql':
+            return DateTime.fromSQL(a, { zone: sz });
+          case 'iso':
+            return DateTime.fromISO(a, { zone: sz });
+          case 'http':
+            return DateTime.fromHTTP(a, { zone: sz });
+          case 'jsdate':
+            return DateTime.fromJSDate(a, { zone: sz });
+          default:
+            return DateTime.fromFormat(a, sf, { zone: sz });
         }
-        console.error(e);
-        throw errorMessage;
-        return e;
       }
     
       let dtObj = {
-        parseThis(a) {
-          let b = a;
-          if (opts.beforeParse != false) { b = opts.beforeParse(b); } 
-          if (opts.serverFormat == 'U') return DateTime.fromSQL(b, { zone: opts.serverZone });
-          if (opts.serverFormat == 'ISO') return DateTime.fromISO(b, { zone: opts.serverZone });
-          return error('can not parse server datetime string');
-        },
         toFormat(string, format) {
-          return this.parseThis(string).toFormat(format);
+          return parse(string).toFormat(format);
         },
         toLocale(string) {
-          return this.parseThis(string).toLocaleString();
+          return parse(string).toLocaleString();
         },
         diffForHumans(string) {
-          let cdt = this.parseThis(string);
+          let cdt = parse(string);
           if (!cdt || !cdt.isValid) return null;
           let obj = cdt
             .until(DateTime.local())

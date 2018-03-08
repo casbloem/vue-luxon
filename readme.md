@@ -18,7 +18,7 @@ Vue.use(VueLuxon,{
    clientZone: 'local',
    clientFormat: 'local',
    beforeParse: () => {},
-   
+   i18n: {...},
 });
 ```
 
@@ -36,6 +36,18 @@ Vue.use(VueLuxon,{
 ```javascript
 {{ item.updated_at | diffForHumans }}
 ```
+
+## Format
+
+format | example | description
+--- | --- | ---
+sql | `2017-05-15 09:24:15` | SQL dates, times, and datetimes
+iso | `2018-01-06T13:07:04.054` | ISO 8601 date time string
+laravel | `2018-01-08 18:35:21` | Laravel / Carbon default format
+http | `` | 
+jsdate | `` | 
+*custom* | `mm:yyyy hh-mm-ss` | tokens you can use: https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens
+
 
 ## Functions / Filters
 filter | arguments | description
