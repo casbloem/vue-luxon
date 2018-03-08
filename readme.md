@@ -1,8 +1,7 @@
 # vue-luxon
-!! note: this is just a setup - first release will be soon !!
 Easy use of Luxon in Vue
 Providing a filter for datetime parsing and formating.
-###### version 0.2 will be released 06/03
+###### version 0.2 will be released 08/03
 
 ## Install
 ```
@@ -22,25 +21,27 @@ Vue.use(VueLuxon,{
 });
 ```
 
-### Vue v-datetime usage
-```javascript
-<span v-datetime="..."></span>
-```
-
-
 ### Vue Filter usage
 ```javascript
 {{ variable | filter }}
 ```
 
 ```javascript
-{{ item.updated_at | locale }}
-
 {{ item.updated_at | format('yyyy-mm') }}
+// result:  2018-02
+
+{{ plan.expires | locale }}
+// result: 23-04-2018   ( depends on clients locale )
 ```
 
-## Format
 
+### Vue v-datetime usage
+```javascript
+<span v-datetime="..."></span>
+```
+
+
+## Formats
 format | example | description
 --- | --- | ---
 sql | ```2017-05-15 09:24:15``` | SQL dates, times, and datetimes
