@@ -37,7 +37,7 @@ Vue.use(VueLuxon,{
 
 ### Vue v-datetime usage
 ```javascript
-<span v-datetime="..."></span>
+<span v-dt="..." v-dt:fromFormat=""></span>
 ```
 
 
