@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vue-luxon</title>
+<link href="app.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app" v-cloak>
+        <div class="container mx-auto px-4">
+                <div class="bg-white mx-auto max-w-md shadow-lg rounded-lg p-4">
+                    <span class="block font-bold my-2 p-1">Filter</span>
+
+<pre class="text-xs overflow-hidden my-6 bg-blue-lightest p-4">
+data() {
+    return {
+        fakeServerTime: '<input class="shadow appearance-none border rounded w-full max-w-xs py-1 px-2 text-grey-darker mb-3" type="text" v-model="fakeServerTime">',
+        fakeServerTimeSQL: '<input class="shadow appearance-none border rounded w-full max-w-xs py-1 px-2 text-grey-darker mb-3" type="text" v-model="fakeServerTimeSQL">',
+    }
+}
+</pre>
+
+    
+
+                    <div class="codeblock">
+                        <pre class="codeblock__pre" v-pre>{{ fakeServerTime | locale }}</pre>
+                        <span class="codeblock__code">{{ fakeServerTime | locale }}</span>
+                    </div>
+
+                    <div class="codeblock">
+                        <pre class="codeblock__pre" v-pre>{{ fakeServerTime | luxon({ clientFormat: 'dd'}) }}</pre>
+                        <span class="codeblock__code">{{ fakeServerTime | luxon({ clientFormat: 'dd'}) }}</span>
+                    </div>
+
+                    <div class="codeblock">
+                        <pre class="codeblock__pre" v-pre>{{ fakeServerTime | format('yy - yyyy - mm') }}</pre>
+                        <span class="codeblock__code">{{ fakeServerTime | format('yy - yyyy - mm') }}</span>
+                    </div>
+
+                    <div class="codeblock">
+                        <pre class="codeblock__pre" v-pre>{{ fakeServerTimeSQL | format('dd-mm-yyyy', { serverFormat: 'SQL' }) }}</pre>
+                        <span class="codeblock__code">{{ fakeServerTimeSQL | format('dd-mm-yyyy', { serverFormat: 'SQL' }) }}</span>
+                    </div>
+
+
+                    
+                </div>
+        </div>
+       
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

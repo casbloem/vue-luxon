@@ -10,7 +10,7 @@ npm install vue-luxon --save
 
 ## Use
 ```javascript
-import VueLuxon from 'vue-luxon';
+const VueLuxon = require('vue-luxon');
 Vue.use(VueLuxon,{
    serverZone: 'UTC',
    serverFormat: 'ISO',
@@ -36,10 +36,11 @@ Vue.use(VueLuxon,{
 
 
 ### Vue v-dt usage
+
 ```javascript
+<span v-dt="..." v-dt:"{ server: { format: 'sql' }, client: { showTime: false, format: 'local' } }"></span>
 <span v-dt="..." v-dt:server.format="sql" v-dt:client.showTime="false" v-dt:client.format="local"></span>
 ```
-(next update)
 
 
 ## Formats
