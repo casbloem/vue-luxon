@@ -19,6 +19,11 @@ Vue.use(VueLuxon,{
    serverFormat: 'ISO',
    clientZone: 'locale',
    clientFormat: 'locale',
+   localeFormat: {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    },
    i18n: {...},
 });
 ```
@@ -34,16 +39,56 @@ Vue.use(VueLuxon,{
 see [vue-luxon example](https://vue-luxon.cblm.nl/example/example.html) to see it live.
 
 
-## Formats
-format | example | description
---- | --- | ---
-sql | ```2017-05-15 09:24:15``` | SQL dates, times, and datetimes
-iso | ```2018-01-06T13:07:04.054``` | ISO 8601 date time string
-laravel | ```2018-01-08 18:35:21``` | Laravel / Carbon default format
-rfc2822 | ``` Tue, 01 Nov 2016 13:23:12 +0630 ``` | RFC 2822
-http | ``` Sun, 06 Nov 1994 08:49:37 GMT ``` | HTTP header specs (RFC 850 and 1123)
-*tokens* | ```` mm:yyyy hh-mm-ss ```` | supported tokens can be found [here](https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens)
 
+
+
+## Options
+prop | options | description
+--- | --- | ---
+serverZone | see zones (default: `utc`) | zone of the given datetimeString
+serverFormat | see formats (default: `iso`) | format of the given datetimeString
+clientZone | see zones (default: `locale`) | zone of the given datetimeString
+clientFormat | see formats (default: `locale`) | format of the given datetimeString
+
+
+## Formats
+format | server-/clientFormat | description | example
+--- | --- | ---
+sql | both | SQL dates, times, and datetimes | ``` 2017-05-15 09:24:15 ```
+laravel | both | Laravel / Carbon default format | sql alias
+iso | both | ISO 8601 date time string | ``` 2018-01-06T13:07:04.054 ```
+rfc2822 | both | RFC 2822 | ``` Tue, 01 Nov 2016 13:23:12 +0630 ```
+http | both | HTTP header specs (RFC 850 and 1123) | ``` Sun, 06 Nov 1994 08:49:37 GMT ```
+*tokens* | both | supported tokens can be found [here](https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens)
+locale | both | locale format (see below)
+
+### localeFormat options
+You can easily change the locale formatting settings.
+```javascript
+// default:
+{
+  localeFormat: {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }
+}
+
+// make it longer:
+{
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  weekday: 'long'
+}
+```
+
+
+
+## Zones
+Can be any zone. eg: `UTC`, `America/New_York`, ...
+
+For the system's local zone you just use 'locale'.
 
 ## Shorthand Filters
 
@@ -79,5 +124,10 @@ http | ``` Sun, 06 Nov 1994 08:49:37 GMT ``` | HTTP header specs (RFC 850 and 11
 // is short for:
 {{ datetimeString | luxon({ clientFormat: 'diffForHumans'}) }}
 ```
+
+
+
+
+
 
 

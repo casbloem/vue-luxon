@@ -7,7 +7,11 @@ module.exports = {
       serverFormat: "ISO",
       clientZone: "locale",
       clientFormat: "locale",
-      beforeParse: str => {},
+      localeFormat: {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      },
       i18n: {
         year: ["year", "years"],
         month: ["month", "months"],
@@ -25,6 +29,36 @@ module.exports = {
         opts[key] = optionsDefault[key];
       }
     }
+
+    var extend = function() {
+      var extended = {};
+      var deep = false;
+      var i = 0;
+      var length = arguments.length;
+      if (Object.prototype.toString.call(arguments[0]) === "[object Boolean]") {
+        deep = arguments[0];
+        i++;
+      }
+      var merge = function(obj) {
+        for (var prop in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+            if (
+              deep &&
+              Object.prototype.toString.call(obj[prop]) === "[object Object]"
+            ) {
+              extended[prop] = extend(true, extended[prop], obj[prop]);
+            } else {
+              extended[prop] = obj[prop];
+            }
+          }
+        }
+      };
+      for (; i < length; i++) {
+        var obj = arguments[i];
+        merge(obj);
+      }
+      return extended;
+    };
 
     let format_dfh = cdt => {
       if (!cdt || !cdt.isValid) return null;
@@ -47,12 +81,12 @@ module.exports = {
       return `${a[0]} ${a[1][a[0] > 1 ? 1 : 0]} ${opts.i18n.ago}`;
     };
 
-    let parse = (str, newOpts) => {
+    let parse = (str, newOpts, forcedOptions) => {
       if (!str) return "never";
-      if (!newOpts) newOpts = {};
+      let eOptions = extend(opts, newOpts, forcedOptions);
       let a = str,
-        sf = newOpts.serverFormat || opts.serverFormat,
-        sz = newOpts.serverZone || opts.serverZone;
+        sf = eOptions.serverFormat,
+        sz = eOptions.serverZone;
 
       switch (sf.toLowerCase()) {
         case "sql":
@@ -72,21 +106,18 @@ module.exports = {
     };
 
     let format = (str, options = {}, forcedOptions = {}) => {
-      let dt = parse(str, options);
-      let a = str;
-      let cf = forcedOptions.clientFormat
-        ? forcedOptions.clientFormat
-        : options && options.clientFormat
-          ? options.clientFormat
-          : opts.clientFormat;
-      let cz =
-        options && options.clientZone ? options.clientZone : opts.clientZone;
+      let dt = parse(str, options, forcedOptions);
+      let eOptions = extend(opts, options, forcedOptions);
+      let a = str,
+        cf = eOptions.clientFormat,
+        cz = eOptions.clientZone,
+        lf = eOptions.localeFormat;
       switch (cf.toLowerCase()) {
         case "diffforhumans":
         case "dfh":
           return format_dfh(dt);
         case "locale":
-          return dt.toLocaleString();
+          return dt.toLocaleString(lf);
         default:
           return dt.toFormat(cf, { zone: cz });
       }
@@ -105,7 +136,7 @@ module.exports = {
       });
     });
     Vue.filter("luxon:locale", function() {
-      return vueluxon(arguments[0], {}, { clientFormat: "locale" });
+      return vueluxon(arguments[0], arguments[1], { clientFormat: "locale" });
     });
     Vue.filter("luxon:diffForHumans", function() {
       return vueluxon(arguments[0], {}, { clientFormat: "diffforhumans" });
