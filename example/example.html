@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>vue-luxon</title>
-<link href="app.css" rel="stylesheet">
+<link href="../example/dist/app.css" rel="stylesheet">
 </head>
 <body>
     <div id="app" v-cloak>
@@ -33,13 +33,13 @@ data() {
                     </div>
 
                     <div class="codeblock">
-                        <pre class="codeblock__pre" v-pre>{{ fakeServerTime | format('yy - yyyy - mm') }}</pre>
-                        <span class="codeblock__code">{{ fakeServerTime | format('yy - yyyy - mm') }}</span>
+                        <pre class="codeblock__pre" v-pre>{{ fakeServerTime | luxon:format('yy - yyyy - mm') }}</pre>
+                        <span class="codeblock__code">{{ fakeServerTime | luxon:format('yy - yyyy - mm') }}</span>
                     </div>
 
                     <div class="codeblock">
-                        <pre class="codeblock__pre" v-pre>{{ fakeServerTimeSQL | format('dd-mm-yyyy', { serverFormat: 'SQL' }) }}</pre>
-                        <span class="codeblock__code">{{ fakeServerTimeSQL | format('dd-mm-yyyy', { serverFormat: 'SQL' }) }}</span>
+                        <pre class="codeblock__pre" v-pre>{{ fakeServerTimeSQL | luxon:format('dd-mm-yyyy', { serverFormat: 'SQL' }) }}</pre>
+                        <span class="codeblock__code">{{ fakeServerTimeSQL | luxon:format('dd-mm-yyyy', { serverFormat: 'SQL' }) }}</span>
                     </div>
 
 
@@ -50,6 +50,6 @@ data() {
 
     </div>
 
-    <script src="app.js"></script>
+    <script src="../example/dist/app.js"></script>
 </body>
 </html>

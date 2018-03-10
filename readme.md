@@ -23,24 +23,13 @@ Vue.use(VueLuxon,{
 
 ### Vue Filter usage
 ```javascript
-{{ variable | filter }}
+{{ datetimeString | luxon }}
+
+// Override options
+{{ datetimeString | luxon({ clientFormat: 'mm-yyyy'}) }}
 ```
 
-```javascript
-{{ item.updated_at | format('yyyy-mm') }}
-// result:  2018-02
-
-{{ plan.expires | locale }}
-// result: 23-04-2018   ( depends on clients locale )
-```
-
-
-### Vue v-dt usage
-
-```javascript
-<span v-dt="..." v-dt:"{ server: { format: 'sql' }, client: { showTime: false, format: 'local' } }"></span>
-<span v-dt="..." v-dt:server.format="sql" v-dt:client.showTime="false" v-dt:client.format="local"></span>
-```
+see ()[vue-luxon example] to see it live.
 
 
 ## Formats
@@ -54,12 +43,37 @@ http | ``` Sun, 06 Nov 1994 08:49:37 GMT ``` | HTTP header specs (RFC 850 and 11
 *custom* | ```` mm:yyyy hh-mm-ss ```` | tokens you can use: https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens
 
 
-## Functions / Filters
-filter | arguments | description
---- | --- | ---
-format() | (string) format | a string formatted according to the specified format string
-locale |  | a localized string representing the date
-diffForHumans |  | displaying humanized strings
+## Shorthand Filters
 
+###luxon:format
+```javascript
+{{ datetimeString | luxon:format('format') }}
+
+// is short for:
+{{ datetimeString | luxon({ clientFormat: 'format'}) }}
+```
+
+###luxon:locale
+```javascript
+{{ datetimeString | luxon:locale }}
+
+// is short for:
+{{ datetimeString | luxon({ clientFormat: 'locale'}) }}
+
+
+
+{{ datetimeString | luxon:locale(['d', 'm']) }}
+
+// is short for:
+{{ datetimeString | luxon({ clientFormat: 'locale', localeUse: { second: false, minute: false, hour: false, day: true, month: true, year: false }) }}
+```
+
+###luxon:diffForHumans
+```javascript
+{{ datetimeString | luxon:diffForHumans }}
+
+// is short for:
+{{ datetimeString | luxon({ clientFormat: 'diffForHumans'}) }}
+```
 
 

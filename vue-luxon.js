@@ -88,8 +88,8 @@ module.exports = {
     };
 
     Vue.filter("luxon", function() { return vueluxon(arguments[0], arguments[1]) } );
-    Vue.filter("format", function() { return vueluxon(arguments[0], arguments[2], { clientFormat: arguments[1] } ) } );
-    Vue.filter("locale", function() { return vueluxon(arguments[0], { clientFormat: 'locale' } ) } );
+    Vue.filter("luxon:format", function() { return vueluxon(arguments[0], arguments[2], { clientFormat: arguments[1] } ) } );
+    Vue.filter("luxon:locale", function() { return vueluxon(arguments[0], { clientFormat: 'locale' } ) } );
 
 
   }

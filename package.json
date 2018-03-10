@@ -4,12 +4,7 @@
   "description": "Vue filters for datetimes using Luxon.",
   "main": "vue-luxon.js",
   "scripts": {
-    "dev": "browserify example/assets/app.js -o example/app.js",
-    "tailwind": "node_modules/.bin/tailwind build example/assets/app.scss -c example/assets/tailwind.js -o example/app.css",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "browser": {
-    "vue": "vue/dist/vue.common.js"
   },
   "repository": {
     "type": "git",
@@ -27,8 +22,5 @@
   "homepage": "https://github.com/casbloem/vue-luxon#readme",
   "dependencies": {
     "luxon": "^0.5.3"
-  },
-  "devDependencies": {
-    "tailwindcss": "^0.4.3"
   }
 }

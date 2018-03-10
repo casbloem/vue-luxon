@@ -1,0 +1,17 @@
+{
+  "name": "vue-luxon-example",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npx webpack --config webpack.config.js"
+  },
+  "devDependencies": {
+    "path": "^0.12.7",
+    "tailwindcss": "^0.4.3",
+    "vue": "^2.5.14",
+    "webpack": "^3.11.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
