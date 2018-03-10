@@ -112,11 +112,11 @@ module.exports = {
         case "dfh": return format_dfh(dt);
         case "locale": return dt.toLocaleString(lf);
         case "sql":
-        case "laravel": return DateTime.toSQL(a, { zone: cz });
-        case "iso": return DateTime.toISO(a, { zone: cz });
-        case "http": return DateTime.toHTTP(a, { zone: cz });
-        case "jsdate": return DateTime.toJSDate(a, { zone: cz });
-        case "rfc2822": return DateTime.toRFC2822(a, { zone: cz });
+        case "laravel": return dt.toSQL(a, { zone: cz });
+        case "iso": return dt.toISO(a, { zone: cz });
+        case "http": return dt.toHTTP(a, { zone: cz });
+        case "jsdate": return dt.toJSDate(a, { zone: cz });
+        case "rfc2822": return dt.toRFC2822(a, { zone: cz });
         default: return dt.toFormat(cf, { zone: cz });
       }
     };
