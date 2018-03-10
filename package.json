@@ -1,7 +1,7 @@
 {
   "name": "vue-luxon",
-  "version": "0.1.4",
-  "description": "Vue filters for datetimes using Luxon.",
+  "version": "0.2.0",
+  "description": "Easy use of DateTime Formating in Vue using Luxon",
   "main": "vue-luxon.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/casbloem/vue-luxon/issues"
   },
-  "homepage": "https://github.com/casbloem/vue-luxon#readme",
+  "homepage": "https://vue-luxon.cblm.nl/example/example.html",
   "dependencies": {
     "luxon": "^0.5.3"
   }

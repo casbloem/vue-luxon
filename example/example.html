@@ -52,6 +52,11 @@ data() {
                         <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTimeSQL | luxon:format('dd-mm-yyyy', { serverFormat: 'SQL' }) }}</span>
                     </div>
 
+                    <div class="my-3 rounded-sm shadow border border-grey-dark">
+                        <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ fakeServerTime | luxon:diffForHumans }}</pre>
+                        <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTime | luxon:diffForHumans }}</span>
+                    </div>
+
 
                     
                 </div>
