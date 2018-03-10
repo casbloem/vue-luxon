@@ -60,6 +60,10 @@ module.exports = {
       return extended;
     };
 
+    let localFormatTemplates = {
+      // Next Update
+    };
+
     let format_dfh = cdt => {
       if (!cdt || !cdt.isValid) return null;
       let obj = cdt

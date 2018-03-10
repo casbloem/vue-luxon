@@ -99,13 +99,13 @@ serverFormat:   <input class="shadow appearance-none border rounded w-full max-w
 
 
                     <div class="my-3 rounded-sm shadow border border-grey-dark">
-                        <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ fakeServerTime | luxon:format('yy - yyyy - mm') }}</pre>
-                        <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTime | luxon:format('yy - yyyy - mm') }}</span>
+                        <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ fakeServerTime | luxon:format('yy - yyyy - MM') }}</pre>
+                        <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTime | luxon:format('yy - yyyy - MM') }}</span>
                     </div>
 
                     <div class="my-3 rounded-sm shadow border border-grey-dark">
-                        <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ fakeServerTimeSQL | luxon:format('dd-mm-yyyy', { serverFormat: 'SQL' }) }}</pre>
-                        <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTimeSQL | luxon:format('dd-mm-yyyy', { serverFormat: 'SQL' }) }}</span>
+                        <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ fakeServerTimeSQL | luxon:format('dd-MM-yyyy', { serverFormat: 'SQL' }) }}</pre>
+                        <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTimeSQL | luxon:format('dd-MM-yyyy', { serverFormat: 'SQL' }) }}</span>
                     </div>
 
                    
