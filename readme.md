@@ -24,7 +24,7 @@ Vue.use(VueLuxon,{
       month: 'long',
       day: 'numeric'
     },
-   i18n: {...},
+   i18n: { },
 });
 ```
 
@@ -33,12 +33,10 @@ Vue.use(VueLuxon,{
 {{ datetimeString | luxon }}
 
 // Override options
-{{ datetimeString | luxon({ clientFormat: 'format'}) }}
+{{ datetimeString | luxon({ options }) }}
 ```
 
 see [vue-luxon example](https://vue-luxon.cblm.nl/example/example.html) to see it live.
-
-
 
 
 
@@ -59,7 +57,7 @@ laravel | Laravel / Carbon default format | sql alias
 iso | ISO 8601 date time string | ``` 2018-01-06T13:07:04.054 ```
 rfc2822 | RFC 2822 | ``` Tue, 01 Nov 2016 13:23:12 +0630 ```
 http | HTTP header specs (RFC 850 and 1123) | ``` Sun, 06 Nov 1994 08:49:37 GMT ```
-*tokens* | see: [format Tokens](#format-tokens) (see below) | 
+*tokens* | supported tokens can be found [here](https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens) | 
 locale | see: [localeFormat](#localeFormat-options) (see below) |
 
 ### localeFormat options
@@ -82,12 +80,11 @@ You can easily change the locale formatting settings.
 }
 ```
 
-### format Tokens
-supported tokens can be found [here](https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens).
-
-
 ## Zones
 Can be any zone. eg: `UTC`, `America/New_York`, ...
+America/New_York
+America/Los_Angeles
+Asia/Tokyo
 
 For the system's local zone you just use `locale`.
 
@@ -128,6 +125,7 @@ For the system's local zone you just use `locale`.
 {{ datetimeString | luxon({ clientFormat: 'diffForHumans'}) }}
 ```
 
+see [vue-luxon example](https://vue-luxon.cblm.nl/example/example.html) to see all the shorthands live.
 
 
 
