@@ -2,14 +2,18 @@
   "name": "vue-luxon-example",
   "version": "1.0.0",
   "scripts": {
-    "dev": "browserify assets/app.js | uglifyjs -c > dist/app.js"
+    "brow": "browserify src/app.js | uglifyjs -c > dist/app.js",
+    "tail": "bash ./node_modules/.bin/tailwind build ../example/src/app.scss -c ../example/tailwind.js -o ../example/src/tailwinded.scss",
+    "sass": "node-sass src/tailwinded.scss dist/app.css --output-style compressed",
+    "dev": "npm run brow && npm run tail && npm run sass"
   },
   "devDependencies": {
+    "tailwindcss": "^0.4.3",
     "vue": "^2.5.14"
   },
   "browser": {
-       "vue": "vue/dist/vue.common.js"
-     },
+    "vue": "vue/dist/vue.common.js"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",

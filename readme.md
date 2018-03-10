@@ -52,15 +52,15 @@ clientFormat | see formats (default: `locale`) | format of the given datetimeStr
 
 
 ## Formats
-format | server-/clientFormat | description | example
+format | description | example
 --- | --- | ---
-sql | both | SQL dates, times, and datetimes | ``` 2017-05-15 09:24:15 ```
-laravel | both | Laravel / Carbon default format | sql alias
-iso | both | ISO 8601 date time string | ``` 2018-01-06T13:07:04.054 ```
-rfc2822 | both | RFC 2822 | ``` Tue, 01 Nov 2016 13:23:12 +0630 ```
-http | both | HTTP header specs (RFC 850 and 1123) | ``` Sun, 06 Nov 1994 08:49:37 GMT ```
-*tokens* | both | see: format Tokens (see below)
-locale | both | see: localeFormat (see below)
+sql | SQL dates, times, and datetimes | ``` 2017-05-15 09:24:15 ```
+laravel | Laravel / Carbon default format | sql alias
+iso | ISO 8601 date time string | ``` 2018-01-06T13:07:04.054 ```
+rfc2822 | RFC 2822 | ``` Tue, 01 Nov 2016 13:23:12 +0630 ```
+http | HTTP header specs (RFC 850 and 1123) | ``` Sun, 06 Nov 1994 08:49:37 GMT ```
+*tokens* | see: [format Tokens](#format-tokens) (see below) | 
+locale | see: [localeFormat](#localeFormat-options) (see below) |
 
 ### localeFormat options
 You can easily change the locale formatting settings.
@@ -76,10 +76,9 @@ You can easily change the locale formatting settings.
 
 // make it longer:
 {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  weekday: 'long'
+  localeFormat: {
+    weekday: 'long'
+  }
 }
 ```
 
@@ -92,9 +91,10 @@ Can be any zone. eg: `UTC`, `America/New_York`, ...
 
 For the system's local zone you just use `locale`.
 
+
 ## Shorthand Filters
 
-#### luxon:format
+#### luxon:format(clientFormat, options)
 ```javascript
 {{ datetimeString | luxon:format('format') }}
 
@@ -102,7 +102,7 @@ For the system's local zone you just use `locale`.
 {{ datetimeString | luxon({ clientFormat: 'format'}) }}
 ```
 
-#### luxon:locale
+#### luxon:locale(localeFormat, options)
 ```javascript
 {{ datetimeString | luxon:locale }}
 
@@ -112,12 +112,13 @@ For the system's local zone you just use `locale`.
 ```
 
 ```javascript
-// NEXT UPDATE
-{{ datetimeString | luxon:locale(['d', 'm']) }}
+{{ datetimeString | luxon:locale({ month: 'long' }) }}
 
 // is short for:
-{{ datetimeString | luxon({ clientFormat: 'locale', localeFormat: { ... }) }}
+{{ datetimeString | luxon({ clientFormat: 'locale', localFormat: { month: 'long' } }) }}
+
 ```
+
 
 #### luxon:diffForHumans
 ```javascript

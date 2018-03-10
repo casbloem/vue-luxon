@@ -4,21 +4,8 @@
 <meta charset="UTF-8">
 <title>vue-luxon</title>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
-<style>
-    body {
-        background-color: rgb(218, 218, 218);
-        }
-    #app {
-        padding: 22px;
-        }
-   .container { 
-       font-family: 'Noto Sans', sans-serif;
-       }
-   [v-cloak] {
-       display: none;
-       }
-</style>
+<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+<link href="dist/app.css" rel="stylesheet">
 </head>
 <body>
     <div id="app" v-cloak>
@@ -26,108 +13,153 @@
                 <div class="bg-white mx-auto max-w-md shadow rounded p-4">
                     <span class="block font-bold my-2 p-1">vue-luxon</span>
 
-<pre class="text-xs overflow-hidden my-6 bg-blue-lightest p-4">
-data() {
-    return {
-        fakeServerTime: '<input class="shadow appearance-none border rounded w-full max-w-xs py-1 px-2 text-grey-darker mb-3" type="text" v-model="fakeServerTime">',
-        fakeServerTimeSQL: '<input class="shadow appearance-none border rounded w-full max-w-xs py-1 px-2 text-grey-darker mb-3" type="text" v-model="fakeServerTimeSQL">',
-    }
-}
-</pre>
-
-    
-                    <div class="my-3 rounded-sm shadow border border-grey-dark">
-                        <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ fakeServerTime | luxon }}</pre>
-                        <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTime | luxon }}</span>
+                    <div class="url-holder">
+                        <a class="url-holder__url" href="https://www.npmjs.com/package/vue-luxon">NPM</a>
+                        <a class="url-holder__url" href="https://github.com/casbloem/vue-luxon">GitHub</a>
                     </div>
 
-                    <div class="my-3 rounded-sm shadow border border-grey-dark">
-                            <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ fakeServerTime | luxon({ clientFormat: 'dd'}) }}</pre>
-                            <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTime | luxon({ clientFormat: 'dd'}) }}</span>
+<div class="codeblock">
+<small class="codeblock__title codeblock__title--vars">VARIABLES</small>
+<pre class="codeblock__pre">
+fakeServerTime:     <input class="codeblock__input" type="text" v-model="fakeServerTime"><br>
+fakeServerTimeSQL:  <input class="codeblock__input" type="text" v-model="fakeServerTimeSQL">
+</pre>
+</div>
+    
+                    <div class="codeblock">
+                        <small class="codeblock__title codeblock__title--code">CODE</small>
+                        <pre class="codeblock__code" v-pre>{{ fakeServerTime | luxon }}</pre>
+                        <span class="codeblock__result"><small class="codeblock__title codeblock__title--result">RESULT</small>{{ fakeServerTime | luxon }}</span>
+                    </div>
+
+                    <div class="codeblock">
+                            <small class="codeblock__title codeblock__title--code">CODE</small>
+                            <pre class="codeblock__code" v-pre>{{ fakeServerTime | luxon({ clientFormat: 'dd'}) }}</pre>
+                            <span class="codeblock__result"><small class="codeblock__title codeblock__title--result">RESULT</small>
+                                {{ fakeServerTime | luxon({ clientFormat: 'dd'}) }}</span>
                         </div>
 
-                        <div class="my-3 rounded-sm shadow border border-grey-dark">
-<pre class="text-xs overflow-hidden bg-blue-lightest p-4">
-datetimeString: <input class="shadow appearance-none border rounded w-full max-w-xs py-1 px-2 text-grey-darker my-1" type="text" v-model="fakedatetimeString"><br>
-clientFormat:   <input class="shadow appearance-none border rounded w-full max-w-xs py-1 px-2 text-grey-darker my-1" type="text" v-model="cformat"><br>
-serverFormat:   <input class="shadow appearance-none border rounded w-full max-w-xs py-1 px-2 text-grey-darker my-1" type="text" v-model="sformat">
+<div class="codeblock">
+<small class="codeblock__title codeblock__title--vars">VARIABLES</small>
+<pre class="codeblock__pre">
+datetimeString:     <input class="codeblock__input" type="text" v-model="fakedatetimeString"><br>
+serverZone:         <input class="codeblock__input" type="text" v-model="szone"><br>
+serverFormat:       <input class="codeblock__input" type="text" v-model="sformat"><br>
+clientFormat:       <input class="codeblock__input" type="text" v-model="cformat"><br>
 </pre>
-                                    
-                                    <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ datetimeString | luxon({ serverFormat: ..., clientFormat: ... }) }}</pre>
-                                    <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakedatetimeString | luxon({ serverFormat: sformat, clientFormat: cformat }) }}</span>
-                                </div>
+    <div class="relative">
+            <small class="codeblock__title codeblock__title--code">CODE</small>
+        <pre class="codeblock__code" v-pre>{{ datetimeString | luxon({ serverZone: ..., serverFormat: ..., clientFormat: ... }) }}</pre>
+    </div>
+   
+    <span class="codeblock__result"><small class="codeblock__title codeblock__title--result">RESULT</small>
+        {{ fakedatetimeString | luxon({ serverFormat: sformat, clientFormat: cformat, serverZone: szone }) }}</span>
 </div>
-<div class="bg-white mx-auto max-w-md shadow rounded p-4 mt-6">
-<span class="block font-bold text-grey-dark p-1">locale shorthand</span>       
 
-            <div class="my-3 rounded-sm shadow border border-grey-dark">
-                    <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ fakeServerTime | luxon:locale }}</pre>
-                    <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTime | luxon:locale }}</span>
+
+</div>
+
+<div class="bg-white mx-auto max-w-md shadow rounded p-4 mt-6">
+<span class="block font-bold text-indigo-dark p-1">locale shorthand</span>       
+
+            <div class="codeblock">
+                    <small class="codeblock__title codeblock__title--code">CODE</small>
+                    <pre class="codeblock__code" v-pre>{{ fakeServerTime | luxon:locale }}</pre>
+                    <span class="codeblock__result">{{ fakeServerTime | luxon:locale }}</span>
                 </div>
 
-                    <div class="my-3 rounded-sm shadow border border-grey-dark">
-                        <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>
+                    <div class="codeblock">
+                        <small class="codeblock__title codeblock__title--code">CODE</small>
+                        <pre class="codeblock__code" v-pre>
 {{ fakeServerTime | luxon:locale(
     { 
-        localeFormat: {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            weekday: 'long'
-        } 
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        weekday: 'long'
     }
 ) }}</pre>
-                        <span class="block w-full bg-purple-lightest p-2 text-purple-darker">
+                        <span class="codeblock__result">
+                        <small class="codeblock__title codeblock__title--result">RESULT</small>
                 {{ fakeServerTime | luxon:locale(
                     { 
-                        localeFormat: {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                            weekday: 'long'
-                        } 
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        weekday: 'long'
                     }
                 ) }}</span>
                     </div>
 
 </div>
 <div class="bg-white mx-auto max-w-md shadow rounded p-4 mt-6">
-<span class="block font-bold text-grey-dark p-1">format shorthand</span>  
+<span class="block font-bold text-indigo-dark p-1">format shorthand</span>  
 
                     
 
 
 
-                    <div class="my-3 rounded-sm shadow border border-grey-dark">
-                        <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ fakeServerTime | luxon:format('yy - yyyy - MM') }}</pre>
-                        <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTime | luxon:format('yy - yyyy - MM') }}</span>
+                    <div class="codeblock">
+                        <small class="codeblock__title codeblock__title--code">CODE</small>
+                        <pre class="codeblock__code" v-pre>{{ fakeServerTime | luxon:format('yy - yyyy - MM') }}</pre>
+                        <span class="codeblock__result">
+                            <small class="codeblock__title codeblock__title--result">RESULT</small>
+                            {{ fakeServerTime | luxon:format('yy - yyyy - MM') }}
+                        </span>
                     </div>
 
-                    <div class="my-3 rounded-sm shadow border border-grey-dark">
-                        <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ fakeServerTimeSQL | luxon:format('dd-MM-yyyy', { serverFormat: 'SQL' }) }}</pre>
-                        <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTimeSQL | luxon:format('dd-MM-yyyy', { serverFormat: 'SQL' }) }}</span>
+                    <div class="codeblock">
+                        <small class="codeblock__title codeblock__title--code">CODE</small>
+                        <pre class="codeblock__code" v-pre>{{ fakeServerTimeSQL | luxon:format('dd-MM-yyyy', { serverFormat: 'SQL' }) }}</pre>
+                        <span class="codeblock__result">
+                                <small class="codeblock__title codeblock__title--result">RESULT</small>
+                                {{ fakeServerTimeSQL | luxon:format('dd-MM-yyyy', { serverFormat: 'SQL' }) }}</span>
                     </div>
 
                    
 
 </div>
 <div class="bg-white mx-auto max-w-md shadow rounded p-4 mt-6">
-<span class="block font-bold text-grey-dark p-1">diffForHumans shorthand</span>  
+<span class="block font-bold text-indigo-dark p-1">diffForHumans shorthand</span>  
 
                 
-                    <div class="my-3 rounded-sm shadow border border-grey-dark">
-                        <pre class="block w-full bg-grey-dark text-grey-lightest text-xs p-2" v-pre>{{ fakeServerTime | luxon:diffForHumans }}</pre>
-                        <span class="block w-full bg-purple-lightest p-2 text-purple-darker">{{ fakeServerTime | luxon:diffForHumans }}</span>
+                    <div class="codeblock">
+                        <small class="codeblock__title codeblock__title--code">CODE</small>
+                        <pre class="codeblock__code" v-pre>{{ fakeServerTime | luxon:diffForHumans }}</pre>
+                        <span class="codeblock__result">
+                            <small class="codeblock__title codeblock__title--result">RESULT</small>
+                            {{ fakeServerTime | luxon:diffForHumans }}
+                        </span>
+                    </div>
+
+                    <div class="codeblock">
+
+                            <small class="codeblock__title codeblock__title--vars">VARIABLES</small>
+<pre class="codeblock__pre">
+datetimeString: <input class="codeblock__input" type="text" v-model="fakedatetimeString2"><br>
+</pre>
+                    <div class="relative">
+                        <small class="codeblock__title codeblock__title--code">CODE</small>
+                        <pre class="codeblock__code" v-pre>{{ datetimeString | luxon:diffForHumans }}</pre>
+                    </div>
+
+                        <span class="codeblock__result">
+                            <small class="codeblock__title codeblock__title--result">RESULT</small>
+                            {{ fakedatetimeString2 | luxon:diffForHumans }}
+                        </span>
                     </div>
 
 
                     
                 </div>
+
+
+                
         </div>
        
 
     </div>
 
-    <script src="../example/dist/app.js"></script>
+    <script src="dist/app.js"></script>
 </body>
 </html>

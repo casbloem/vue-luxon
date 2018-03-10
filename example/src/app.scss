@@ -1,0 +1,60 @@
+
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i');
+
+ @tailwind preflight;
+
+    body {
+    background-color: rgb(218, 218, 218);
+    }
+    #app {
+        padding: 22px;
+        }
+   .container { 
+       font-family: 'Noto Sans', sans-serif;
+       }
+   [v-cloak] {
+       display: none;
+       }
+
+    .url-holder { @apply .text-blue-darker .uppercase .text-sm .block .mx-auto .p-1 .py-2; font-family: 'Abel', sans-serif;
+        &__url { @apply .text-blue-darker .no-underline .px-2; }
+        &__url:hover { @apply .text-blue; }
+        }
+
+    .codeblock {
+        @apply .my-3 .rounded-sm .shadow .border .border-indigo .relative;
+                                        
+        .codeblock__variables { @apply .absolute .pin-t .pin-l .opacity-75 .text-indigo-darker .text-sm .p-2; 
+            font-family: 'Abel', sans-serif;
+        }
+        .codeblock__title { @apply .absolute .pin-t .pin-l .opacity-75 .text-sm .p-2;
+            font-family: 'Abel', sans-serif;
+
+            &--vars {
+                    @apply .text-indigo-darker;
+                }
+            &--code {
+                    @apply .text-indigo-light;
+                }
+            &--result {
+                    @apply .text-indigo-darker;
+                }
+        }
+
+        .codeblock__input {
+            @apply .shadow .appearance-none .border .rounded .w-full .max-w-xs .py-1 .px-2 .text-indigo-darker .my-1;
+            }
+
+        .codeblock__code {
+            @apply .block .w-full .bg-indigo-darker .text-indigo-lightest .text-xs .p-3 .pt-8;
+            }
+
+        .codeblock__result {
+            @apply .block .w-full .bg-purple-lightest .p-3 .pt-8 .text-purple-darker .relative;
+            }
+    
+        .codeblock__pre { @apply .text-xs .overflow-hidden .bg-indigo-lighter .text-indigo-darker .p-2 .px-4 .pt-6; }
+      
+    }
+
+ @tailwind utilities;

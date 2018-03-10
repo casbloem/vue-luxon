@@ -47,8 +47,10 @@ module.exports = {
         hour: ["hour", "hours"],
         minute: ["minute", "minutes"],
         second: ["second", "seconds"],
-        ago: "ago"
-      }
+        ago: "ago",
+        in: "in"
+      },
+      invalid: (reason) => { return `invalid: ${reason}`; }
     }, optionsUser);
 
     
@@ -58,15 +60,14 @@ module.exports = {
     };
 
     let format_dfh = cdt => {
-      if (!cdt || !cdt.isValid) return null;
+      if (!cdt || !cdt.isValid) return optionsGlobal.invalid(cdt.invalid);
       let obj = cdt
         .until(DateTime.local())
         .toDuration(["years", "months", "days", "hours", "minutes", "seconds"])
         .toObject();
+      let txt = {};
       let opts = optionsGlobal;
-      let a = obj.years
-        ? [obj.years, opts.i18n.year]
-        : obj.months
+      let a = obj.years ? [obj.years, opts.i18n.year] : obj.months
           ? [obj.months, opts.i18n.month]
           : obj.days
             ? [obj.days, opts.i18n.day]
@@ -75,8 +76,27 @@ module.exports = {
               : obj.minutes
                 ? [obj.minutes, opts.i18n.minute]
                 : obj.seconds ? [obj.seconds, opts.i18n.second] : false;
-      if (a == false) return null;
-      return `${a[0]} ${a[1][a[0] > 1 ? 1 : 0]} ${opts.i18n.ago}`;
+            txt.in = null, txt.ago = opts.i18n.ago;
+      if (a == false) {
+        obj = DateTime.local()
+        .until(cdt)
+        .toDuration(["years", "months", "days", "hours", "minutes", "seconds"])
+        .toObject();
+      a = obj.years
+      ? [obj.years, opts.i18n.year]
+      : obj.months
+        ? [obj.months, opts.i18n.month]
+        : obj.days
+          ? [obj.days, opts.i18n.day]
+          : obj.hours
+            ? [obj.hours, opts.i18n.hour]
+            : obj.minutes
+              ? [obj.minutes, opts.i18n.minute]
+              : obj.seconds ? [obj.seconds, opts.i18n.second] : false;
+              txt.in = opts.i18n.in, txt.ago = null;
+    }
+
+      return `${txt.in||''} ${a[0]} ${a[1][a[0] > 1 ? 1 : 0]} ${txt.ago||''}`;
     };
 
     const parse = (str, options) => {
@@ -84,7 +104,7 @@ module.exports = {
       let a = str,
         sf = options.serverFormat,
         sz = options.serverZone;
-
+      
       switch (sf.toLowerCase()) {
         case "sql":
         case "laravel":
@@ -103,6 +123,7 @@ module.exports = {
     const format = (str, optionsFilter = {}, optionsForce = {}) => {
       let options = extend(optionsGlobal, optionsFilter, optionsForce);
       let dt = parse(str, options);
+      if (dt.isValid == false) return optionsGlobal.invalid(dt.invalid);
       let a = str,
         cf = options.clientFormat,
         cz = options.clientZone,
@@ -134,12 +155,11 @@ module.exports = {
       });
     });
     Vue.filter("luxon:locale", function() {
-      return vueluxon(arguments[0], arguments[1], { clientFormat: "locale" });
+      return vueluxon(arguments[0], arguments[2], { clientFormat: "locale", localeFormat: arguments[1] });
     });
     Vue.filter("luxon:diffForHumans", function() {
-      return vueluxon(arguments[0], {}, { clientFormat: "diffforhumans" });
+      return vueluxon(arguments[0], arguments[1], { clientFormat: "diffforhumans" });
     });
 
-    return parse;
   }
 };
