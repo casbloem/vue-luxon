@@ -15,7 +15,7 @@
     "luxon"
   ],
   "author": "Cas Bloem",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/casbloem/vue-luxon/issues"
   },
