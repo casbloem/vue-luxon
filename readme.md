@@ -4,7 +4,7 @@ Providing a filter for datetime parsing and formating.
 ###### !! still in alpha !!
 
 ## Example
-You can find an example at https://vue-luxon.cblm.nl/example/example.html
+You can find an example at https://packages.cblm.nl/examples/vue-luxon
 
 ## Install
 ```
@@ -36,7 +36,7 @@ Vue.use(VueLuxon,{
 {{ datetimeString | luxon({ options }) }}
 ```
 
-see [vue-luxon example](https://vue-luxon.cblm.nl/example/example.html) to see it live.
+see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see it live.
 
 
 
@@ -125,7 +125,7 @@ For the system's local zone you just use `locale`.
 {{ datetimeString | luxon({ clientFormat: 'diffForHumans'}) }}
 ```
 
-see [vue-luxon example](https://vue-luxon.cblm.nl/example/example.html) to see all the shorthands live.
+see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see all the shorthands live.
 
 
 
