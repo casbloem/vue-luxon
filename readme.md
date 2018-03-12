@@ -2,6 +2,7 @@
 Easy use of Luxon in Vue
 Providing a filter for datetime parsing and formating.
 
+[![GitHub version](https://badge.fury.io/gh/casbloem%2Fvue-luxon.svg)](https://badge.fury.io/gh/casbloem%2Fvue-luxon)
 [![npm version](https://badge.fury.io/js/vue-luxon.svg)](https://badge.fury.io/js/vue-luxon)
 
 ## Example
