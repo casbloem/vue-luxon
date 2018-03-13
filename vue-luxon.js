@@ -1,59 +1,47 @@
 let { DateTime, Interval } = require("luxon");
 module.exports = {
   install: function(Vue, optionsUser) {
-    let extend = function() {
-      var extended = {};
-      var deep = false;
-      var i = 0;
-      var length = arguments.length;
-      if (Object.prototype.toString.call(arguments[0]) === "[object Boolean]") {
-        deep = arguments[0];
-        i++;
-      }
-      var merge = function(obj) {
-        for (var prop in obj) {
-          if (Object.prototype.hasOwnProperty.call(obj, prop)) {
-            if (
-              deep &&
-              Object.prototype.toString.call(obj[prop]) === "[object Object]"
-            ) {
-              extended[prop] = extend(true, extended[prop], obj[prop]);
-            } else {
-              extended[prop] = obj[prop];
-            }
-          }
-        }
-      };
-      for (; i < length; i++) {
+   const extend = function(out) {
+      out = out || {};
+      for (var i = 1, len = arguments.length; i < len; ++i) {
         var obj = arguments[i];
-        merge(obj);
-      }
-      return extended;
+        if (!obj) continue;
+        for (var key in obj) {
+          if (!obj.hasOwnProperty(key)) continue;
+          if (Object.prototype.toString.call(obj[key]) === "[object Object]") {
+            out[key] = extend(out[key], obj[key]); continue;
+          } out[key] = obj[key];
+        }
+      } return out;
     };
-    const optionsGlobal = extend({
-      serverZone: "UTC",
-      serverFormat: "ISO",
-      clientZone: "locale",
-      clientFormat: "locale",
-      localeFormat: {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      },
-      i18n: {
-        year: ["year", "years"],
-        month: ["month", "months"],
-        day: ["day", "days"],
-        hour: ["hour", "hours"],
-        minute: ["minute", "minutes"],
-        second: ["second", "seconds"],
-        ago: "ago",
-        in: "in"
-      },
-      invalid: (reason) => { return `invalid: ${reason}`; }
-    }, optionsUser);
 
-    
+    const optionsGlobal = extend(
+      {
+        serverZone: "UTC",
+        serverFormat: "ISO",
+        clientZone: "locale",
+        clientFormat: "locale",
+        localeFormat: {
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        },
+        i18n: {
+          year: ["year", "years"],
+          month: ["month", "months"],
+          day: ["day", "days"],
+          hour: ["hour", "hours"],
+          minute: ["minute", "minutes"],
+          second: ["second", "seconds"],
+          ago: "ago",
+          in: "in"
+        },
+        invalid: reason => {
+          return `invalid: ${reason}`;
+        }
+      },
+      optionsUser
+    );
 
     let localFormatTemplates = {
       // Next Update
@@ -67,7 +55,9 @@ module.exports = {
         .toObject();
       let txt = {};
       let opts = optionsGlobal;
-      let a = obj.years ? [obj.years, opts.i18n.year] : obj.months
+      let a = obj.years
+        ? [obj.years, opts.i18n.year]
+        : obj.months
           ? [obj.months, opts.i18n.month]
           : obj.days
             ? [obj.days, opts.i18n.day]
@@ -76,27 +66,35 @@ module.exports = {
               : obj.minutes
                 ? [obj.minutes, opts.i18n.minute]
                 : obj.seconds ? [obj.seconds, opts.i18n.second] : false;
-            txt.in = null, txt.ago = opts.i18n.ago;
+      (txt.in = null), (txt.ago = opts.i18n.ago);
       if (a == false) {
         obj = DateTime.local()
-        .until(cdt)
-        .toDuration(["years", "months", "days", "hours", "minutes", "seconds"])
-        .toObject();
-      a = obj.years
-      ? [obj.years, opts.i18n.year]
-      : obj.months
-        ? [obj.months, opts.i18n.month]
-        : obj.days
-          ? [obj.days, opts.i18n.day]
-          : obj.hours
-            ? [obj.hours, opts.i18n.hour]
-            : obj.minutes
-              ? [obj.minutes, opts.i18n.minute]
-              : obj.seconds ? [obj.seconds, opts.i18n.second] : false;
-              txt.in = opts.i18n.in, txt.ago = null;
-    }
+          .until(cdt)
+          .toDuration([
+            "years",
+            "months",
+            "days",
+            "hours",
+            "minutes",
+            "seconds"
+          ])
+          .toObject();
+        a = obj.years
+          ? [obj.years, opts.i18n.year]
+          : obj.months
+            ? [obj.months, opts.i18n.month]
+            : obj.days
+              ? [obj.days, opts.i18n.day]
+              : obj.hours
+                ? [obj.hours, opts.i18n.hour]
+                : obj.minutes
+                  ? [obj.minutes, opts.i18n.minute]
+                  : obj.seconds ? [obj.seconds, opts.i18n.second] : false;
+        (txt.in = opts.i18n.in), (txt.ago = null);
+      }
 
-      return `${txt.in||''} ${a[0]} ${a[1][a[0] > 1 ? 1 : 0]} ${txt.ago||''}`;
+      return `${txt.in || ""} ${a[0]} ${a[1][a[0] > 1 ? 1 : 0]} ${txt.ago ||
+        ""}`;
     };
 
     const parse = (str, options) => {
@@ -104,7 +102,7 @@ module.exports = {
       let a = str,
         sf = options.serverFormat,
         sz = options.serverZone;
-      
+
       switch (sf.toLowerCase()) {
         case "sql":
         case "laravel":
@@ -115,8 +113,10 @@ module.exports = {
           return DateTime.fromHTTP(a, { zone: sz });
         case "jsdate":
           return DateTime.fromJSDate(a, { zone: sz });
-        case "rfc2822": return DateTime.fromRFC2822(a, { zone: sz });
-        default: return DateTime.fromFormat(a, sf, { zone: sz });
+        case "rfc2822":
+          return DateTime.fromRFC2822(a, { zone: sz });
+        default:
+          return DateTime.fromFormat(a, sf, { zone: sz });
       }
     };
 
@@ -130,15 +130,23 @@ module.exports = {
         lf = options.localeFormat;
       switch (cf.toLowerCase()) {
         case "diffforhumans":
-        case "dfh": return format_dfh(dt);
-        case "locale": return dt.toLocaleString(lf);
+        case "dfh":
+          return format_dfh(dt);
+        case "locale":
+          return dt.toLocaleString(lf);
         case "sql":
-        case "laravel": return dt.toSQL(a, { zone: cz });
-        case "iso": return dt.toISO(a, { zone: cz });
-        case "http": return dt.toHTTP(a, { zone: cz });
-        case "jsdate": return dt.toJSDate(a, { zone: cz });
-        case "rfc2822": return dt.toRFC2822(a, { zone: cz });
-        default: return dt.toFormat(cf, { zone: cz });
+        case "laravel":
+          return dt.toSQL(a, { zone: cz });
+        case "iso":
+          return dt.toISO(a, { zone: cz });
+        case "http":
+          return dt.toHTTP(a, { zone: cz });
+        case "jsdate":
+          return dt.toJSDate(a, { zone: cz });
+        case "rfc2822":
+          return dt.toRFC2822(a, { zone: cz });
+        default:
+          return dt.toFormat(cf, { zone: cz });
       }
     };
 
@@ -155,11 +163,15 @@ module.exports = {
       });
     });
     Vue.filter("luxon:locale", function() {
-      return vueluxon(arguments[0], arguments[2], { clientFormat: "locale", localeFormat: arguments[1] });
+      return vueluxon(arguments[0], arguments[2], {
+        clientFormat: "locale",
+        localeFormat: arguments[1]
+      });
     });
     Vue.filter("luxon:diffForHumans", function() {
-      return vueluxon(arguments[0], arguments[1], { clientFormat: "diffforhumans" });
+      return vueluxon(arguments[0], arguments[1], {
+        clientFormat: "diffforhumans"
+      });
     });
-
   }
 };
