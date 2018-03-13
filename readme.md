@@ -4,7 +4,7 @@ Providing a filter for datetime parsing and formating.
 
 [![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
 [![npm version](https://img.shields.io/npm/v/vue-luxon.svg)](https://npmjs.com/package/vue-mny)
-[![npm version](https://img.shields.io/npm/dt/vue-luxon.svg](https://npmjs.com/package/vue-mny)
+[![npm downloads](https://img.shields.io/npm/dt/vue-luxon.svg](https://npmjs.com/package/vue-mny)
 
 
 ## Example
