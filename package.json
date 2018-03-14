@@ -1,6 +1,6 @@
 {
   "name": "vue-luxon",
-  "version": "0.2.7",
+  "version": "0.3.0-beta",
   "description": "Easy use of DateTime Formating in Vue using Luxon",
   "main": "vue-luxon.js",
   "scripts": {
@@ -21,6 +21,6 @@
   },
   "homepage": "https://packages.cblm.nl/examples/vue-luxon",
   "dependencies": {
-    "luxon": "^0.5.3"
+    "luxon": "0.5.6"
   }
 }

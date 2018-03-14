@@ -6,6 +6,8 @@ Providing a filter for datetime parsing and formating.
 [![npm version](https://img.shields.io/npm/v/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![npm downloads](https://img.shields.io/npm/dt/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 
+#### version: 0.3.0-alpha
+
 
 ## Example
 You can find an example at https://packages.cblm.nl/examples/vue-luxon
@@ -23,14 +25,9 @@ Vue.use(VueLuxon,{
    serverFormat: 'ISO',
    clientZone: 'locale',
    clientFormat: 'locale',
-   localeFormat: {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    },
-   i18n: { },
 });
 ```
+[click here to see all available options](#options-defaults)
 
 ### Vue Filter usage
 ```javascript
@@ -53,6 +50,14 @@ clientZone | see zones (default: `locale`) | zone of the given datetimeString
 clientFormat | see formats (default: `locale`) | format of the given datetimeString
 
 
+## Zones
+Can be any zone. eg: `UTC`, `America/New_York`, `Asia/Tokyo`, ...
+
+For the system's local zone you use `locale`.
+
+
+
+
 ## Formats
 format | description | example
 --- | --- | ---
@@ -66,6 +71,8 @@ locale | see: [localeFormat](#localeFormat-options) (see below) |
 
 ### localeFormat options
 You can easily change the locale formatting settings.
+The keys that can be set are `year`, `month`, ...
+
 ```javascript
 // default:
 {
@@ -75,22 +82,68 @@ You can easily change the locale formatting settings.
     day: 'numeric'
   }
 }
+```
 
-// make it longer:
+
+## Difference for Humans (diffForHumans)
+
+```javascript
 {
-  localeFormat: {
-    weekday: 'long'
-  }
+  diffForHumans: {
+    past: ":a :w :ago",
+    now: "just now",
+    future: ":in :a :w",
+    durations: ["years", "months", "days", "hours", "minutes", "seconds"]
+  },
+}
+```
+use `:a` to define where to place the amount, `:w` for the word (day, years, etc..), `:in` and `:ago` for the translation of 'in' and 'ago'.
+
+
+```javascript
+{
+    durations: ['years', 'months', 'days', 'hours', 'minutes', 'seconds'],
+}
+// RESULT:  " 32 seconds ago "
+
+// Now remove the seconds...
+{
+    durations: ['years', 'months', 'days', 'hours', 'minutes'],
+}
+// RESULT:  " just now "
+```
+
+
+
+## i18n
+```javascript
+{
+ i18n: {
+    lang: "en-EN",
+    year: "[one]year|[other]years",
+    month: "[one]month|[other]months",
+    week: "[one]week|[other]weeks",
+    day: "[one]day|[other]days",
+    hour: "[one]hour|[other]hours",
+    minute: "[one]minute|[other]minutes",
+    second: "[one]second|[other]seconds",
+    ago: 'ago',
+    in: 'in',
+  },
 }
 ```
 
-## Zones
-Can be any zone. eg: `UTC`, `America/New_York`, ...
-America/New_York
-America/Los_Angeles
-Asia/Tokyo
+#### more than two plural forms
+The BCP 47 lang property is used for plural sensitive formatting when using diffForHumans.
+Different languages can have different rules on how to change words, depending on the number qualifying the word.
 
-For the system's local zone you just use `locale`.
+`en-EN` only has 2 plural forms, so there are only 2 pluralCategories (`one` and `other`).
+However, some languages can have more plural forms. ( `zero` `one` `two` `few` `many` `other` )
+
+
+
+
+
 
 
 ## Shorthand Filters
@@ -129,10 +182,50 @@ For the system's local zone you just use `locale`.
 {{ datetimeString | luxon({ clientFormat: 'diffForHumans'}) }}
 ```
 
+```javascript
+{{ datetimeString | luxon:diffForHumans( diffForHumansOptions ) }}
+```
+
+
 see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see all the shorthands live.
 
 
 
 
 
+## default options
+```javascript
+ {
+    serverZone: "UTC",
+    serverFormat: "ISO",
+    clientZone: "locale",
+    clientFormat: "locale",
+    localeFormat: {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    },
+    diffForHumans: {
+      past: ":a :w :ago",
+      now: "just now",
+      future: ":in :a :w",
+      durations: ["years", "months", "days", "hours", "minutes", "seconds"]
+    },
+    i18n: {
+      lang: "en-EN",
+      year: "[one]year|[other]years",
+      month: "[one]month|[other]months",
+      week: "[one]week|[other]weeks",
+      day: "[one]day|[other]days",
+      hour: "[one]hour|[other]hours",
+      minute: "[one]minute|[other]minutes",
+      second: "[one]second|[other]seconds",
+      ago: "ago",
+      in: "in"
+    },
+    invalid: reason => {
+      return `invalid: ${reason}`;
+    }
+}
+```
 
