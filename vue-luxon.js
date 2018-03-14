@@ -1,9 +1,9 @@
 let { DateTime, Interval } = require("luxon");
 module.exports = {
   install: function(Vue, optionsUser) {
-   const extend = function(out) {
-      out = out || {};
-      for (var i = 1, len = arguments.length; i < len; ++i) {
+   const extend = function() {
+      let out = {};
+      for (var i = 0, len = arguments.length; i < len; ++i) {
         var obj = arguments[i];
         if (!obj) continue;
         for (var key in obj) {
