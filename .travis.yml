@@ -1,2 +1,2 @@
-language: javascript
+language: node-js
 instsll: - npm install
