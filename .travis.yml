@@ -1,2 +1,3 @@
 language: node-js
-instsll: - npm install
+before_script:
+  - npm install
