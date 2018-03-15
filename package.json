@@ -31,6 +31,6 @@
     "eslint": "^4.18.2"
   },
   "scripts": {
-    "test": "eslint test.js"
+    "test": "eslint --no-eslintrc test.js"
   }
 }
