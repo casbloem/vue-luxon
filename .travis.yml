@@ -1,4 +1,2 @@
 language: node-js
-before_script:
-  - npm i -g eslint
 script: npm test
