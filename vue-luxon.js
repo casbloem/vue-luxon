@@ -169,7 +169,7 @@ module.exports = {
     Vue.filter("luxon:locale", function() {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: "locale",
-        localeFormat: arguments[1]
+        localeFormat: extend(optionsGlobal.localeFormat, arguments[1])
       });
     });
     Vue.filter("luxon:diffForHumans", function() {
