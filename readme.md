@@ -1,43 +1,52 @@
 # vue-luxon
-Easy use of Luxon in Vue, Providing a filter for datetime parsing and formating.
-Also includes `diffForHumans` function, for all languages!
+Easy use of Luxon in Vue, datetime parsing and formating.
 
 [![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
 [![npm version](https://img.shields.io/npm/v/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![npm downloads](https://img.shields.io/npm/dt/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![Build Status](https://travis-ci.org/casbloem/vue-luxon.svg?branch=master)](#)
 
-#### version: 0.3.1
-(1 week in development, more doc and func soon!)
 
 
 
-## Example
+#### Example
 You can find an example at https://packages.cblm.nl/examples/vue-luxon
+
+
 
 ## Install
 ```
 npm install vue-luxon --save
 ```
 
-## Use
+#### Use
+
 ```javascript
 const VueLuxon = require('vue-luxon');
-Vue.use(VueLuxon,{
-   serverZone: 'UTC',
-   serverFormat: 'ISO',
-   clientZone: 'locale',
-   clientFormat: 'locale',
+Vue.use(VueLuxon, {
+    serverZone: 'utc',
+    serverFormat: 'iso',
+    clientZone: 'local',
+    clientFormat: 'local',
 });
 ```
-[click here to see all available options](#options-defaults)
+The default settings expect the given datetime string to be an  `utc`  `iso`  datetime string, and will output the default locale format. [Learn more about the options here](#options).
 
-### Vue Filter usage
+
+
+
+
+#### Usage
+
+as a filter
 ```javascript
 {{ datetimeString | luxon }}
+```
 
-// Override options
-{{ datetimeString | luxon({ options }) }}
+or using v-luxon
+```vue
+<span v-luxon>018-03-15T09:08:07+00:00</span>
+<span v-text="datetimeString" v-luxon></span>
 ```
 
 see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see it live.
@@ -45,6 +54,7 @@ see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see it l
 
 
 ## Options
+
 prop | options | description
 --- | --- | ---
 serverZone | see zones (default: `utc`) | zone of the given datetimeString
@@ -52,16 +62,64 @@ serverFormat | see formats (default: `iso`) | format of the given datetimeString
 clientZone | see zones (default: `locale`) | zone of the given datetimeString
 clientFormat | see formats (default: `locale`) | format of the given datetimeString
 
-
-## Zones
-Can be any zone. eg: `UTC`, `America/New_York`, `Asia/Tokyo`, ...
-
-For the system's local zone you use `locale`.
+[click here to see all available options](#options-defaults)
 
 
 
+#### Override options
 
-## Formats
+You can override the default options easily.
+
+##### with v-luxon
+
+```vue
+<span v-luxon="{ options }">
+```
+
+##### as filter
+
+```javascript
+{{ datetimeString | luxon({ options }) }}
+```
+
+
+
+##### Filter shorthand's
+
+When using filter shorthand's, the first argument will be the option value where the shorthand is for.
+
+```javascript
+{{ datetimeString | luxon:format('dd-MM-yyyy') }}
+
+// is short for:
+{{ datetimeString | luxon({ clientFormat: 'dd-MM-yyyy'}) }}
+```
+
+You can still adjust other options via the second argument:
+
+```javascript
+{{ datetimeString | luxon:format('dd-MM-yyyy', { serverFormat: 'sql' }) }}
+
+// is short for:
+{{ datetimeString | luxon({ clientFormat: 'dd-MM-yyyy', serverFormat: 'sql' }) }}
+```
+
+You can find [all the shorthand's here](#filter-shorthands).
+
+
+
+### Zones
+
+eg: `UTC`, `America/New_York`, `Asia/Tokyo`, ...
+
+For the systems local zone you use `locale`.
+
+There is a [list on wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+
+
+
+### Formats
 format | description | example
 --- | --- | ---
 sql | SQL dates, times, and datetimes | ``` 2017-05-15 09:24:15 ```
@@ -74,10 +132,10 @@ locale | see: [localeFormat](#localeFormat-options) (see below) |
 
 ### localeFormat options
 You can easily change the locale formatting settings.
-The keys that can be set are `year`, `month`, ...
+The keys that can be set are in the table below.
 
 ```javascript
-// default:
+// example:
 {
   localeFormat: {
     year: 'numeric',
@@ -86,6 +144,38 @@ The keys that can be set are `year`, `month`, ...
   }
 }
 ```
+
+
+
+**weekday**
+The representation of the weekday. Possible values are `'narrow'`, `'short'`, `'long'`.
+
+**era**
+The representation of the era. Possible values are `'narrow'`, `'short'`, `'long'`.
+
+**year**
+The representation of the year. Possible values are `'numeric'`, `'2-digit'`.
+
+**month**
+The representation of the month. Possible values are `'numeric'`, `'2-digit'`, `'narrow'`, `'short'`, `'long'`.
+
+**day**
+The representation of the day. Possible values are `'numeric'`, `'2-digit'`.
+
+**hour**
+The representation of the hour. Possible values are `'numeric'`, `'2-digit'`.
+
+**minute**
+The representation of the minute. Possible values are `'numeric'`, `'2-digit'`.
+
+**second**
+The representation of the second. Possible values are `'numeric'`, `'2-digit'`.
+
+**timeZoneName**
+The representation of the time zone name. Possible values are `'short'`, `'long'`.
+
+
+
 
 
 ## Difference for Humans (diffForHumans)
