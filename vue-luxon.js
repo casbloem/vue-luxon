@@ -1,17 +1,14 @@
 let { DateTime, Interval } = require("luxon");
 module.exports = {
   install: function(Vue, optionsUser) {
-<<<<<<< HEAD
     const extend = function() {
       let out = {};
       for (let i = 0, len = arguments.length; i < len; ++i) {
         let obj = arguments[i];
-=======
    const extend = function() {
       let out = {};
       for (var i = 0, len = arguments.length; i < len; ++i) {
         var obj = arguments[i];
->>>>>>> 2a9be10d70e96d6ca02b581ef40350c839225b0c
         if (!obj) continue;
         for (let key in obj) {
           if (!obj.hasOwnProperty(key)) continue;
