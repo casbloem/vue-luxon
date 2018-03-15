@@ -3,16 +3,20 @@
   "version": "0.3.0-beta",
   "description": "Easy use of DateTime Formating in Vue using Luxon",
   "main": "vue-luxon.js",
-  "scripts": {
-    "test": true
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/casbloem/vue-luxon.git"
   },
   "keywords": [
     "vue",
-    "luxon"
+    "vuejs",
+    "luxon",
+    "date",
+    "datetime",
+    "time",
+    "moment",
+    "momentjs",
+    "2018"
   ],
   "author": "Cas Bloem",
   "license": "MIT",
@@ -22,5 +26,11 @@
   "homepage": "https://packages.cblm.nl/examples/vue-luxon",
   "dependencies": {
     "luxon": "0.5.6"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.5"
+  },
+  "scripts": {
+    "test": "./node_modules/jshint/bin/jshint test.js"
   }
 }
