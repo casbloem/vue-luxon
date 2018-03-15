@@ -1,14 +1,15 @@
 # vue-luxon
-Easy use of Luxon in Vue
-Providing a filter for datetime parsing and formating.
+Easy use of Luxon in Vue, Providing a filter for datetime parsing and formating.
+Also includes `diffForHumans` function, for all languages!
 
 [![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
 [![npm version](https://img.shields.io/npm/v/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![npm downloads](https://img.shields.io/npm/dt/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![Build Status](https://travis-ci.org/casbloem/vue-luxon.svg?branch=master)](#)
 
-#### version: 0.3.0
+#### version: 0.3.1
 (1 week in development, more doc and func soon!)
+
 
 
 ## Example
