@@ -1,7 +1,4 @@
-let cl = msg => {
-  console.log(msg);
-};
-cl("test started");
 
-cl(">> DONE --> test ended");
+console.log(">> test started");
+console.log(">> test ended");
 return true;
