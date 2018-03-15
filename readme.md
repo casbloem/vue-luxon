@@ -7,7 +7,8 @@ Providing a filter for datetime parsing and formating.
 [![npm downloads](https://img.shields.io/npm/dt/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![Build Status](https://travis-ci.org/casbloem/vue-luxon.svg?branch=master)](#)
 
-#### version: 0.3.0-alpha
+#### version: 0.3.0
+(1 week in development, more doc and func soon!)
 
 
 ## Example
