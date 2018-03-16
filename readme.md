@@ -1,4 +1,5 @@
 # vue-luxon
+
 Easy use of Luxon in Vue, datetime parsing and formating.
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/casbloem/vue-luxon.svg)](#)
@@ -12,6 +13,9 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 
 
 > **version 0.5.0 beta** 
+>
+> *03/16 17:54:01 CET*
+> Almost done updating, will push 0.5.0 soon.
 >
 > *03/16 01:55:29 CET*
 > Currently updating docs and files to the next version... hold on.
@@ -93,12 +97,15 @@ sets the format to locale.
 <div v-text="datetimeString" v-luxon:locale.short></div>
 <div v-text="datetimeString" v-luxon:locale.long></div>
 ```
+If `localeLang` is `en`, the results would be:
 ```             
-20 april 2017
-20 april 2017
-20-4-2017
-donderdag 20 april 2017
+April 20, 2017
+April 20, 2017
+4/20/2017
+Thursday, April 20, 2017
 ```
+
+
 
 ###### luxon:diffForHumans
 
@@ -118,9 +125,8 @@ serverZone | see zones (`utc`) | zone of the given datetimeString
 serverFormat | see formats (`iso`) | format of the given datetimeString
 clientZone | see zones (`locale`) | zone of the given datetimeString
 clientFormat | see formats (`locale`) | format of the given datetimeString
+localeLang | language tag (user's locale) | 
 localeFormat | [localeFormatObject](#localeFormat) | 
-
-[click here to see all available options](#options-defaults)
 
 
 
@@ -171,7 +177,7 @@ So if you need to override options, use the second.
 
 You can find [all the shorthand's here](#filter-shorthands).
 
-
+localeLang
 
 #### localeFormat
 
@@ -236,7 +242,7 @@ iso | ISO 8601 date time string | ``` 2018-01-06T13:07:04.054 ```
 rfc2822 | RFC 2822 | ``` Tue, 01 Nov 2016 13:23:12 +0630 ```
 http | HTTP header specs (RFC 850 and 1123) | ``` Sun, 06 Nov 1994 08:49:37 GMT ```
 *tokens* | supported tokens can be found [here](https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens) | 
-locale | see: [localeFormat](#localeFormat-options) (see below) |
+locale | see: [localeFormat](#localeFormat-options) |Thursday, April 20, 2017
 
 
 
