@@ -1,10 +1,10 @@
 let { DateTime, Interval } = require("luxon");
 module.exports = {
-  install: function(Vue, optionsUser) {
+  vueluxon: function(optionsUser) {
     const extend = function() {
-        let out = {};
-        for (let i = 0, len = arguments.length; i < len; ++i) {
-          let obj = arguments[i];
+      let out = {};
+      for (let i = 0, len = arguments.length; i < len; ++i) {
+        let obj = arguments[i];
         if (!obj) continue;
         for (let key in obj) {
           if (!obj.hasOwnProperty(key)) continue;
@@ -154,9 +154,12 @@ module.exports = {
       }
     };
 
-    const vueluxon = (str, optionsFilter, optionsForce) => {
+    return vueluxon = (str, optionsFilter, optionsForce) => {
       return format(str, optionsFilter, optionsForce);
     };
+  },
+  install: function(Vue, optionsUser) {
+    let vueluxon = module.exports.vueluxon(optionsUser);
 
     Vue.filter("luxon", function() {
       return vueluxon(arguments[0], arguments[1]);

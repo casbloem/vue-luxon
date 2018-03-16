@@ -182,9 +182,9 @@ You can find [all the shorthand's here](#filter-shorthands).
 
 Examples:
 
-`en`: English (primary language).
-`hi`: Hindi (primary language).
-`de-AT`: German as used in Austria (primary language with country code).
+`en`: English (primary language).    
+`hi`: Hindi (primary language).     
+`de-AT`: German as used in Austria (primary language with country code).    
 `zh-Hans-CN`: Chinese written in simplified
 
 #### localeFormat
@@ -200,32 +200,44 @@ Examples:
 }
 ```
 
-**weekday**
+**weekday **   
 The representation of the weekday. Possible values are `narrow`, `short`, `long`.
 
-**era**
+**era **   
 The representation of the era. Possible values are `narrow`, `short`, `long`.
 
-**year**
+**year**    
 The representation of the year. Possible values are `numeric`, `2-digit`.
 
-**month**
+**month**    
 The representation of the month. Possible values are `numeric`, `2-digit`, `narrow`, `short`, `long`.
 
-**day**
+**day **   
 The representation of the day. Possible values are `'numeric'`, `'2-digit'`.
 
-**hour**
+**hour **   
 The representation of the hour. Possible values are `'numeric'`, `'2-digit'`.
 
-**minute**
+**minute**   
 The representation of the minute. Possible values are `'numeric'`, `'2-digit'`.
 
-**second**
+**second        **    
 The representation of the second. Possible values are `'numeric'`, `'2-digit'`.
 
-**timeZoneName**
+**timeZoneName**     
 The representation of the time zone name. Possible values are `'short'`, `'long'`.
+
+
+
+##### Templates for localFormat
+
+You can also use one of the templates by just setting the `localFormat` to a string of the name of the template.
+
+`short` 
+
+`long`
+
+`hello`
 
 
 
