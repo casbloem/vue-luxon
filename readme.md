@@ -140,7 +140,7 @@ Vue.use(VueLuxon, {
     serverFormat: 'iso',
     clientZone: 'locale',
     clientFormat: 'locale',
-    localeLang: 
+    localeLang: null,
     // you can append more options
 });
 ```
@@ -177,7 +177,15 @@ So if you need to override options, use the second.
 
 You can find [all the shorthand's here](#filter-shorthands).
 
-localeLang
+#### localeLang
+`null` default value, will use the client's language.
+
+Examples:
+
+`en`: English (primary language).
+`hi`: Hindi (primary language).
+`de-AT`: German as used in Austria (primary language with country code).
+`zh-Hans-CN`: Chinese written in simplified
 
 #### localeFormat
 
@@ -193,16 +201,16 @@ localeLang
 ```
 
 **weekday**
-The representation of the weekday. Possible values are `'narrow'`, `'short'`, `'long'`.
+The representation of the weekday. Possible values are `narrow`, `short`, `long`.
 
 **era**
-The representation of the era. Possible values are `'narrow'`, `'short'`, `'long'`.
+The representation of the era. Possible values are `narrow`, `short`, `long`.
 
 **year**
-The representation of the year. Possible values are `'numeric'`, `'2-digit'`.
+The representation of the year. Possible values are `numeric`, `2-digit`.
 
 **month**
-The representation of the month. Possible values are `'numeric'`, `'2-digit'`, `'narrow'`, `'short'`, `'long'`.
+The representation of the month. Possible values are `numeric`, `2-digit`, `narrow`, `short`, `long`.
 
 **day**
 The representation of the day. Possible values are `'numeric'`, `'2-digit'`.
