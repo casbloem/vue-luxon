@@ -1,15 +1,27 @@
 # vue-luxon
 Easy use of Luxon in Vue, datetime parsing and formating.
 
+[![GitHub last commit](https://img.shields.io/github/last-commit/casbloem/vue-luxon.svg)](#)
 [![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
+
+
 [![npm version](https://img.shields.io/npm/v/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![npm downloads](https://img.shields.io/npm/dt/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![Build Status](https://travis-ci.org/casbloem/vue-luxon.svg?branch=master)](#)
 
 
 
+> **version 0.5.0 beta** 
+>
+> *03/16 01:55:29 CET*
+> Currently updating docs and files to the next version... hold on.
+
+
+
+
 
 #### Example
+
 You can find an example at https://packages.cblm.nl/examples/vue-luxon
 
 
@@ -23,46 +35,65 @@ npm install vue-luxon --save
 
 ```javascript
 const VueLuxon = require('vue-luxon');
-Vue.use(VueLuxon, {
-    serverZone: 'utc',
-    serverFormat: 'iso',
-    clientZone: 'local',
-    clientFormat: 'local',
-});
+Vue.use(VueLuxon);
 ```
-The default settings expect the given datetime string to be an  `utc`  `iso`  datetime string, and will output the default locale format. [Learn more about the options here](#options).
 
-
-
-
+By default, vue-luxon expect the given datetime string to be timezone `utc`  and format `iso` . The output will be based on the client's locale. Of course these defaults can be changed.
+[Learn more about the options](#options)
 
 #### Usage
 
+There are many ways to use vue-luxon. To get started just use the `luxon` filter or `v-luxon` directive, as shown below.
+
 as a filter
+
 ```javascript
 {{ datetimeString | luxon }}
 ```
 
 or using v-luxon
+
 ```vue
 <span v-luxon>018-03-15T09:08:07+00:00</span>
-<span v-text="datetimeString" v-luxon></span>
+
+<span v-luxon v-text="datetimeString"></span>
 ```
 
 see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see it live.
 
 
 
+
+
+
+
 ## Options
 
-prop | options | description
+prop | options (default) | description
 --- | --- | ---
-serverZone | see zones (default: `utc`) | zone of the given datetimeString
-serverFormat | see formats (default: `iso`) | format of the given datetimeString
-clientZone | see zones (default: `locale`) | zone of the given datetimeString
-clientFormat | see formats (default: `locale`) | format of the given datetimeString
+serverZone | see zones (`utc`) | zone of the given datetimeString
+serverFormat | see formats (`iso`) | format of the given datetimeString
+clientZone | see zones (`locale`) | zone of the given datetimeString
+clientFormat | see formats (`locale`) | format of the given datetimeString
+localeFormat | [localeFormatObject](#localeFormat) | 
 
 [click here to see all available options](#options-defaults)
+
+
+
+#### Change default options
+
+You can change the default options with the second argument of the Vue.use functions.
+
+```javascript
+Vue.use(VueLuxon, {
+    serverZone: 'utc',
+    serverFormat: 'iso',
+    clientZone: 'local',
+    clientFormat: 'local',
+    // you can append more options
+});
+```
 
 
 
@@ -82,20 +113,10 @@ You can override the default options easily.
 {{ datetimeString | luxon({ options }) }}
 ```
 
+##### when using filter shorthand's
 
-
-##### Filter shorthand's
-
-When using filter shorthand's, the first argument will be the option value where the shorthand is for.
-
-```javascript
-{{ datetimeString | luxon:format('dd-MM-yyyy') }}
-
-// is short for:
-{{ datetimeString | luxon({ clientFormat: 'dd-MM-yyyy'}) }}
-```
-
-You can still adjust other options via the second argument:
+When using filter shorthand's, the first argument will for the shorthand.
+So if you need to override options, use the second.
 
 ```javascript
 {{ datetimeString | luxon:format('dd-MM-yyyy', { serverFormat: 'sql' }) }}
@@ -108,31 +129,7 @@ You can find [all the shorthand's here](#filter-shorthands).
 
 
 
-### Zones
-
-eg: `UTC`, `America/New_York`, `Asia/Tokyo`, ...
-
-For the systems local zone you use `locale`.
-
-There is a [list on wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
-
-
-
-
-### Formats
-format | description | example
---- | --- | ---
-sql | SQL dates, times, and datetimes | ``` 2017-05-15 09:24:15 ```
-laravel | Laravel / Carbon default format | sql alias
-iso | ISO 8601 date time string | ``` 2018-01-06T13:07:04.054 ```
-rfc2822 | RFC 2822 | ``` Tue, 01 Nov 2016 13:23:12 +0630 ```
-http | HTTP header specs (RFC 850 and 1123) | ``` Sun, 06 Nov 1994 08:49:37 GMT ```
-*tokens* | supported tokens can be found [here](https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens) | 
-locale | see: [localeFormat](#localeFormat-options) (see below) |
-
-### localeFormat options
-You can easily change the locale formatting settings.
-The keys that can be set are in the table below.
+#### localeFormat
 
 ```javascript
 // example:
@@ -144,8 +141,6 @@ The keys that can be set are in the table below.
   }
 }
 ```
-
-
 
 **weekday**
 The representation of the weekday. Possible values are `'narrow'`, `'short'`, `'long'`.
@@ -173,6 +168,34 @@ The representation of the second. Possible values are `'numeric'`, `'2-digit'`.
 
 **timeZoneName**
 The representation of the time zone name. Possible values are `'short'`, `'long'`.
+
+
+
+
+
+### Zones
+
+eg: `UTC`, `America/New_York`, `Asia/Tokyo`, ...
+
+For the systems local zone you use `locale`.
+
+There is a [list on wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+
+
+
+### Formats
+format | description | example
+--- | --- | ---
+sql | SQL dates, times, and datetimes | ``` 2017-05-15 09:24:15 ```
+laravel | Laravel / Carbon default format | sql alias
+iso | ISO 8601 date time string | ``` 2018-01-06T13:07:04.054 ```
+rfc2822 | RFC 2822 | ``` Tue, 01 Nov 2016 13:23:12 +0630 ```
+http | HTTP header specs (RFC 850 and 1123) | ``` Sun, 06 Nov 1994 08:49:37 GMT ```
+*tokens* | supported tokens can be found [here](https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens) | 
+locale | see: [localeFormat](#localeFormat-options) (see below) |
+
+
 
 
 
