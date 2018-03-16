@@ -61,7 +61,50 @@ or using v-luxon
 
 see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see it live.
 
+#### Shorthand's
 
+There are some useful shorthand's available.
+
+###### luxon:format
+
+Change the clientFormat.
+
+```
+{{ luxon:format('dd-MM-YY') }}
+```
+
+
+
+###### luxon:locale
+
+sets the format to locale.
+
+```javascript
+{{ luxon:locale }}
+```
+
+```vue
+<span v-luxon:locale></span>
+```
+
+```vue
+<div v-text="datetimeString" v-luxon></div>
+<div v-text="datetimeString" v-luxon:locale></div>
+<div v-text="datetimeString" v-luxon:locale.short></div>
+<div v-text="datetimeString" v-luxon:locale.long></div>
+```
+```             
+20 april 2017
+20 april 2017
+20-4-2017
+donderdag 20 april 2017
+```
+
+###### luxon:diffForHumans
+
+The difference in readable format. (eg `10 days ago`)
+
+(see [Difference for Humans](#difference for-humans))
 
 
 
@@ -89,8 +132,9 @@ You can change the default options with the second argument of the Vue.use funct
 Vue.use(VueLuxon, {
     serverZone: 'utc',
     serverFormat: 'iso',
-    clientZone: 'local',
-    clientFormat: 'local',
+    clientZone: 'locale',
+    clientFormat: 'locale',
+    localeLang: 
     // you can append more options
 });
 ```
@@ -188,7 +232,6 @@ There is a [list on wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database
 format | description | example
 --- | --- | ---
 sql | SQL dates, times, and datetimes | ``` 2017-05-15 09:24:15 ```
-laravel | Laravel / Carbon default format | sql alias
 iso | ISO 8601 date time string | ``` 2018-01-06T13:07:04.054 ```
 rfc2822 | RFC 2822 | ``` Tue, 01 Nov 2016 13:23:12 +0630 ```
 http | HTTP header specs (RFC 850 and 1123) | ``` Sun, 06 Nov 1994 08:49:37 GMT ```
@@ -306,6 +349,12 @@ However, some languages can have more plural forms. ( `zero` `one` `two` `few` `
 see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see all the shorthands live.
 
 
+
+
+
+### Tips
+
+Save and serve your datetimes from the server in the `utc` timezone and the `sql` or `iso` format. Then use the client's locale format.
 
 
 
