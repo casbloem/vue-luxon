@@ -1,2 +1,3 @@
 language: node-js
+before-script: npm install -g chalk
 script: npm test
