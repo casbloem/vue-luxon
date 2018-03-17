@@ -17,8 +17,6 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 > *03/16 17:54:01 CET*
 > Almost done updating, will push 0.5.0 soon.
 >
-> *03/16 01:55:29 CET*
-> Currently updating docs and files to the next version... hold on.
 
 
 

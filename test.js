@@ -46,6 +46,6 @@ module.exports = {
 
         console.log('Testing completed!');
 
-        return true;
+        return 'weeee';
     }
 }
