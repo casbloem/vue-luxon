@@ -5,15 +5,15 @@ module.exports = {
         const log = (str) => {
             console.log(chalk.blue.bgWhite(str+'\n'));
         }
-        log(chalk.green(chalk.blue.underline.bold('js-tester 0.0.1') + ' by cblm dev\n'));
-        log(chalk.blue.bgBlue.bold('starting setup...'));
-        log(chalk.blue.bgWhite.bold('importing package(s)\n'));
+        log('js-tester 0.0.1 by cblm dev\n');
+        log('starting setup...');
+        log('importing package(s)\n');
         // import package
         const vueLuxon = require('./vue-luxon.js').vueluxon();
 
 
 
-        console.log(chalk.white.bgBlue.bold('setup completed,' + chalk.white(' starting tests now...')));
+        log('setup completed, starting tests now...');
 
         const tests = [
             {
@@ -35,7 +35,7 @@ module.exports = {
 
         
 
-        console.log(chalk.white.bgGreen.bold('Testing completed!'));
+        console.log('Testing completed!');
 
         return true;
     }
