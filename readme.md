@@ -108,11 +108,12 @@ Thursday, April 20, 2017
 #### luxon:diffForHumans
 The difference in readable format. (eg `10 days ago`)
 
-(see [Difference for Humans](#difference for-humans))
+( see [Difference for Humans](#difference for-humans) )
 
 
 
-#### luxon:custom
+## :small_blue_diamond: luxon:custom
+
 Create your own output.
 ```javascript
 luxon:custom((lxn => {
