@@ -12,17 +12,7 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 
 
 
-> **version 0.5.0 beta** 
->
-> *03/16 17:54:01 CET*
-> Almost done updating, will push 0.5.0 soon.
->
-
-
-
-
-
-#### Example
+## Example
 
 You can find an example at https://packages.cblm.nl/examples/vue-luxon
 
@@ -43,7 +33,9 @@ Vue.use(VueLuxon);
 By default, vue-luxon expect the given datetime string to be timezone `utc`  and format `iso` . The output will be based on the client's locale. Of course these defaults can be changed.
 [Learn more about the options](#options)
 
-### Usage
+
+
+# Usage
 
 There are many ways to use vue-luxon. To get started just use the `luxon` filter or `v-luxon` directive, as shown below.
 
@@ -63,11 +55,11 @@ or using v-luxon
 
 see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see it live.
 
-### Shorthand's
+## Shorthand's
 
 There are some useful shorthand's available.
 
-#### luxon:format
+### luxon:format
 
 Change the clientFormat.
 
@@ -77,7 +69,7 @@ Change the clientFormat.
 
 
 
-#### luxon:locale
+### luxon:locale
 
 sets the format to locale.
 
@@ -105,14 +97,14 @@ Thursday, April 20, 2017
 
 
 
-#### luxon:diffForHumans
+### luxon:diffForHumans
 The difference in readable format. (eg `10 days ago`)
 
 ( see [Difference for Humans](#difference for-humans) )
 
 
 
-## :small_blue_diamond: luxon:custom
+### luxon:custom
 
 Create your own output.
 ```javascript
@@ -125,6 +117,7 @@ luxon:custom((lxn => {
 	return lxn.year;
 })"></div>
 ```
+
 
 
 ## Options
@@ -140,9 +133,9 @@ localeFormat | [localeFormatObject](#localeFormat) |
 
 
 
-#### Change default options
+## Change default options
 
-You can change the default options with the second argument of the Vue.use functions.
+You can change the default options with the second argument of the Vue.use function.
 
 ```javascript
 Vue.use(VueLuxon, {
@@ -151,29 +144,31 @@ Vue.use(VueLuxon, {
     clientZone: 'locale',
     clientFormat: 'locale',
     localeLang: null,
-    // you can append more options
+    localeFormat: {} // see localeFormat below
+    diffForHumans: {} // see diffForHumans below
+    i18n: {} // see i18n below
 });
 ```
 
 
 
-#### Override options
+## Override options
 
 You can override the default options easily.
 
-##### with v-luxon
+#### with v-luxon
 
 ```vue
 <span v-luxon="{ options }">
 ```
 
-##### as filter
+#### as filter
 
 ```javascript
 {{ datetimeString | luxon({ options }) }}
 ```
 
-##### when using filter shorthand's
+#### when using filter shorthand's
 
 When using filter shorthand's, the first argument will for the shorthand.
 So if you need to override options, use the second.
@@ -187,7 +182,7 @@ So if you need to override options, use the second.
 
 You can find [all the shorthand's here](#filter-shorthands).
 
-#### localeLang
+## localeLang
 `null` default value, this will use the client's language.
 
 Or use a language tag to set a client location.
@@ -199,7 +194,7 @@ Examples:
 `de-AT`: German as used in Austria (primary language with country code).    
 `zh-Hans-CN`: Chinese written in simplified
 
-#### localeFormat
+## localeFormat
 
 ```javascript
 // example:
@@ -255,7 +250,7 @@ You can also use one of the templates by just setting the `localFormat` to a str
 
 
 
-### Zones
+## Zones
 
 eg: `UTC`, `America/New_York`, `Asia/Tokyo`, ...
 
@@ -266,19 +261,89 @@ There is a [list on wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database
 
 
 
-### Formats
+## Formats
 format | description | example
 --- | --- | ---
 sql | SQL dates, times, and datetimes | ``` 2017-05-15 09:24:15 ```
 iso | ISO 8601 date time string | ``` 2018-01-06T13:07:04.054 ```
 rfc2822 | RFC 2822 | ``` Tue, 01 Nov 2016 13:23:12 +0630 ```
 http | HTTP header specs (RFC 850 and 1123) | ``` Sun, 06 Nov 1994 08:49:37 GMT ```
-*tokens* | supported tokens can be found [here](https://moment.github.io/luxon/docs/manual/formatting.html#table-of-tokens) | 
+*tokens* | see: tokens | 
 locale | see: [localeFormat](#localeFormat-options) |Thursday, April 20, 2017
 
 
 
+## Tokens
 
+Tokens are useful for formatting and parsing.
+
+You can use the following tokens:
+
+| Standalone token | Format token | Description                                                  | Example                                                     |
+| ---------------- | ------------ | ------------------------------------------------------------ | ----------------------------------------------------------- |
+| S                |              | millisecond, no padding                                      | 54                                                          |
+| SSS              |              | millisecond, padded to 3                                     | 054                                                         |
+| u                |              | fractional seconds, functionally identical to SSS            | 054                                                         |
+| s                |              | second, no padding                                           | 4                                                           |
+| ss               |              | second, padded to 2 padding                                  | 04                                                          |
+| m                |              | minute, no padding                                           | 7                                                           |
+| mm               |              | minute, padded to 2                                          | 07                                                          |
+| h                |              | hour in 12-hour time, no padding                             | 1                                                           |
+| hh               |              | hour in 12-hour time, padded to 2                            | 01                                                          |
+| H                |              | hour in 24-hour time, no padding                             | 9                                                           |
+| HH               |              | hour in 24-hour time, padded to 2                            | 13                                                          |
+| Z                |              | narrow offset                                                | +5                                                          |
+| ZZ               |              | short offset                                                 | +05:00                                                      |
+| ZZZ              |              | techie offset                                                | +0500                                                       |
+| ZZZZ             |              | abbreviated named offset                                     | EST                                                         |
+| ZZZZZ            |              | unabbreviated named offset                                   | Eastern Standard Time                                       |
+| z                |              | IANA zone                                                    | America/New_York                                            |
+| a                |              | meridiem                                                     | AM                                                          |
+| d                |              | day of the month, no padding                                 | 6                                                           |
+| dd               |              | day of the month, padded to 2                                | 06                                                          |
+| c                | E            | day of the week, as number from 1-7 (Monday is 1, Sunday is 7) | 3                                                           |
+| ccc              | EEE          | day of the week, as an abbreviate localized string           | Wed                                                         |
+| cccc             | EEEE         | day of the week, as an unabbreviated localized string        | Wednesday                                                   |
+| ccccc            | EEEEE        | day of the week, as a single localized letter                | W                                                           |
+| L                | M            | month as an unpadded number                                  | 8                                                           |
+| LL               | MM           | month as an padded number                                    | 08                                                          |
+| LLL              | MMM          | month as an abbreviated localized string                     | Aug                                                         |
+| LLLL             | MMMM         | month as an unabbreviated localized string                   | August                                                      |
+| LLLLL            | MMMMM        | month as a single localized letter                           | A                                                           |
+| y                |              | year, unpadded                                               | 2014                                                        |
+| yy               |              | two-digit year                                               | 14                                                          |
+| yyyy             |              | four- to six- digit year, pads to 4                          | 2014                                                        |
+| G                |              | abbreviated localized era                                    | AD                                                          |
+| GG               |              | unabbreviated localized era                                  | Anno Domini                                                 |
+| GGGGG            |              | one-letter localized era                                     | A                                                           |
+| kk               |              | ISO week year, unpadded                                      | 17                                                          |
+| kkkk             |              | ISO week year, padded to 4                                   | 2014                                                        |
+| W                |              | ISO week number, unpadded                                    | 32                                                          |
+| WW               |              | ISO week number, padded to 2                                 | 32                                                          |
+| o                |              | ordinal (day of year), unpadded                              | 218                                                         |
+| ooo              |              | ordinal (day of year), padded to 3                           | 218                                                         |
+| D                |              | localized numeric date                                       | 9/4/2017                                                    |
+| DD               |              | localized date with abbreviated month                        | Aug 6, 2014                                                 |
+| DDD              |              | localized date with full month                               | August 6, 2014                                              |
+| DDDD             |              | localized date with full month and weekday                   | Wednesday, August 6, 2014                                   |
+| t                |              | localized time                                               | 9:07 AM                                                     |
+| tt               |              | localized time with seconds                                  | 1:07:04 PM                                                  |
+| ttt              |              | localized time with seconds and abbreviated offset           | 1:07:04 PM EDT                                              |
+| tttt             |              | localized time with seconds and full offset                  | 1:07:04 PM Eastern Daylight Time                            |
+| T                |              | localized 24-hour time                                       | 13:07                                                       |
+| TT               |              | localized 24-hour time with seconds                          | 13:07:04                                                    |
+| TTT              |              | localized 24-hour time with seconds and abbreviated offset   | 13:07:04 EDT                                                |
+| TTTT             |              | localized 24-hour time with seconds and full offset          | 13:07:04 Eastern Daylight Time                              |
+| f                |              | short localized date and time                                | 8/6/2014, 1:07 PM                                           |
+| ff               |              | less short localized date and time                           | Aug 6, 2014, 1:07 PM                                        |
+| fff              |              | verbose localized date and time                              | August 6, 2014, 1:07 PM EDT                                 |
+| ffff             |              | extra verbose localized date and time                        | Wednesday, August 6, 2014, 1:07 PM Eastern Daylight Time    |
+| F                |              | short localized date and time with seconds                   | 8/6/2014, 1:07:04 PM                                        |
+| FF               |              | less short localized date and time with seconds              | Aug 6, 2014, 1:07:04 PM                                     |
+| FFF              |              | verbose localized date and time with seconds                 | August 6, 2014, 1:07:04 PM EDT                              |
+| FFFF             |              | extra verbose localized date and time with seconds           | Wednesday, August 6, 2014, 1:07:04 PM Eastern Daylight Time |
+| q                |              | quarter, no padding                                          | 9                                                           |
+| qq               |              | quarter, padded to 2                                         | 13                                                          |
 
 
 
@@ -313,6 +378,11 @@ use `:a` to define where to place the amount, `:w` for the word (day, years, etc
 
 
 ## i18n
+
+*(these settings do not affect datetime parsing and formatting)*
+
+This language object is currently only used by `diffForHumans`.
+
 ```javascript
 {
  i18n: {
@@ -330,7 +400,10 @@ use `:a` to define where to place the amount, `:w` for the word (day, years, etc
 }
 ```
 
+
+
 #### more than two plural forms
+
 The BCP 47 lang property is used for plural sensitive formatting when using diffForHumans.
 Different languages can have different rules on how to change words, depending on the number qualifying the word.
 
@@ -341,94 +414,6 @@ However, some languages can have more plural forms. ( `zero` `one` `two` `few` `
 
 
 
-
-
-## Shorthand Filters
-
-#### luxon:format(clientFormat, options)
-```javascript
-{{ datetimeString | luxon:format('format') }}
-
-// is short for:
-{{ datetimeString | luxon({ clientFormat: 'format'}) }}
-```
-
-#### luxon:locale(localeFormat, options)
-```javascript
-{{ datetimeString | luxon:locale }}
-
-// is short for:
-{{ datetimeString | luxon({ clientFormat: 'locale'}) }}
-
-```
-
-```javascript
-{{ datetimeString | luxon:locale({ month: 'long' }) }}
-
-// is short for:
-{{ datetimeString | luxon({ clientFormat: 'locale', localFormat: { month: 'long' } }) }}
-
-```
-
-
-#### luxon:diffForHumans
-```javascript
-{{ datetimeString | luxon:diffForHumans }}
-
-// is short for:
-{{ datetimeString | luxon({ clientFormat: 'diffForHumans'}) }}
-```
-
-```javascript
-{{ datetimeString | luxon:diffForHumans( diffForHumansOptions ) }}
-```
-
-
-see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see all the shorthands live.
-
-
-
-
-
 ### Tips
 
 Save and serve your datetimes from the server in the `utc` timezone and the `sql` or `iso` format. Then use the client's locale format.
-
-
-
-## default options
-```javascript
- {
-    serverZone: "UTC",
-    serverFormat: "ISO",
-    clientZone: "locale",
-    clientFormat: "locale",
-    localeFormat: {
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    },
-    diffForHumans: {
-      past: ":a :w :ago",
-      now: "just now",
-      future: ":in :a :w",
-      durations: ["years", "months", "days", "hours", "minutes", "seconds"]
-    },
-    i18n: {
-      lang: "en-EN",
-      year: "[one]year|[other]years",
-      month: "[one]month|[other]months",
-      week: "[one]week|[other]weeks",
-      day: "[one]day|[other]days",
-      hour: "[one]hour|[other]hours",
-      minute: "[one]minute|[other]minutes",
-      second: "[one]second|[other]seconds",
-      ago: "ago",
-      in: "in"
-    },
-    invalid: reason => {
-      return `invalid: ${reason}`;
-    }
-}
-```
-
