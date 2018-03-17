@@ -33,7 +33,7 @@ You can find an example at https://packages.cblm.nl/examples/vue-luxon
 npm install vue-luxon --save
 ```
 
-#### Use
+### Use
 
 ```javascript
 const VueLuxon = require('vue-luxon');
@@ -43,7 +43,7 @@ Vue.use(VueLuxon);
 By default, vue-luxon expect the given datetime string to be timezone `utc`  and format `iso` . The output will be based on the client's locale. Of course these defaults can be changed.
 [Learn more about the options](#options)
 
-#### Usage
+### Usage
 
 There are many ways to use vue-luxon. To get started just use the `luxon` filter or `v-luxon` directive, as shown below.
 
