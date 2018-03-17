@@ -1,9 +1,7 @@
-const chalk = require('chalk');
-
 module.exports = {
     initialStarter() {
         const log = (str) => {
-            console.log(chalk.blue.bgWhite(str+'\n'));
+            console.log(str+'\n');
         }
         log('js-tester 0.0.1 by cblm dev\n');
         log('starting setup...');
