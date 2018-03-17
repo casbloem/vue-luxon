@@ -63,11 +63,11 @@ or using v-luxon
 
 see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see it live.
 
-#### Shorthand's
+### Shorthand's
 
 There are some useful shorthand's available.
 
-###### luxon:format
+#### luxon:format
 
 Change the clientFormat.
 
@@ -77,7 +77,7 @@ Change the clientFormat.
 
 
 
-###### luxon:locale
+#### luxon:locale
 
 sets the format to locale.
 
@@ -105,14 +105,25 @@ Thursday, April 20, 2017
 
 
 
-###### luxon:diffForHumans
-
+#### luxon:diffForHumans
 The difference in readable format. (eg `10 days ago`)
 
 (see [Difference for Humans](#difference for-humans))
 
 
 
+#### luxon:custom
+Create your own output.
+```javascript
+luxon:custom((lxn => {
+	return lxn.year;
+})
+```
+```vue
+<div v-luxon:custom="(lxn => {
+	return lxn.year;
+})"></div>
+```
 
 
 ## Options
@@ -176,7 +187,9 @@ So if you need to override options, use the second.
 You can find [all the shorthand's here](#filter-shorthands).
 
 #### localeLang
-`null` default value, will use the client's language.
+`null` default value, this will use the client's language.
+
+Or use a language tag to set a client location.
 
 Examples:
 
