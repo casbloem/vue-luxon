@@ -13,15 +13,29 @@ module.exports = {
 
 
 
-        console.log(chalk.blue.bgBlue.bold('Setup completed, starting tests now...'));
+        console.log(chalk.blue.bgBlue.bold('setup completed,' + chalk.black(' starting tests now...')));
 
-        console.log(
-            vueLuxon('2012')
-        );
+        const tests = [
+            {
+                input: vueLuxon('2012', {
+                    serverZone: "UTC",
+                    serverFormat: "yyyy",
+                    clientZone: "UTC",
+                    clientFormat: "yyyy", }),
+                expected_output: '2012',
+            }
+        ]
+        
+        for(let i = 0; i < tests.length; i++) {
+            let test = tests[i];
+            if (test.input == test.expected_output) log('TEST '+ i +' SUCCESS');
+            else log('TEST '+key+' FAILED');
+        }
+    
 
         
 
-        console.log(chalk.blue.bgGreen.bold('Testing completed!'));
+        console.log(chalk.black.bgGreen.bold('Testing completed!'));
 
         return true;
     }
