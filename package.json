@@ -28,6 +28,6 @@
     "luxon": "0.5.6"
   },
   "scripts": {
-    "test": "node -e require('./test.js').initialStarter()"
+    "test": "node -e \"require('./test.js').initialStarter()\""
   }
 }
