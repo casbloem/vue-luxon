@@ -13,7 +13,7 @@ module.exports = {
 
 
 
-        console.log(chalk.blue.bgBlue.bold('setup completed,' + chalk.black(' starting tests now...')));
+        console.log(chalk.white.bgBlue.bold('setup completed,' + chalk.white(' starting tests now...')));
 
         const tests = [
             {
@@ -35,7 +35,7 @@ module.exports = {
 
         
 
-        console.log(chalk.black.bgGreen.bold('Testing completed!'));
+        console.log(chalk.white.bgGreen.bold('Testing completed!'));
 
         return true;
     }

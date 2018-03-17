@@ -1,4 +1,6 @@
 language: node-js
-before-script:
-  - npm install -g chalk
+before-install:
+ - npm install chalk
+ - npm install each-async
+ - npm install indent-string
 script: npm test
