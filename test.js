@@ -21,13 +21,24 @@ module.exports = {
                     clientZone: "UTC",
                     clientFormat: "yyyy", }),
                 expected_output: '2012',
+            },
+            {
+                input: vueLuxon('2012', {
+                    serverZone: "UTC",
+                    serverFormat: "yyyy",
+                    clientZone: "UTC",
+                    clientFormat: "yyyy", }),
+                expected_output: '2012',
             }
         ]
-        
+        log('---------------------------------------');
         for(let i = 0; i < tests.length; i++) {
             let test = tests[i];
+            log('> expects: ' + test.expected_output);
+            log('> gets: ' + test.input);
             if (test.input == test.expected_output) log('TEST '+ i +' SUCCESS');
             else log('TEST '+key+' FAILED');
+            log('---------------------------------------');
         }
     
 

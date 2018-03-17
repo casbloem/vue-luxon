@@ -1,2 +1,3 @@
 language: node-js
+install: npm install luxon
 script: npm test
