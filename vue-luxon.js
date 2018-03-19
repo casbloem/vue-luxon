@@ -24,6 +24,7 @@ module.exports = {
         serverFormat: "ISO",
         clientZone: "locale",
         clientFormat: "locale",
+        localeLang: null,
         localeFormat: {
           year: "numeric",
           month: "long",
@@ -53,6 +54,34 @@ module.exports = {
       },
       optionsUser
     );
+
+    const formatTemplates = {
+      short: {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric"
+      },
+      med: {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      },
+      full: {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      },
+      huge: {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        weekday: "long"
+      },
+      timesimple: {
+        hour: "numeric",
+        minute: "2-digit"
+      }
+    };
 
     const trans = (nameRaw, amountRaw, parser, options) => {
       let amount = Math.round(amountRaw);
@@ -124,6 +153,16 @@ module.exports = {
       }
     };
 
+    const parseLocaleLang = (str) => {
+      if (!str || str == 'locale') return null;
+      return str;
+    }
+
+    const parseLocaleFormat = (str) => {
+      if (str instanceof String) return formatTemplates[str] || formatTemplates[0];
+      return str;
+    }
+
     const format = (str, optionsFilter = {}, optionsForce = {}) => {
       let options = extend(optionsGlobal, optionsFilter, optionsForce);
       let dt = parse(str, options);
@@ -131,13 +170,14 @@ module.exports = {
       let a = str,
         cf = options.clientFormat,
         cz = options.clientZone,
-        lf = options.localeFormat;
+        ll = parseLocaleLang(options.localeLang),
+        lf = parseLocaleFormat(options.localeFormat);
       switch (cf.toLowerCase()) {
         case "diffforhumans":
         case "dfh":
           return format_dfh(dt, options);
         case "locale":
-          return dt.toLocaleString(lf);
+          return dt.setLocale(ll).toLocaleString(lf);
         case "sql":
         case "laravel":
           return dt.toSQL(a, { zone: cz });
@@ -154,15 +194,26 @@ module.exports = {
       }
     };
 
-    return vueluxon = (str, optionsFilter, optionsForce) => {
+    return (vueluxon = (str, optionsFilter, optionsForce) => {
       return format(str, optionsFilter, optionsForce);
-    };
+    });
   },
   install: function(Vue, optionsUser) {
     let vueluxon = module.exports.vueluxon(optionsUser);
 
+    Vue.directive("luxon", function(el, binding) {
+      let opts = {};
+      let modifierKeys = Object.keys(binding.modifiers);
+      if (binding.arg == "locale") {
+        if (modifierKeys.length > 0) {
+          opts.localeFormat = modifierKeys[0];
+        }
+      }
+      el.innerHTML = vueluxon(el.innerHTML, opts);
+    });
+
     Vue.filter("luxon", function() {
-      return vueluxon(arguments[0], arguments[1]);
+      return vueluxon(...arguments);
     });
     Vue.filter("luxon:format", function() {
       return vueluxon(arguments[0], arguments[2], {
@@ -181,7 +232,5 @@ module.exports = {
         diffForHumans: extend(optionsGlobal.diffForHumans, arguments[1])
       });
     });
-
-    //return DateTime;
   }
 };

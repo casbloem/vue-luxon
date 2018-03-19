@@ -238,15 +238,7 @@ The representation of the time zone name. Possible values are `'short'`, `'long'
 
 ##### Templates for localFormat
 
-You can also use one of the templates by just setting the `localFormat` to a string of the name of the template.
-
-`short` 
-
-`long`
-
-`hello`
-
-
+You can also use one of the templates, just set the `localFormat` to a string of the name of the template.
 
 
 
@@ -271,9 +263,7 @@ http | HTTP header specs (RFC 850 and 1123) | ``` Sun, 06 Nov 1994 08:49:37 GMT 
 *tokens* | see: tokens | 
 locale | see: [localeFormat](#localeFormat-options) |Thursday, April 20, 2017
 
-
-
-## Tokens
+### Tokens
 
 Tokens are useful for formatting and parsing.
 
