@@ -12,6 +12,16 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 
 
 
+> #### version 0.5.0 (beta)
+
+> next update
+>
+> - more templates for localFormat
+> - docs & example improvements
+> - ​
+
+
+
 ## Example
 
 You can find an example at https://packages.cblm.nl/examples/vue-luxon
@@ -239,6 +249,14 @@ The representation of the time zone name. Possible values are `'short'`, `'long'
 ##### Templates for localFormat
 
 You can also use one of the templates, just set the `localFormat` to a string of the name of the template.
+
+| localFormat | example *(with localeLang `en`)* |
+| ----------- | -------------------------------- |
+| short       | 4/20/2017                        |
+| med         | Apr 20, 2017                     |
+| full        | April 20, 2017                   |
+| huge        | Thursday, April 20, 2017         |
+| timesimple  | 3:32 PM                          |
 
 
 

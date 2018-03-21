@@ -7,7 +7,7 @@ module.exports = {
         let obj = arguments[i];
         if (!obj) continue;
         for (let key in obj) {
-          if (!obj.hasOwnProperty(key)) continue;
+          if (!obj.hasOwnProperty(key) || !obj[key]) continue;
           if (Object.prototype.toString.call(obj[key]) === "[object Object]") {
             out[key] = extend(out[key], obj[key]);
             continue;
@@ -153,18 +153,19 @@ module.exports = {
       }
     };
 
-    const parseLocaleLang = (str) => {
-      if (!str || str == 'locale') return null;
+    const parseLocaleLang = str => {
+      if (!str || str == "locale") return null;
       return str;
-    }
+    };
 
-    const parseLocaleFormat = (str) => {
-      if (str instanceof String) return formatTemplates[str] || formatTemplates[0];
+    const parseLocaleFormat = str => {
+      if (typeof str == "string") {
+        return formatTemplates[str] || formatTemplates[0];
+      }
       return str;
-    }
+    };
 
-    const format = (str, optionsFilter = {}, optionsForce = {}) => {
-      let options = extend(optionsGlobal, optionsFilter, optionsForce);
+    const format = (str, options = optionsGlobal) => {
       let dt = parse(str, options);
       if (dt.isValid == false) return optionsGlobal.invalid(dt.invalid);
       let a = str,
@@ -194,18 +195,27 @@ module.exports = {
       }
     };
 
-    return (vueluxon = (str, optionsFilter, optionsForce) => {
-      return format(str, optionsFilter, optionsForce);
-    });
+    return (str, optionsFilter, optionsForce) => {
+      let options = extend(optionsGlobal, optionsFilter, optionsForce);
+      return format(str, options);
+    };
   },
   install: function(Vue, optionsUser) {
     let vueluxon = module.exports.vueluxon(optionsUser);
+    let extend = module.exports.extend;
+
+    const validate = {
+      isString: input => {
+        return typeof input == "String";
+      }
+    };
 
     Vue.directive("luxon", function(el, binding) {
       let opts = {};
       let modifierKeys = Object.keys(binding.modifiers);
       if (binding.arg == "locale") {
         if (modifierKeys.length > 0) {
+          opts.clientFormat = "locale";
           opts.localeFormat = modifierKeys[0];
         }
       }
@@ -213,7 +223,7 @@ module.exports = {
     });
 
     Vue.filter("luxon", function() {
-      return vueluxon(...arguments);
+      return vueluxon(arguments[0], arguments[2]);
     });
     Vue.filter("luxon:format", function() {
       return vueluxon(arguments[0], arguments[2], {
@@ -223,13 +233,13 @@ module.exports = {
     Vue.filter("luxon:locale", function() {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: "locale",
-        localeFormat: extend(optionsGlobal.localeFormat, arguments[1])
+        localeFormat: arguments[1]
       });
     });
     Vue.filter("luxon:diffForHumans", function() {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: "diffforhumans",
-        diffForHumans: extend(optionsGlobal.diffForHumans, arguments[1])
+        diffForHumans: arguments[1]
       });
     });
   }
