@@ -12,19 +12,21 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 
 
 
-> #### version 0.5.0 (beta)
+> #### version 0.5.1 (beta)
 
-> next update
+> Working towards a stable version of vue-luxon (waited for stable version of Luxon).
+> Almost done.
 >
-> - more templates for localFormat
-> - docs & example improvements
-> - ​
+> - The next update will contain all the new features. 
+
+You can find the [full changelog](#changelog) at the bottom
 
 
 
 ## Example
 
 You can find an example at https://packages.cblm.nl/examples/vue-luxon
+(example might not work)
 
 
 
@@ -47,20 +49,10 @@ By default, vue-luxon expect the given datetime string to be timezone `utc`  and
 
 # Usage
 
-There are many ways to use vue-luxon. To get started just use the `luxon` filter or `v-luxon` directive, as shown below.
-
-as a filter
+To get started just use the `luxon` filter, as shown below.
 
 ```javascript
 {{ datetimeString | luxon }}
-```
-
-or using v-luxon
-
-```vue
-<span v-luxon>018-03-15T09:08:07+00:00</span>
-
-<span v-luxon v-text="datetimeString"></span>
 ```
 
 see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see it live.
@@ -84,22 +76,13 @@ Change the clientFormat.
 sets the format to locale.
 
 ```javascript
-{{ luxon:locale }}
+{{ datetimestring | luxon:locale }}
+{{ datetimestring | luxon:locale.short }}
+{{ datetimestring | luxon:locale.long }}
 ```
 
-```vue
-<span v-luxon:locale></span>
-```
-
-```vue
-<div v-text="datetimeString" v-luxon></div>
-<div v-text="datetimeString" v-luxon:locale></div>
-<div v-text="datetimeString" v-luxon:locale.short></div>
-<div v-text="datetimeString" v-luxon:locale.long></div>
-```
 If `localeLang` is `en`, the results would be:
 ```             
-April 20, 2017
 April 20, 2017
 4/20/2017
 Thursday, April 20, 2017
@@ -122,12 +105,6 @@ luxon:custom((lxn => {
 	return lxn.year;
 })
 ```
-```vue
-<div v-luxon:custom="(lxn => {
-	return lxn.year;
-})"></div>
-```
-
 
 
 ## Options
@@ -165,14 +142,6 @@ Vue.use(VueLuxon, {
 ## Override options
 
 You can override the default options easily.
-
-#### with v-luxon
-
-```vue
-<span v-luxon="{ options }">
-```
-
-#### as filter
 
 ```javascript
 {{ datetimeString | luxon({ options }) }}
@@ -425,3 +394,21 @@ However, some languages can have more plural forms. ( `zero` `one` `two` `few` `
 ### Tips
 
 Save and serve your datetimes from the server in the `utc` timezone and the `sql` or `iso` format. Then use the client's locale format.
+
+
+
+
+
+
+
+## Changelog
+
+**version 0.5.1 (beta)**
+
+- Removed the v-luxon method, as it did not work as expected. Only using filter from now on. The next update will contain all the new features.
+
+​             
+
+**version 0.5.0 (beta)**
+
+- initial changes
