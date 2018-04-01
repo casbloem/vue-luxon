@@ -210,20 +210,8 @@ module.exports = {
       }
     };
 
-    Vue.directive("luxon", function(el, binding) {
-      let opts = {};
-      let modifierKeys = Object.keys(binding.modifiers);
-      if (binding.arg == "locale") {
-        if (modifierKeys.length > 0) {
-          opts.clientFormat = "locale";
-          opts.localeFormat = modifierKeys[0];
-        }
-      }
-      el.innerHTML = vueluxon(el.innerHTML, opts);
-    });
-
     Vue.filter("luxon", function() {
-      return vueluxon(arguments[0], arguments[2]);
+      return vueluxon(arguments[0], arguments[1]);
     });
     Vue.filter("luxon:format", function() {
       return vueluxon(arguments[0], arguments[2], {

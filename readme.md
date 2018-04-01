@@ -12,7 +12,7 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 
 
 
-> #### version 0.5.1 (beta)
+> #### version 0.5.3 (beta)
 
 > Working towards a stable version of vue-luxon (waited for stable version of Luxon).
 > Almost done.
@@ -26,7 +26,6 @@ You can find the [full changelog](#changelog) at the bottom
 ## Example
 
 You can find an example at https://packages.cblm.nl/examples/vue-luxon
-(example might not work)
 
 
 
@@ -402,6 +401,11 @@ Save and serve your datetimes from the server in the `utc` timezone and the `sql
 
 
 ## Changelog
+
+**version 0.5.3 (beta)**
+no major changes
+
+
 
 **version 0.5.1 (beta)**
 
