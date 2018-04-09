@@ -12,15 +12,10 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 
 
 
-> #### version 0.5.4 (beta)
->
-> - Changed the filter names. Use a dot (`.`) instead now.
->     
+> #### version 0.5.5 (beta)
 
-> Working towards a stable version of vue-luxon (waited for stable version of Luxon).
-> Almost done.
->
-> - The next update will contain all the new features. 
+
+
 
 You can find the [full changelog](#changelog) at the bottom
 
@@ -79,8 +74,8 @@ sets the format to locale.
 
 ```javascript
 {{ datetimestring | luxon.locale }}
-{{ datetimestring | luxon.locale.short }}
-{{ datetimestring | luxon.locale.long }}
+{{ datetimestring | luxon.locale('short') }}
+{{ datetimestring | luxon.locale('long') }}
 ```
 
 If `localeLang` is `en`, the results would be:
@@ -95,7 +90,7 @@ Thursday, April 20, 2017
 ### luxon:diffForHumans
 The difference in readable format. (eg `10 days ago`)
 
-( see [Difference for Humans](#difference for-humans) )
+( see [Difference for Humans](#difference-for-humans) )
 
 
 
@@ -405,13 +400,10 @@ Save and serve your datetimes from the server in the `utc` timezone and the `sql
 
 ## Changelog
 
+
+
 **version 0.5.4 (beta)**
 Changed the filter names. Use a dot (`.`) instead now.
-
-
-
-**version 0.5.3 (beta)**
-no major changes
 
 
 
