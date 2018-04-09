@@ -12,7 +12,10 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 
 
 
-> #### version 0.5.3 (beta)
+> #### version 0.5.4 (beta)
+>
+> - Changed the filter names. Use a dot (`.`) instead now.
+>     
 
 > Working towards a stable version of vue-luxon (waited for stable version of Luxon).
 > Almost done.
@@ -65,7 +68,7 @@ There are some useful shorthand's available.
 Change the clientFormat.
 
 ```
-{{ luxon:format('dd-MM-YY') }}
+{{ luxon.format('dd-MM-YY') }}
 ```
 
 
@@ -75,9 +78,9 @@ Change the clientFormat.
 sets the format to locale.
 
 ```javascript
-{{ datetimestring | luxon:locale }}
-{{ datetimestring | luxon:locale.short }}
-{{ datetimestring | luxon:locale.long }}
+{{ datetimestring | luxon.locale }}
+{{ datetimestring | luxon.locale.short }}
+{{ datetimestring | luxon.locale.long }}
 ```
 
 If `localeLang` is `en`, the results would be:
@@ -152,7 +155,7 @@ When using filter shorthand's, the first argument will for the shorthand.
 So if you need to override options, use the second.
 
 ```javascript
-{{ datetimeString | luxon:format('dd-MM-yyyy', { serverFormat: 'sql' }) }}
+{{ datetimeString | luxon.format('dd-MM-yyyy', { serverFormat: 'sql' }) }}
 
 // is short for:
 {{ datetimeString | luxon({ clientFormat: 'dd-MM-yyyy', serverFormat: 'sql' }) }}
@@ -401,6 +404,11 @@ Save and serve your datetimes from the server in the `utc` timezone and the `sql
 
 
 ## Changelog
+
+**version 0.5.4 (beta)**
+Changed the filter names. Use a dot (`.`) instead now.
+
+
 
 **version 0.5.3 (beta)**
 no major changes

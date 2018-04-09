@@ -108,7 +108,7 @@ module.exports = {
       if (!cdt || !cdt.isValid) return optionsGlobal.invalid(cdt.invalid);
 
       let from = cdt;
-      let till = DateTime.local();
+      let till = DateTime.local().setLocale(options.serverZone);
       let p = from.until(till),
         f = till.until(from);
       let c = p.isValid ? p : f.isValid ? f : false;
@@ -213,18 +213,18 @@ module.exports = {
     Vue.filter("luxon", function() {
       return vueluxon(arguments[0], arguments[1]);
     });
-    Vue.filter("luxon:format", function() {
+    Vue.filter("luxon.format", function() {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: arguments[1]
       });
     });
-    Vue.filter("luxon:locale", function() {
+    Vue.filter("luxon.locale", function() {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: "locale",
         localeFormat: arguments[1]
       });
     });
-    Vue.filter("luxon:diffForHumans", function() {
+    Vue.filter("luxon.diffForHumans", function() {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: "diffforhumans",
         diffForHumans: arguments[1]

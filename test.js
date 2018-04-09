@@ -28,6 +28,15 @@ module.exports = {
           clientFormat: "yy-dd-MM"
         }),
         expected_output: "11-02-04"
+      },
+      {
+        input: vueLuxon('2018-04-09 03:42', {
+          serverZone: "Europe/Amsterdam",
+          serverFormat: "yyyy-MM-dd hh:mm",
+          clientZone: "Europe/Amsterdam",
+          clientFormat: "dfh"
+        }),
+        expected_output: "7 years ago"
       }
     ];
 
