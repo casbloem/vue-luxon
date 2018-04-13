@@ -1,0 +1,109 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div id="vue">
+        <div class="container">
+            <h1 class="p-3 display-4">vue-luxon</h1>
+            <hr>
+
+            <h1 class="h5">Simple examples</h1>
+            <p class="lead">The variable <code>datetimeVariable</code> is set to <input v-model="datetimeVariable"></p>
+            <div class="row">
+                <div class="col-md-8">
+                    <code class="d-block p-2" v-pre>{{ datetimeVariable | luxon }}</code>
+                    <code class="d-block p-2">&lt;span v-luxon="datetimeVariable"&gt;&lt;/span&gt;</code>
+            
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        <span class="d-block p-2">{{ datetimeVariable | luxon }}</span> 
+                        <span class="d-block p-2" v-luxon="datetimeVariable"></span>
+
+                    </p>
+
+                </div>
+            </div>
+            <hr>
+
+    
+
+            <h2 class="h6">Format</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <code class="d-block p-2" v-pre>{{ datetimeVariable | luxon.format('dd-MM-yyyy') }}</code>
+  
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        <span class="d-block p-2">{{ datetimeVariable | luxon.format('dd-MM-yyyy') }}</span> 
+                    </p>
+
+                </div>
+            </div>
+            <hr>
+
+            <h2 class="h6">Locale <small>with shortcuts</small></h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <code class="d-block p-2" v-pre>{{ datetimeVariable | luxon.locale }}</code>
+                    <code class="d-block p-2" v-pre>{{ datetimeVariable | luxon.locale('short') }}</code>
+                    <code class="d-block p-2" v-pre>{{ datetimeVariable | luxon.locale('med') }}</code>
+                    <code class="d-block p-2" v-pre>{{ datetimeVariable | luxon.locale('full') }}</code>
+                    <code class="d-block p-2" v-pre>{{ datetimeVariable | luxon.locale('huge') }}</code>
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        <span class="d-block p-2">{{ datetimeVariable | luxon.locale }}</span> 
+                        <span class="d-block p-2">{{ datetimeVariable | luxon.locale('short') }}</span> 
+                        <span class="d-block p-2">{{ datetimeVariable | luxon.locale('med') }}</span>
+                        <span class="d-block p-2">{{ datetimeVariable | luxon.locale('full') }}</span>  
+                        <span class="d-block p-2">{{ datetimeVariable | luxon.locale('huge') }}</span>  
+                    </p>
+
+                </div>
+            </div>
+
+            <hr>
+
+            <h2 class="h6">Options</h2>
+            <p class="lead">The variable <code>datetimeObject</code> is set to<br>
+                <code>{<br>
+                    <var style="width: 160px; padding-left:15px; display:inline-block;">value:</var>'<input v-model="datetimeObject.value" class="form-control form-control-sm" style="width: 220px; display:inline-block;">',<br>
+                    <var style="width: 160px; padding-left:15px; display:inline-block;">serverZone:</var>'<input v-model="datetimeObject.serverZone" class="form-control form-control-sm" style="width: 220px; display:inline-block;">',<br>
+                    <var style="width: 160px; padding-left:15px; display:inline-block;">serverFormat:</var>'<input v-model="datetimeObject.serverFormat" class="form-control form-control-sm" style="width: 220px; display:inline-block;">',<br>
+                    <var style="width: 160px; padding-left:15px; display:inline-block;">clientZone:</var>'<input v-model="datetimeObject.clientZone" class="form-control form-control-sm" style="width: 220px; display:inline-block;">',<br>
+                    <var style="width: 160px; padding-left:15px; display:inline-block;">clientFormat:</var>'<input v-model="datetimeObject.clientFormat" class="form-control form-control-sm" style="width: 220px; display:inline-block;">',<br>
+                }</code>
+            </p>
+            <div class="row">
+                <div class="col-md-8">
+                        <code class="d-block p-2">&lt;span v-luxon="datetimeObject"&gt;&lt;/span&gt;</code>
+                        <code class="d-block p-2" v-pre>{{ datetimeObject | luxon }}</code>
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        <span class="d-block p-2" v-luxon="datetimeObject"></span> 
+                        <span class="d-block p-2">{{ datetimeObject | luxon }}</span> 
+                    </p>
+
+                </div>
+            </div>
+            <hr>
+
+
+
+    
+
+        </div>
+    </div>
+
+    <script src="build.js"></script>
+</body>
+
+</html>
