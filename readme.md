@@ -46,9 +46,9 @@ To get started just use the `luxon` filter or the `v-luxon` directive, as shown 
 ```
 
 
-## Shorthand's
+## Shorthands and Modifiers
 
-There are some useful shorthand's available.
+There are some useful shorthand's and, when using the `v-luxon`, modifiers available.
 
 ### luxon:format
 
@@ -64,10 +64,15 @@ Change the clientFormat.
 
 sets the format to locale.
 
-```javascript
+```html
 {{ datetimestring | luxon.locale }}
+<span v-luxon:locale="datatimestring"></span>
+
 {{ datetimestring | luxon.locale('short') }}
+<span v-luxon:locale.short="datatimestring"></span>
+
 {{ datetimestring | luxon.locale('long') }}
+<span v-luxon:locale.long="datatimestring"></span>
 ```
 
 If `localeLang` is `en`, the results would be:
@@ -78,8 +83,11 @@ Thursday, April 20, 2017
 ```
 
 
-
 ### luxon:diffForHumans
+```html
+{{ datetimestring | luxon.diffForHumans }} 
+<span v-luxon:diffForHumans="datatimestring"></span>
+```  
 The difference in readable format. (eg `10 days ago`)
 
 ( see [Difference for Humans](#difference-for-humans) )
@@ -94,6 +102,7 @@ luxon:custom((lxn => {
 	return lxn.year;
 })
 ```
+
 
 
 ## Options
@@ -134,6 +143,8 @@ You can override the default options easily.
 
 ```javascript
 {{ datetimeString | luxon({ options }) }}
+
+<span v-luxon="{ value: dateTimeString, options }"></span>
 ```
 
 #### when using filter shorthand's
