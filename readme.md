@@ -9,6 +9,8 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 
 > ### version 0.6.0 (pre-release)
 
+![vue-luxon-preview](https://user-images.githubusercontent.com/5813001/38711958-00d78e2a-3ec9-11e8-80f2-a16075af06a0.png)
+
 
 ### Example  
 You can find an example at https://packages.cblm.nl/examples/vue-luxon
