@@ -83,6 +83,10 @@ module.exports = {
       }
     };
 
+    const clientFormats = {
+
+    };
+
     const trans = (nameRaw, amountRaw, parser, options) => {
       let amount = Math.round(amountRaw);
       let name = nameRaw.slice(0, -1);
@@ -165,11 +169,16 @@ module.exports = {
       return str;
     };
 
+    const parseClientFormat = str => {
+      
+      return str;
+    };
+
     const format = (str, options = optionsGlobal) => {
       let dt = parse(str, options);
       if (dt.isValid == false) return optionsGlobal.invalid(dt.invalid);
       let a = str,
-        cf = options.clientFormat,
+        cf = parseClientFormat(options.clientFormat),
         cz = options.clientZone,
         ll = parseLocaleLang(options.localeLang),
         lf = parseLocaleFormat(options.localeFormat);
@@ -196,6 +205,9 @@ module.exports = {
     };
 
     return (str, optionsFilter, optionsForce) => {
+      if (typeof str == 'object') {
+        optionsFilter = str; str = str.value;
+      }
       let options = extend(optionsGlobal, optionsFilter, optionsForce);
       return format(str, options);
     };
@@ -229,6 +241,10 @@ module.exports = {
         clientFormat: "diffforhumans",
         diffForHumans: arguments[1]
       });
+    });
+
+    Vue.directive("luxon", (el, binding) => {
+      el.innerHTML = vueluxon(binding.value);
     });
   }
 };

@@ -1,28 +1,16 @@
 # vue-luxon
 
 Easy use of Luxon in Vue, datetime parsing and formating.
-
-[![GitHub last commit](https://img.shields.io/github/last-commit/casbloem/vue-luxon.svg)](#)
-[![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
-
-
 [![npm version](https://img.shields.io/npm/v/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![npm downloads](https://img.shields.io/npm/dt/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
+[![GitHub last commit](https://img.shields.io/github/last-commit/casbloem/vue-luxon.svg)](#)
+[![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
 [![Build Status](https://travis-ci.org/casbloem/vue-luxon.svg?branch=master)](#)
 
+> ### version 0.6.0 (pre-release)
 
 
-> #### version 0.5.5 (beta)
-
-
-
-
-You can find the [full changelog](#changelog) at the bottom
-
-
-
-## Example
-
+### Example  
 You can find an example at https://packages.cblm.nl/examples/vue-luxon
 
 
@@ -46,13 +34,15 @@ By default, vue-luxon expect the given datetime string to be timezone `utc`  and
 
 # Usage
 
-To get started just use the `luxon` filter, as shown below.
+To get started just use the `luxon` filter or the `v-luxon` directive, as shown below.
 
 ```javascript
 {{ datetimeString | luxon }}
 ```
+```javascript
+<span v-luxon="datetimeString"></span> 
+```
 
-see [vue-luxon example](https://packages.cblm.nl/examples/vue-luxon) to see it live.
 
 ## Shorthand's
 
@@ -388,31 +378,14 @@ However, some languages can have more plural forms. ( `zero` `one` `two` `few` `
 
 
 
-### Tips
-
-Save and serve your datetimes from the server in the `utc` timezone and the `sql` or `iso` format. Then use the client's locale format.
-
+### Tips  
+- Save and serve your datetimes from the server in the `utc` timezone and the `iso` or `sql` format. Then use the client's locale format.
 
 
 
 
 
 
-## Changelog
 
-
-
-**version 0.5.4 (beta)**
-Changed the filter names. Use a dot (`.`) instead now.
-
-
-
-**version 0.5.1 (beta)**
-
-- Removed the v-luxon method, as it did not work as expected. Only using filter from now on. The next update will contain all the new features.
-
-​             
-
-**version 0.5.0 (beta)**
-
-- initial changes
+### Changelog
+...
