@@ -2,10 +2,17 @@
   "private": true,
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "dev": "browserify index.js -o build.js",
+    "prod": "browserify index.js -p [minifyify --no-map] > build.js"
+  },
   "browser": {
     "vue": "vue/dist/vue.common.js"
   },
   "dependencies": {
     "vue": "^2.5.16"
+  },
+  "devDependencies": {
+    "minifyify": "^7.3.5"
   }
 }

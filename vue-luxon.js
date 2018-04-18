@@ -20,6 +20,8 @@ module.exports = {
 
     const optionsGlobal = extend(
       {
+        value: null,
+        lxn: null,
         serverZone: "UTC",
         serverFormat: "ISO",
         clientZone: "locale",
@@ -30,11 +32,12 @@ module.exports = {
           month: "long",
           day: "numeric"
         },
+        parseApply: null,
         diffForHumans: {
           past: ":a :w :ago",
           now: "just now",
           future: ":in :a :w",
-          durations: ["years", "months", "days", "hours", "minutes", "seconds"]
+          durations: ["years", "months", "days", "hours", "minutes", "Seconds"]
         },
         i18n: {
           lang: "en-EN",
@@ -44,7 +47,7 @@ module.exports = {
           day: "[one]day|[other]days",
           hour: "[one]hour|[other]hours",
           minute: "[one]minute|[other]minutes",
-          second: "[one]second|[other]seconds",
+          second: "[one]second|[other]Seconds",
           ago: "ago",
           in: "in"
         },
@@ -66,26 +69,121 @@ module.exports = {
         month: "short",
         day: "numeric"
       },
+      timesimple: {
+        hour: "numeric",
+        minute: "2-digit"
+      },
+      timewithseconds: {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit"
+      },
+      timewithshortoffset: {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "short"
+      },
+      timewithlongoffset: {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "long"
+      },
+      time24simple: {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: false
+      },
+      time24withseconds: {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      },
+      time24withshortoffset: {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+        timeZoneName: "short"
+      },
+      time24withlongoffset: {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+        timeZoneName: "long"
+      },
+      datetimeshort: {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      },
+      datetimeshortwithseconds: {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit"
+      },
+      datetimemed: {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      },
+      medwithseconds: {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit"
+      },
       full: {
         year: "numeric",
         month: "long",
-        day: "numeric"
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        timeZoneName: "short"
+      },
+      fullwithseconds: {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "short"
       },
       huge: {
         year: "numeric",
         month: "long",
         day: "numeric",
-        weekday: "long"
-      },
-      timesimple: {
+        weekday: "long",
         hour: "numeric",
-        minute: "2-digit"
+        minute: "2-digit",
+        timeZoneName: "long"
+      },
+      hugewithseconds: {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        weekday: "long",
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "long"
       }
     };
 
-    const clientFormats = {
-
-    };
+    const clientFormats = {};
 
     const trans = (nameRaw, amountRaw, parser, options) => {
       let amount = Math.round(amountRaw);
@@ -164,79 +262,136 @@ module.exports = {
 
     const parseLocaleFormat = str => {
       if (typeof str == "string") {
-        return formatTemplates[str] || formatTemplates[0];
+        return formatTemplates[str.toLowerCase()] || formatTemplates[0];
       }
       return str;
     };
 
     const parseClientFormat = str => {
-      
       return str;
     };
 
+    
+    const argToOpts = arg => {
+      let matchableArgs = {
+        humanize: { clientFormat: "dfh" }
+      };
+      let formatTemplateKeys = Object.keys(formatTemplates);
+      console.log(formatTemplateKeys);
+      for (let k in formatTemplateKeys)
+        matchableArgs[formatTemplateKeys[k].toLowerCase()] = { "localeFormat": formatTemplateKeys[k].toLowerCase() };
+
+      return matchableArgs[arg];
+    };
+
+    const modsToOpts = mods => {
+      let r = {};
+      let y = {
+        endofday: "parseApply",
+        endofmonth: "parseApply"
+      };
+     
+
+      for (let i in mods)
+        if (y.hasOwnProperty(mods[i])) r[y[mods[i]]] = mods[i];
+
+      return r;
+    };
+
     const format = (str, options = optionsGlobal) => {
+      options.value = str;
       let dt = parse(str, options);
+      let dtp = null;
       if (dt.isValid == false) return optionsGlobal.invalid(dt.invalid);
       let a = str,
         cf = parseClientFormat(options.clientFormat),
         cz = options.clientZone,
         ll = parseLocaleLang(options.localeLang),
         lf = parseLocaleFormat(options.localeFormat);
+
+      if (options.parseApply != null) {
+        switch (options.parseApply.toLowerCase()) {
+          case "endofday":
+            dt = dt.endOf("day");
+            break;
+          case "endofmonth":
+            dt = dt.endOf("month");
+            break;
+        }
+      }
+      if (options.clientZone != "locale") dt = dt.setZone(cz);
       switch (cf.toLowerCase()) {
         case "diffforhumans":
         case "dfh":
           return format_dfh(dt, options);
+          break;
         case "locale":
           return dt.setLocale(ll).toLocaleString(lf);
+          break;
         case "sql":
         case "laravel":
-          return dt.toSQL(a, { zone: cz });
+          return dt.toSQL(a);
+          break;
         case "iso":
-          return dt.toISO(a, { zone: cz });
+          return dt.toISO(a);
+          break;
         case "http":
-          return dt.toHTTP(a, { zone: cz });
+          return dt.toHTTP(a);
+          break;
         case "jsdate":
-          return dt.toJSDate(a, { zone: cz });
+          return dt.toJSDate(a);
+          break;
         case "rfc2822":
-          return dt.toRFC2822(a, { zone: cz });
+          return dt.toRFC2822(a);
+          break;
         default:
-          return dt.toFormat(cf, { zone: cz });
+          return dt.toFormat(cf);
+          break;
       }
     };
 
-    return (str, optionsFilter, optionsForce) => {
-      if (typeof str == 'object') {
-        optionsFilter = str; str = str.value;
+    return (str, optionsFilter, optionsForce, binding = false) => {
+      if (typeof str == "object") {
+        optionsFilter = str;
+        str = str.value;
       }
-      let options = extend(optionsGlobal, optionsFilter, optionsForce);
+
+      let optionsMods = {};
+      let optionsArg = {};
+      if (binding != false) {
+        if (binding.modifiers)
+          optionsMods = modsToOpts(Object.keys(binding.modifiers));
+        if (binding.arg) optionsArg = argToOpts(binding.arg);
+      }
+
+      let options = extend(
+        optionsGlobal,
+        optionsFilter,
+        optionsMods,
+        optionsArg,
+        optionsForce
+      );
       return format(str, options);
     };
   },
   install: function(Vue, optionsUser) {
     let vueluxon = module.exports.vueluxon(optionsUser);
-    let extend = module.exports.extend;
-
-    const validate = {
-      isString: input => {
-        return typeof input == "String";
-      }
-    };
 
     Vue.filter("luxon", function() {
       return vueluxon(arguments[0], arguments[1]);
     });
-    Vue.filter("luxon.format", function() {
+    Vue.filter("luxon:format", function() {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: arguments[1]
       });
     });
-    Vue.filter("luxon.locale", function() {
+    Vue.filter("luxon:locale", function() {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: "locale",
         localeFormat: arguments[1]
       });
     });
-    Vue.filter("luxon.diffForHumans", function() {
+    Vue.filter("luxon:diffForHumans", function() {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: "diffforhumans",
         diffForHumans: arguments[1]
@@ -244,7 +399,7 @@ module.exports = {
     });
 
     Vue.directive("luxon", (el, binding) => {
-      el.innerHTML = vueluxon(binding.value);
+      el.innerHTML = vueluxon(binding.value, {}, {}, binding);
     });
   }
 };

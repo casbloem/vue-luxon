@@ -207,7 +207,7 @@ The representation of the hour. Possible values are `'numeric'`, `'2-digit'`.
 **minute**   
 The representation of the minute. Possible values are `'numeric'`, `'2-digit'`.
 
-**second        **    
+**second**    
 The representation of the second. Possible values are `'numeric'`, `'2-digit'`.
 
 **timeZoneName**     
