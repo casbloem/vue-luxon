@@ -59,128 +59,28 @@ module.exports = {
     );
 
     const formatTemplates = {
-      short: {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric"
-      },
-      med: {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-      },
-      timesimple: {
-        hour: "numeric",
-        minute: "2-digit"
-      },
-      timewithseconds: {
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit"
-      },
-      timewithshortoffset: {
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        timeZoneName: "short"
-      },
-      timewithlongoffset: {
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        timeZoneName: "long"
-      },
-      time24simple: {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: false
-      },
-      time24withseconds: {
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-      },
-      time24withshortoffset: {
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-        timeZoneName: "short"
-      },
-      time24withlongoffset: {
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-        timeZoneName: "long"
-      },
-      datetimeshort: {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit"
-      },
-      datetimeshortwithseconds: {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit"
-      },
-      datetimemed: {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit"
-      },
-      medwithseconds: {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit"
-      },
-      full: {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-        timeZoneName: "short"
-      },
-      fullwithseconds: {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        timeZoneName: "short"
-      },
-      huge: {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        weekday: "long",
-        hour: "numeric",
-        minute: "2-digit",
-        timeZoneName: "long"
-      },
-      hugewithseconds: {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        weekday: "long",
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        timeZoneName: "long"
-      }
+      full: DateTime.DATETIME_FULL,
+      fulls: DateTime.DATETIME_FULL_WITH_SECONDS,
+      huge: DateTime.DATETIME_HUGE,
+      huges: DateTime.DATETIME_HUGE_WITH_SECONDS,
+      med: DateTime.DATETIME_MED,
+      meds: DateTime.DATETIME_MED_WITH_SECONDS,
+      short: DateTime.DATETIME_SHORT,
+      shorts: DateTime.DATETIME_SHORT_WITH_SECONDS,
+
+      date_full: DateTime.DATE_FULL,
+      date_huge: DateTime.DATE_HUGE,
+      date_med: DateTime.DATE_MED,
+      date_short: DateTime.DATE_SHORT,
+
+      time24simple: DateTime.TIME_24_SIMPLE,
+      time24longoffset: DateTime.TIME_24_WITH_LONG_OFFSET,
+      time24seconds: DateTime.TIME_24_WITH_SECONDS,
+      //name: DateTime.TIME_24_WITH_SHORT_OFFSET,
+      //name: DateTime.TIME_SIMPLE,
+      //name: DateTime.TIME_WITH_LONG_OFFSET,
+      //name: DateTime.TIME_WITH_SECONDS,
+      //name: DateTime.TIME_WITH_SHORT_OFFSET,
     };
 
     const clientFormats = {};
@@ -273,15 +173,9 @@ module.exports = {
 
     
     const argToOpts = arg => {
-      let matchableArgs = {
-        humanize: { clientFormat: "dfh" }
-      };
-      let formatTemplateKeys = Object.keys(formatTemplates);
-      console.log(formatTemplateKeys);
-      for (let k in formatTemplateKeys)
-        matchableArgs[formatTemplateKeys[k].toLowerCase()] = { "localeFormat": formatTemplateKeys[k].toLowerCase() };
-
-      return matchableArgs[arg];
+      let argDown = arg.toLowerCase();
+      if (formatTemplates.hasOwnProperty(argDown)) return { clientFormat: 'locale', localeFormat: argDown };
+      if (argDown == 'humanize') return { humanize: { clientFormat: "dfh" } };
     };
 
     const modsToOpts = mods => {
@@ -319,6 +213,7 @@ module.exports = {
             break;
         }
       }
+
       if (options.clientZone != "locale") dt = dt.setZone(cz);
       switch (cf.toLowerCase()) {
         case "diffforhumans":

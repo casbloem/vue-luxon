@@ -7,13 +7,13 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 [![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
 [![Build Status](https://travis-ci.org/casbloem/vue-luxon.svg?branch=master)](#)
 
-> ### version 0.6.0 (pre-release)
+> ### version 0.6.0 (alpha)    
 
 ![vue-luxon-preview](https://user-images.githubusercontent.com/5813001/38711958-00d78e2a-3ec9-11e8-80f2-a16075af06a0.png)
 
-
+    
 ### Example  
-You can find an example at https://packages.cblm.nl/examples/vue-luxon
+https://packages.cblm.nl/vue-luxon
 
 
 
@@ -250,6 +250,34 @@ http | HTTP header specs (RFC 850 and 1123) | ``` Sun, 06 Nov 1994 08:49:37 GMT 
 *tokens* | see: tokens | 
 locale | see: [localeFormat](#localeFormat-options) |Thursday, April 20, 2017
 
+## Difference for Humans (diffForHumans)
+
+```javascript
+{
+  diffForHumans: {
+    past: ":a :w :ago",
+    now: "just now",
+    future: ":in :a :w",
+    durations: ["years", "months", "days", "hours", "minutes", "seconds"]
+  },
+}
+```
+use `:a` to define where to place the amount, `:w` for the word (day, years, etc..), `:in` and `:ago` for the translation of 'in' and 'ago'.
+
+
+```javascript
+{
+    durations: ['years', 'months', 'days', 'hours', 'minutes', 'seconds'],
+}
+// RESULT:  " 32 seconds ago "
+
+// Now remove the seconds...
+{
+    durations: ['years', 'months', 'days', 'hours', 'minutes'],
+}
+// RESULT:  " just now "
+```
+
 ### Tokens
 
 Tokens are useful for formatting and parsing.
@@ -323,34 +351,6 @@ You can use the following tokens:
 | qq               |              | quarter, padded to 2                                         | 13                                                          |
 
 
-
-## Difference for Humans (diffForHumans)
-
-```javascript
-{
-  diffForHumans: {
-    past: ":a :w :ago",
-    now: "just now",
-    future: ":in :a :w",
-    durations: ["years", "months", "days", "hours", "minutes", "seconds"]
-  },
-}
-```
-use `:a` to define where to place the amount, `:w` for the word (day, years, etc..), `:in` and `:ago` for the translation of 'in' and 'ago'.
-
-
-```javascript
-{
-    durations: ['years', 'months', 'days', 'hours', 'minutes', 'seconds'],
-}
-// RESULT:  " 32 seconds ago "
-
-// Now remove the seconds...
-{
-    durations: ['years', 'months', 'days', 'hours', 'minutes'],
-}
-// RESULT:  " just now "
-```
 
 
 

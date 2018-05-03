@@ -24,19 +24,19 @@ module.exports = {
         input: vueLuxon("2011-04-02", {
           serverZone: "UTC",
           serverFormat: "yyyy-MM-dd",
-          clientZone: "en-US",
+          clientZone: "Europe/Amsterdam",
           clientFormat: "yy-dd-MM"
         }),
         expected_output: "11-02-04"
       },
       {
-        input: vueLuxon('2018-04-09 03:42', {
+        input: vueLuxon('2011-04-09 03:42', {
           serverZone: "UTC",
           serverFormat: "yyyy-MM-dd hh:mm",
           clientZone: "UTC",
           clientFormat: "dfh"
         }),
-        expected_output: "7 years ago"
+        expected_output: "7 years ago"//iknow
       }
     ];
 
