@@ -18,7 +18,8 @@ const app = new Vue({
                 localeFormat: 'dd-MM',
             },
             datetimeVariable: '2019-02-23T03:32',
-            localeFormatKeys: ["short", "med", "timesimple", "timewithseconds", "timeWithShortOffset", "timeWithLongOffset", "time24Simple", "time24WithSeconds", "time24WithShortOffset", "time24WithLongOffset", "datetimeShort", "datetimeShortWithSeconds", "datetimeMed", "medWithSeconds", "full", "fullWithSeconds", "huge", "hugeWithSeconds"],
+            localeFormatKeys: ['full', 'fullS', 'huge', 'hugeS', 'med', 'medS', 'short', 'shortS', 'date_full', 'date_huge', 'date_med', 'dateShort'
+                                    , 'time24simple', 'time24longoffset' ],
             
         }
     }
