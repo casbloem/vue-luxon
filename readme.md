@@ -7,9 +7,7 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 [![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
 [![Build Status](https://travis-ci.org/casbloem/vue-luxon.svg?branch=master)](#)
 
-> ### version 0.6.0 (alpha)    
-
-![vue-luxon-preview](https://user-images.githubusercontent.com/5813001/38711958-00d78e2a-3ec9-11e8-80f2-a16075af06a0.png)
+> ### version 0.6.1 (alpha)    
 
     
 ### Example  
@@ -55,7 +53,7 @@ There are some useful shorthand's and, when using the `v-luxon`, modifiers avail
 Change the clientFormat.
 
 ```
-{{ luxon.format('dd-MM-YY') }}
+{{ luxon:format('dd-MM-YY') }}
 ```
 
 
@@ -65,13 +63,13 @@ Change the clientFormat.
 sets the format to locale.
 
 ```html
-{{ datetimestring | luxon.locale }}
+{{ datetimestring | luxon:locale }}
 <span v-luxon:locale="datatimestring"></span>
 
-{{ datetimestring | luxon.locale('short') }}
+{{ datetimestring | luxon:locale('short') }}
 <span v-luxon:locale.short="datatimestring"></span>
 
-{{ datetimestring | luxon.locale('long') }}
+{{ datetimestring | luxon:locale('long') }}
 <span v-luxon:locale.long="datatimestring"></span>
 ```
 
@@ -85,7 +83,7 @@ Thursday, April 20, 2017
 
 ### luxon:diffForHumans
 ```html
-{{ datetimestring | luxon.diffForHumans }} 
+{{ datetimestring | luxon:diffForHumans }} 
 <span v-luxon:diffForHumans="datatimestring"></span>
 ```  
 The difference in readable format. (eg `10 days ago`)
@@ -153,7 +151,7 @@ When using filter shorthand's, the first argument will for the shorthand.
 So if you need to override options, use the second.
 
 ```javascript
-{{ datetimeString | luxon.format('dd-MM-yyyy', { serverFormat: 'sql' }) }}
+{{ datetimeString | luxon:format('dd-MM-yyyy', { serverFormat: 'sql' }) }}
 
 // is short for:
 {{ datetimeString | luxon({ clientFormat: 'dd-MM-yyyy', serverFormat: 'sql' }) }}
