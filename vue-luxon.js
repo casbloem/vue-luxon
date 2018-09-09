@@ -1,7 +1,10 @@
-let { DateTime, Interval } = require("luxon");
+let {
+  DateTime,
+  Interval
+} = require("luxon");
 module.exports = {
-  vueluxon: function(optionsUser) {
-    const extend = function() {
+  vueluxon: function (optionsUser) {
+    const extend = function () {
       let out = {};
       for (let i = 0, len = arguments.length; i < len; ++i) {
         let obj = arguments[i];
@@ -18,8 +21,7 @@ module.exports = {
       return out;
     };
 
-    const optionsGlobal = extend(
-      {
+    const optionsGlobal = extend({
         value: null,
         lxn: null,
         serverZone: "UTC",
@@ -90,9 +92,9 @@ module.exports = {
       let name = nameRaw.slice(0, -1);
       let variants = options.i18n[name].split("|");
       let amount_name =
-        options.i18n.lang == "en-EN"
-          ? amount == 1 ? "one" : "other"
-          : new Intl.PluralRules(options.i18n.lang).select(amount);
+        options.i18n.lang == "en-EN" ?
+        amount == 1 ? "one" : "other" :
+        new Intl.PluralRules(options.i18n.lang).select(amount);
 
       let str = "";
       for (let i = 0; variants.length > i; i++) {
@@ -110,7 +112,7 @@ module.exports = {
       if (!cdt || !cdt.isValid) return optionsGlobal.invalid(cdt.invalid);
 
       let from = cdt;
-      let till = DateTime.local().setLocale(options.serverZone);
+      let till = DateTime.local().setZone(options.serverZone);
       let p = from.until(till),
         f = till.until(from);
       let c = p.isValid ? p : f.isValid ? f : false;
@@ -125,9 +127,9 @@ module.exports = {
       return trans(
         closestName,
         obj[closestName],
-        p.isValid && !isNow
-          ? options.diffForHumans.past
-          : !isNow ? options.diffForHumans.future : options.diffForHumans.now,
+        p.isValid && !isNow ?
+        options.diffForHumans.past :
+        !isNow ? options.diffForHumans.future : options.diffForHumans.now,
         options
       );
     };
@@ -141,17 +143,29 @@ module.exports = {
       switch (sf.toLowerCase()) {
         case "sql":
         case "laravel":
-          return DateTime.fromSQL(a, { zone: sz });
+          return DateTime.fromSQL(a, {
+            zone: sz
+          });
         case "iso":
-          return DateTime.fromISO(a, { zone: sz });
+          return DateTime.fromISO(a, {
+            zone: sz
+          });
         case "http":
-          return DateTime.fromHTTP(a, { zone: sz });
+          return DateTime.fromHTTP(a, {
+            zone: sz
+          });
         case "jsdate":
-          return DateTime.fromJSDate(a, { zone: sz });
+          return DateTime.fromJSDate(a, {
+            zone: sz
+          });
         case "rfc2822":
-          return DateTime.fromRFC2822(a, { zone: sz });
+          return DateTime.fromRFC2822(a, {
+            zone: sz
+          });
         default:
-          return DateTime.fromFormat(a, sf, { zone: sz });
+          return DateTime.fromFormat(a, sf, {
+            zone: sz
+          });
       }
     };
 
@@ -171,11 +185,18 @@ module.exports = {
       return str;
     };
 
-    
+
     const argToOpts = arg => {
       let argDown = arg.toLowerCase();
-      if (formatTemplates.hasOwnProperty(argDown)) return { clientFormat: 'locale', localeFormat: argDown };
-      if (argDown == 'humanize') return { humanize: { clientFormat: "dfh" } };
+      if (formatTemplates.hasOwnProperty(argDown)) return {
+        clientFormat: 'locale',
+        localeFormat: argDown
+      };
+      if (argDown == 'humanize') return {
+        humanize: {
+          clientFormat: "dfh"
+        }
+      };
     };
 
     const modsToOpts = mods => {
@@ -184,7 +205,7 @@ module.exports = {
         endofday: "parseApply",
         endofmonth: "parseApply"
       };
-     
+
 
       for (let i in mods)
         if (y.hasOwnProperty(mods[i])) r[y[mods[i]]] = mods[i];
@@ -269,24 +290,24 @@ module.exports = {
       return format(str, options);
     };
   },
-  install: function(Vue, optionsUser) {
+  install: function (Vue, optionsUser) {
     let vueluxon = module.exports.vueluxon(optionsUser);
 
-    Vue.filter("luxon", function() {
+    Vue.filter("luxon", function () {
       return vueluxon(arguments[0], arguments[1]);
     });
-    Vue.filter("luxon:format", function() {
+    Vue.filter("luxon:format", function () {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: arguments[1]
       });
     });
-    Vue.filter("luxon:locale", function() {
+    Vue.filter("luxon:locale", function () {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: "locale",
         localeFormat: arguments[1]
       });
     });
-    Vue.filter("luxon:diffForHumans", function() {
+    Vue.filter("luxon:diffForHumans", function () {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: "diffforhumans",
         diffForHumans: arguments[1]
