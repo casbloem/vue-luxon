@@ -7,11 +7,9 @@ Easy use of Luxon in Vue, datetime parsing and formating. Plus additional featur
 [![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
 [![Build Status](https://travis-ci.org/casbloem/vue-luxon.svg?branch=master)](#)
 
-> ### version 0.6.1 (alpha)
+> ### version 0.7.0
 
-### Example
 
-https://packages.cblm.nl/vue-luxon
 
 ## Install
 
@@ -22,7 +20,7 @@ npm install vue-luxon --save
 ### Use
 
 ```javascript
-const VueLuxon = require("vue-luxon");
+import VueLuxon from "vue-luxon";
 Vue.use(VueLuxon);
 ```
 
@@ -31,23 +29,17 @@ By default, vue-luxon expect the given datetime string to be timezone `utc` and 
 
 # Usage
 
-To get started just use the `luxon` filter or the `v-luxon` directive, as shown below.
+To get started just use the `luxon` filter, as shown below.
 
 ```javascript
-{
-  {
-    datetimeString | luxon;
-  }
-}
+{{ datetimeString | luxon }}
 ```
 
-```javascript
-<span v-luxon="datetimeString" />
-```
 
-## Shorthands and Modifiers
 
-There are some useful shorthand's and, when using `v-luxon`, modifiers available.
+## Shorthands
+
+There are some useful shorthand's/modifiers available.
 
 ### luxon:format
 
@@ -63,13 +55,10 @@ sets the format to locale.
 
 ```html
 {{ datetimestring | luxon:locale }}
-<span v-luxon:locale="datatimestring"></span>
 
 {{ datetimestring | luxon:locale('short') }}
-<span v-luxon:locale.short="datatimestring"></span>
 
 {{ datetimestring | luxon:locale('long') }}
-<span v-luxon:locale.long="datatimestring"></span>
 ```
 
 If `localeLang` is `en`, the results would be:
