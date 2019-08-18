@@ -1,7 +1,7 @@
-let {
+import {
   DateTime,
   Interval
-} = require("luxon");
+} from "luxon";
 module.exports = {
   vueluxon: function (optionsUser) {
     const extend = function () {
