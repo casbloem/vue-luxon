@@ -235,6 +235,9 @@ module.exports = {
         }
       }
 
+      if (dt == 'never') return '[invalid]';
+
+
       if (options.clientZone != "locale") dt = dt.setZone(cz);
       switch (cf.toLowerCase()) {
         case "diffforhumans":
@@ -267,7 +270,7 @@ module.exports = {
     };
 
     return (str, optionsFilter, optionsForce, binding = false) => {
-      if (typeof str == "object") {
+      if (str && typeof str == "object") {
         optionsFilter = str;
         str = str.value;
       }
