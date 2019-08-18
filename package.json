@@ -25,7 +25,7 @@
   },
   "homepage": "https://packages.cblm.nl/vue-luxon",
   "dependencies": {
-    "luxon": "^1.17.2"
+    "luxon": "^1.0.0"
   },
   "scripts": {
     "test": "node -p \"require('./test.js').initialStarter()\""
