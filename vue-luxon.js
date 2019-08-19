@@ -102,9 +102,9 @@ module.exports = {
           str = variants[i].replace(/\[\w+\]/, "");
       }
       return parser
-        .replace(/\:a/, amount)
         .replace(/\:ago/, options.i18n.ago)
         .replace(/\:in/, options.i18n.in)
+        .replace(/\:a/, amount)
         .replace(/\:w/, str);
     };
 
