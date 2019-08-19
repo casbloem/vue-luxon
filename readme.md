@@ -1,6 +1,9 @@
 # vue-luxon
 
+https://packages.cblm.nl/vue-luxon
+
 Easy use of Luxon in Vue, datetime parsing and formating. Plus additional features.
+
 [![npm version](https://img.shields.io/npm/v/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![npm downloads](https://img.shields.io/npm/dt/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![GitHub last commit](https://img.shields.io/github/last-commit/casbloem/vue-luxon.svg)](#)
