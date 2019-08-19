@@ -13,6 +13,7 @@
     "vue": "^2.5.16"
   },
   "devDependencies": {
+    "browserify": "^16.5.0",
     "minifyify": "^7.3.5"
   }
 }
