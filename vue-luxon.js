@@ -2,7 +2,7 @@ import {
   DateTime,
   Interval
 } from "luxon";
-module.exports = {
+export default {
   vueluxon: function (optionsUser) {
     const extend = function () {
       let out = {};
