@@ -1,8 +1,8 @@
-import {
+let {
   DateTime,
   Interval
-} from "luxon";
-export default {
+} = require("luxon");
+module.exports = {
   vueluxon: function (optionsUser) {
     const extend = function () {
       let out = {};

@@ -10,8 +10,7 @@ module.exports = {
 
     log("setup completed, starting tests now...");
 
-    const tests = [
-      {
+    const tests = [{
         input: vueLuxon("2012", {
           serverZone: "UTC",
           serverFormat: "yyyy",
@@ -36,7 +35,7 @@ module.exports = {
           clientZone: "UTC",
           clientFormat: "dfh"
         }),
-        expected_output: "7 years ago"//iknow
+        expected_output: "8 years ago" //iknow
       }
     ];
 
