@@ -122,9 +122,8 @@ module.exports = {
           options.diffForHumans ? options.diffForHumans.durations : undefined
         )
         .toObject();
-      const objProperties = Object.getOwnPropertyNames(obj)
-      let closestName = objProperties[objProperties.length - 1];
-      let isNow = obj[closestName] < 1;
+      const closestName = Object.getOwnPropertyNames(obj).find(key => obj[key] > 0);
+      const isNow = !closestName;
       return trans(
         closestName,
         obj[closestName],
