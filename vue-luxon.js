@@ -119,10 +119,11 @@ module.exports = {
       if (c == false) return optionsGlobal.invalid(cdt.invalid);
       let obj = c
         .toDuration(
-          options.diffForHumans ? options.diffForHumans.durations : []
+          options.diffForHumans ? options.diffForHumans.durations : undefined
         )
         .toObject();
-      let closestName = Object.getOwnPropertyNames(obj)[0];
+      const objProperties = Object.getOwnPropertyNames(obj)
+      let closestName = objProperties[objProperties.length - 1];
       let isNow = obj[closestName] < 1;
       return trans(
         closestName,
