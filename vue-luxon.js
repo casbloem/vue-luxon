@@ -39,7 +39,7 @@ module.exports = {
           past: ":a :w :ago",
           now: "just now",
           future: ":in :a :w",
-          durations: ["years", "months", "days", "hours", "minutes", "Seconds"]
+          durations: ["years", "months", "days", "hours", "minutes", "seconds"]
         },
         i18n: {
           lang: "en-EN",
@@ -117,13 +117,17 @@ module.exports = {
         f = till.until(from);
       let c = p.isValid ? p : f.isValid ? f : false;
       if (c == false) return optionsGlobal.invalid(cdt.invalid);
-      let obj = c
+      let obj_u = c
         .toDuration(
-          options.diffForHumans ? options.diffForHumans.durations : undefined
+          options.diffForHumans ? options.diffForHumans.durations : []
         )
         .toObject();
-      const objProperties = Object.getOwnPropertyNames(obj)
-      let closestName = objProperties[objProperties.length - 1];
+      let obj = {};
+      for (key in obj_u) {
+        if (obj_u[key] > 0) obj[key] = obj_u[key];
+      }
+      let closestName = Object.getOwnPropertyNames(obj)[0];
+      console.log(closestName);
       let isNow = obj[closestName] < 1;
       return trans(
         closestName,
