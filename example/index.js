@@ -25,5 +25,6 @@ const app = new Vue({
     }
 });
 
-// to compile:    browserify index.js -o build.js
+// to compile:    npm run dev
+// or		  npm run prod
 
