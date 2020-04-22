@@ -8,9 +8,8 @@ Easy use of Luxon in Vue, datetime parsing and formating. Plus additional featur
 [![npm downloads](https://img.shields.io/npm/dt/vue-luxon.svg)](https://npmjs.com/package/vue-luxon)
 [![GitHub last commit](https://img.shields.io/github/last-commit/casbloem/vue-luxon.svg)](#)
 [![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
-[![Build Status](https://travis-ci.org/casbloem/vue-luxon.svg?branch=master)](#)
 
-> ### version 0.7.2
+> ### version 0.7.3
 
 ## Install
 

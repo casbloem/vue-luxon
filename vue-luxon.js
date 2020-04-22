@@ -127,7 +127,6 @@ module.exports = {
         if (obj_u[key] > 0) obj[key] = obj_u[key];
       }
       let closestName = Object.getOwnPropertyNames(obj)[0];
-      console.log(closestName);
       let isNow = obj[closestName] < 1;
       return trans(
         closestName,
