@@ -96,7 +96,7 @@ luxon:custom((lxn => {
 | ------------ | ----------------------------------- | ---------------------------------- |
 | serverZone   | see zones (`utc`)                   | zone of the given datetimeString   |
 | serverFormat | see formats (`iso`)                 | format of the given datetimeString |
-| clientZone   | see zones (`locale`)                | zone of the given datetimeString   |
+| clientZone   | see zones (`local`)                 | zone of the given datetimeString   |
 | clientFormat | see formats (`locale`)              | format of the given datetimeString |
 | localeLang   | language tag (user's locale)        |
 | localeFormat | [localeFormatObject](#localeFormat) |
