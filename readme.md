@@ -9,12 +9,12 @@ Easy use of Luxon in Vue, datetime parsing and formating. Plus additional featur
 [![GitHub last commit](https://img.shields.io/github/last-commit/casbloem/vue-luxon.svg)](#)
 [![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
 
-> ### version 0.7.3
+> ### version 0.7.4
 
 ## Install
 
 ```
-npm install vue-luxon --save
+npm install vue-luxon
 ```
 
 ### Use
@@ -52,8 +52,7 @@ Change the clientFormat.
 sets the format to locale.
 
 ```html
-{{ datetimestring | luxon:locale }}
-{{ datetimestring | luxon:locale('short') }}
+{{ datetimestring | luxon:locale }} {{ datetimestring | luxon:locale('short') }}
 {{ datetimestring | luxon:locale('long') }}
 ```
 
@@ -75,16 +74,6 @@ Thursday, April 20, 2017
 The difference in readable format. (eg `10 days ago`)
 
 ( see [Difference for Humans](#difference-for-humans) )
-
-### luxon:custom
-
-Create your own output.
-
-```javascript
-luxon:custom((lxn => {
-	return lxn.year;
-})
-```
 
 ## Options
 
@@ -119,11 +108,7 @@ Vue.use(VueLuxon, {
 You can override the default options easily.
 
 ```javascript
-{
-  {
-    datetimeString | luxon({ options });
-  }
-}
+{{ datetimeString | luxon({ options }) }}
 
 <span v-luxon="{ value: dateTimeString, options }" />;
 ```
@@ -168,10 +153,10 @@ Examples:
 }
 ```
 
-**weekday **  
+**weekday**  
 The representation of the weekday. Possible values are `narrow`, `short`, `long`.
 
-**era **  
+**era**  
 The representation of the era. Possible values are `narrow`, `short`, `long`.
 
 **year**  
@@ -199,13 +184,17 @@ The representation of the time zone name. Possible values are `'short'`, `'long'
 
 You can also use one of the templates, just set the `localFormat` to a string of the name of the template.
 
-| localFormat | example _(with localeLang `en`)_ |
-| ----------- | -------------------------------- |
-| short       | 4/20/2017                        |
-| med         | Apr 20, 2017                     |
-| full        | April 20, 2017                   |
-| huge        | Thursday, April 20, 2017         |
-| timesimple  | 3:32 PM                          |
+| localFormat  | example _(with localeLang `en_US`)_                     |
+| ------------ | ------------------------------------------------------- |
+| short        | 10/14/1983, 1:30 PM                                     |
+| shorts       | 10/14/1983, 1:30:23 PM                                  |
+| med          | Oct 14, 1983, 1:30 PM                                   |
+| full         | October 14, 1983, 1:30 PM EDT                           |
+| huge         | Friday, October 14, 1983, 1:30 PM Eastern Daylight Time |
+| time_simple  | 1:30 PM                                                 |
+| time24simple | 13:30                                                   |
+| date_full    | October 14, 1983                                        |
+| date_huge    | Tuesday, October 14, 1983                               |
 
 ## Zones
 
@@ -223,10 +212,13 @@ There is a [list on wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database
 | iso      | ISO 8601 date time string                  | `2018-01-06T13:07:04.054`         |
 | rfc2822  | RFC 2822                                   | `Tue, 01 Nov 2016 13:23:12 +0630` |
 | http     | HTTP header specs (RFC 850 and 1123)       | `Sun, 06 Nov 1994 08:49:37 GMT`   |
-| _tokens_ | see: tokens                                |
+| seconds  | Unix timestamp                             | `1542674993`                      |
+| millis   | Unix timestamp milliseconds                | `1542674993410`                   |
+| _tokens_ | see: tokens                                |                                   |
 | locale   | see: [localeFormat](#localeFormat-options) | Thursday, April 20, 2017          |
 
 ## Difference for Humans (diffForHumans)
+
 
 ```javascript
 {

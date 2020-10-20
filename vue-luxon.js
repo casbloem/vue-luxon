@@ -79,7 +79,7 @@ module.exports = {
       time24longoffset: DateTime.TIME_24_WITH_LONG_OFFSET,
       time24seconds: DateTime.TIME_24_WITH_SECONDS,
       //name: DateTime.TIME_24_WITH_SHORT_OFFSET,
-      //name: DateTime.TIME_SIMPLE,
+      time_simple: DateTime.TIME_SIMPLE,
       //name: DateTime.TIME_WITH_LONG_OFFSET,
       //name: DateTime.TIME_WITH_SECONDS,
       //name: DateTime.TIME_WITH_SHORT_OFFSET,
@@ -146,7 +146,6 @@ module.exports = {
 
       switch (sf.toLowerCase()) {
         case "sql":
-        case "laravel":
           return DateTime.fromSQL(a, {
             zone: sz
           });
@@ -164,6 +163,15 @@ module.exports = {
           });
         case "rfc2822":
           return DateTime.fromRFC2822(a, {
+            zone: sz
+          });
+        case "millis":
+          return DateTime.fromMillis(a, {
+            zone: sz
+          });
+        case "seconds":
+        case "unix":
+          return DateTime.fromSeconds(a, {
             zone: sz
           });
         default:
@@ -252,7 +260,6 @@ module.exports = {
           return dt.setLocale(ll).toLocaleString(lf);
           break;
         case "sql":
-        case "laravel":
           return dt.toSQL(a);
           break;
         case "iso":
@@ -266,6 +273,13 @@ module.exports = {
           break;
         case "rfc2822":
           return dt.toRFC2822(a);
+          break;
+        case "millis":
+          return dt.toMillis(a);
+          break;
+        case "unix":
+        case "seconds":
+          return dt.toSeconds(a);
           break;
         default:
           return dt.toFormat(cf);
@@ -303,23 +317,33 @@ module.exports = {
     Vue.filter("luxon", function () {
       return vueluxon(arguments[0], arguments[1]);
     });
-    Vue.filter("luxon:format", function () {
+
+    const Format = function () {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: arguments[1]
       });
-    });
-    Vue.filter("luxon:locale", function () {
+    };
+    Vue.filter("luxon:format", Format);
+    Vue.filter("luxonFormat", Format);
+
+    const Locale = function () {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: "locale",
         localeFormat: arguments[1]
       });
-    });
-    Vue.filter("luxon:diffForHumans", function () {
+    };
+    Vue.filter("luxon:locale", Locale);
+    Vue.filter("luxonLocale", Locale);
+
+    const RelativeFormat = function () {
       return vueluxon(arguments[0], arguments[2], {
         clientFormat: "diffforhumans",
         diffForHumans: arguments[1]
       });
-    });
+    };
+    Vue.filter("luxon:diffForHumans", RelativeFormat);
+    Vue.filter("luxonDiffForHumans", RelativeFormat);
+    Vue.filter("luxonRelative", RelativeFormat);
 
     Vue.directive("luxon", (el, binding) => {
       el.innerHTML = vueluxon(binding.value, {}, {}, binding);
