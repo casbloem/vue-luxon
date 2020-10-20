@@ -97,8 +97,8 @@ Vue.use(VueLuxon, {
     clientZone: 'locale',
     clientFormat: 'locale',
     localeLang: null,
-    localeFormat: {} // see localeFormat below
-    diffForHumans: {} // see diffForHumans below
+    localeFormat: {}, // see localeFormat below
+    diffForHumans: {}, // see diffForHumans below
     i18n: {} // see i18n below
 });
 ```
