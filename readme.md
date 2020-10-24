@@ -40,8 +40,8 @@ There are also some other useful filters available:
 
 Change the `clientFormat`.
 
-```
-{{ luxonFormat('dd-MM-YY') }}
+```js
+{{ datetimeString | luxonFormat('dd-MM-YY') }}
 ```
 
 
