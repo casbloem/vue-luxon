@@ -41,7 +41,7 @@ There are also some other useful filters available:
 Change the `clientFormat`.
 
 ```js
-{{ datetimeString | luxonFormat('dd-MM-YY') }}
+{{ datetimeString | luxonFormat('dd-MM-yyyy') }}
 ```
 
 
