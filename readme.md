@@ -34,11 +34,7 @@ To get started just use the `luxon` filter, as shown below.
 
 
 
-## Shorthands
-
-There are some useful shorthand's/modifiers available.
-
-
+There are some useful filters available.
 
 ### luxonFormat
 
