@@ -73,7 +73,6 @@ var vueLuxon = {
             //name: DateTime.TIME_WITH_SHORT_OFFSET,
         };
 
-
         var parse = function (str, options) {
             if (!str) { return "never"; }
             var a = str,
@@ -133,7 +132,6 @@ var vueLuxon = {
             return str;
         };
 
-
         var format = function (str, options) {
             if ( options === void 0 ) options = optionsGlobal;
 
@@ -145,12 +143,7 @@ var vueLuxon = {
                 cz = options.clientZone,
                 ll = parseLocaleLang(options.localeLang),
                 lf = parseLocaleFormat(options.localeFormat);
-
-
-
             if (dt == 'never') { return null; }
-
-
             if (options.clientZone != "locale" || options.clientZone != "local") { dt = dt.setZone(cz); }
             switch (cf.toLowerCase()) {
                 case "relative":
@@ -178,24 +171,18 @@ var vueLuxon = {
             }
         };
 
-        return function (str, optionsFilter, optionsForce, binding) {
-
+        return function (str, optionsFilter, optionsForce) {
             if (str && typeof str == "object") {
                 optionsFilter = str;
                 str = str.value;
             }
 
-            var optionsMods = {};
-            var optionsArg = {};
-
-
             var options = extend(
                 optionsGlobal,
                 optionsFilter,
-                optionsMods,
-                optionsArg,
                 optionsForce
             );
+
             return format(str, options);
         };
     },
@@ -220,7 +207,16 @@ var vueLuxon = {
             });
         };
         Vue.filter("luxonLocale", Locale);
-        Vue.filter("luxonLocal", Locale);
+
+        var Local = function () {
+            return vueluxon(arguments[0], arguments[2], {
+                clientFormat: "locale",
+                clientZone: "local",
+                localeLang: "local",
+                localeFormat: arguments[1]
+            });
+        };
+        Vue.filter("luxonLocal", Local);
 
         var RelativeFormat = function () {
             return vueluxon(arguments[0], arguments[2], {
