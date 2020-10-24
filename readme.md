@@ -6,7 +6,7 @@ Easy use of Luxon in Vue, datetime parsing and formating.
 
 > ### version 0.8.0
 
-#### https://packages.cblm.nl/vue-luxon
+## https://packages.cblm.nl/vue-luxon
 
 ## Install
 
