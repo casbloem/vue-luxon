@@ -34,7 +34,7 @@ To get started just use the `luxon` filter, as shown below.
 
 
 
-There are also some other useful filters available:
+*There are also other useful filters available:*
 
 ### luxonFormat
 
