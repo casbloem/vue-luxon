@@ -1,8 +1,8 @@
 {
   "name": "vue-luxon",
-  "version": "0.7.4",
+  "version": "0.8.0",
   "description": "Easy use of DateTime Formating in Vue using Luxon",
-  "main": "vue-luxon.js",
+  "main": "dist/vue-luxon.min.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/casbloem/vue-luxon.git"
@@ -25,9 +25,11 @@
   },
   "homepage": "https://packages.cblm.nl/vue-luxon",
   "dependencies": {
-    "luxon": "^1.17.2"
+    "luxon": "^1.25.0"
   },
-  "scripts": {
-    
+  "scripts": {},
+  "devDependencies": {
+    "@rollup/plugin-buble": "^0.21.3",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }
