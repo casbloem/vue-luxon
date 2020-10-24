@@ -141,6 +141,7 @@ export default {
                 lf = parseLocaleFormat(options.localeFormat);
             if (dt == 'never') return null;
             if (options.clientZone != "locale" && options.clientZone != "local") dt = dt.setZone(cz);
+            else dt = dt.setZone("local");
             switch (cf.toLowerCase()) {
                 case "relative":
                     return dt.setLocale(ll).toRelative(options.relativeFormat || {});
