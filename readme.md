@@ -91,14 +91,15 @@ The difference in readable format. (eg `10 days ago`)
 
 ## Settings
 
-| prop         | options (default)                   | description                           |
-| ------------ | ----------------------------------- | ------------------------------------- |
-| serverZone   | see zones (`utc`)                   | zone of the given datetimeString      |
-| serverFormat | see formats (`iso`)                 | format of the given datetimeString    |
-| clientZone   | see zones (`local`)                 | zone of the given datetimeString      |
-| clientFormat | see formats (`locale`)              | format of the given datetimeString    |
-| localeLang   | language tag (`null`)               | `null` will use the client's language |
-| localeFormat | [localeFormatObject](#localeFormat) |                                       |
+| prop           | options (default)                       | description                           |
+| -------------- | --------------------------------------- | ------------------------------------- |
+| serverZone     | see zones (`utc`)                       | zone of the given datetimeString      |
+| serverFormat   | see formats (`iso`)                     | format of the given datetimeString    |
+| clientZone     | see zones (`local`)                     | zone of the given datetimeString      |
+| clientFormat   | see formats (`locale`)                  | format of the given datetimeString    |
+| localeLang     | language tag (`null`)                   | `null` will use the client's language |
+| localeFormat   | [localeFormatObject](#localeFormat)     |                                       |
+| relativeFormat | [relativeFormatObject](#relativeFormat) |                                       |
 
 
 
