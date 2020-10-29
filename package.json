@@ -27,9 +27,7 @@
   "dependencies": {
     "luxon": "^1.25.0"
   },
-  "scripts": {
-    "test": "node ./test.js"
-  },
+  "scripts": {},
   "devDependencies": {
     "@rollup/plugin-buble": "^0.21.3",
     "rollup-plugin-terser": "^7.0.2"
