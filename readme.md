@@ -1,158 +1,125 @@
-# vue-luxon
+# vue-luxon 
 
 Easy use of Luxon in Vue, datetime parsing and formating.
 
 [![npm version](https://img.shields.io/npm/v/vue-luxon.svg)](https://npmjs.com/package/vue-luxon) [![npm downloads](https://img.shields.io/npm/dt/vue-luxon.svg)](https://npmjs.com/package/vue-luxon) [![GitHub last commit](https://img.shields.io/github/last-commit/casbloem/vue-luxon.svg)](#) [![GitHub version](https://img.shields.io/github/package-json/v/casbloem/vue-luxon.svg)](https://github.com/casbloem/vue-luxon)
 
-> ### version 0.8.0
-
 ## https://packages.cblm.nl/vue-luxon
 
 ## Install
 
-```
+```shell
 npm install vue-luxon
 ```
 
-### Use
+### Setup
 
 ```javascript
 import VueLuxon from "vue-luxon";
-Vue.use(VueLuxon);
+Vue.use(VueLuxon, {});
 ```
 
-By default, vue-luxon expect the given datetime string to be time zone `utc` and format `iso` . The output will be based on the client's locale. Of course these defaults can be changed.
-[Learn more about the options](#options)
-
-# Usage
-
-To get started just use the `luxon` filter, as shown below.
+By default, vue-luxon expect the given datetime string to be time zone `utc` and format `iso` . The output will be based on the client's locale. Of course these defaults can be changed:
 
 ```javascript
-{{ datetimeString | luxon }}
+Vue.use(VueLuxon, {
+    input: {
+        zone: "utc",
+        format: "iso"
+    },
+    output: "short"
+});
 ```
 
+[Learn more about the settings](#settings)
 
 
-*There are also other useful filters available:*
 
-### luxonFormat
+## Basic usage
 
-Change the `clientFormat`.
+You can use the `$luxon` method everywhere in your vue app:
 
 ```js
-{{ datetimeString | luxonFormat('dd-MM-yyyy') }}
+this.$luxon("2020-10-05T14:48:00.000Z")
+// October 5, 2020
 ```
 
+Or use the `luxon` filter, as shown below:
 
+```javascript
+{{ "2020-10-05T14:48:00.000Z" | luxon }}
+// October 5, 2020
+```
 
-### luxonLocale
+You can change the output format:
 
-Sets the `clientFormat` to `locale` and takes a [localeFormat](#localeformat) string or object as first argument.
 ```js
-{{ datetimestring | luxonLocale }}
-{{ datetimestring | luxonLocale({ era: "narrow", timeZoneName: "short", }) }}
-{{ datetimestring | luxonLocale("short") }}
-{{ datetimestring | luxonLocale("long") }}
+this.$luxon("2020-10-05T14:48:00.000Z", "dd-MM-yyyy")
+// 05-10-2020
+
+this.$luxon("2020-10-05 22:36", "relative")
+// 22 days ago
 ```
 
-If `localeLang` is `en`, the results would be:
+And many other settings:
 
-```
-April 20, 2017
-4/20/2017
-Thursday, April 20, 2017
-```
-
-
-
-### luxonLocal
-
-The same as `luxonLocale` but in addition this also sets the ``clientZone`` and `localeLang` to `local`.
-
-
-
-### luxonRelative
-
-```html
-{{ datetimestring | luxonRelative }}
+```js
+this.$luxon("2020-10-05 22:36", {
+    input: { format: "yyyy-MM-dd HH:mm", zone: "Asia/Tokyo" },
+    output: "full",
+})
+// October 5, 2020, 3:36 PM GMT+2
 ```
 
-The difference in readable format. (eg `10 days ago`)
-( see [Relative format](#relative-format) )
-
-
-
-
-
-
+These formats will be in the clients browser language, unless you set a [specific language].
 
 
 
 ## Settings
 
-| prop           | options (default)                       | description                           |
-| -------------- | --------------------------------------- | ------------------------------------- |
-| serverZone     | see zones (`utc`)                       | zone of the given datetimeString      |
-| serverFormat   | see formats (`iso`)                     | format of the given datetimeString    |
-| clientZone     | see zones (`local`)                     | zone of the given datetimeString      |
-| clientFormat   | see formats (`locale`)                  | format of the given datetimeString    |
-| localeLang     | language tag (`null`)                   | `null` will use the client's language |
-| localeFormat   | [localeFormatObject](#localeFormat)     |                                       |
-| relativeFormat | [relativeFormatObject](#relativeFormat) |                                       |
+| prop      | options (default)                      | description                                                  |
+| --------- | -------------------------------------- | ------------------------------------------------------------ |
+| input     | see [settings.input](#settingsinput)   | The default input format and zone                            |
+| output    | see [settings.output](#settingsoutput) | The default output format, zone, language, and relative settings |
+| templates | see [ templates](#templates)           | Define objects to use as properties                          |
 
+#### Default settings
 
-
-## Change default settings
-
-You can change the default options with the second argument of the Vue.use function.
+You can change the default settings with the second argument of the `Vue.use` function.
 
 ```javascript
 Vue.use(VueLuxon, {
-  serverZone: "utc",
-  serverFormat: "iso",
-  clientZone: "local",
-  clientFormat: "locale",
-  localeLang: null,
-  localeFormat:  {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  },
-  relativeFormat: {
-    style: "long",
-    unit: null,
-    round: true,
-    padding: 0
-  }
+  templates: {},
+    input: {
+        zone: "utc",
+        format: "iso"
+    },
+    output: {
+        zone: "local",
+        format: {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        },
+        lang: null,
+        relative: {
+            round: true,
+            unit: null
+        }
+    }
 });
 ```
 
-
-
-You can also override the default settings per filter easily.
+You can also override the default settings per method/filter easily.
 
 ```javascript
-{{ datetimeString | luxon({ options }) }}
+{{ datetimeString | luxon({ settings }) }}
+this.$luxon({ settings })
 ```
 
-#### when using shorthand's
-
-When using shorthand's, the first argument will be for the shorthand.
-Use the second argument to override default settings.
-
-```javascript
-{{ datetimeString | luxonFormat("dd-MM-yyyy", { serverFormat: "sql" }) }}
-
-// is short for:
-{{ datetimeString | luxon({ clientFormat: "dd-MM-yyyy", serverFormat: "sql" }) }}
-```
-
-You can find [all the shorthand's here](#filter-shorthands).
 
 
-
-## clientZone / serverZone
+### Zone
 
 eg: `UTC`, `America/New_York`, `Asia/Tokyo`, ...
 
@@ -160,24 +127,117 @@ For the systems local zone you use `local`.
 
 There is a [list on wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 
-## clientFormat / serverFormat
-
-| format   | description                                | example                           |
-| -------- | ------------------------------------------ | --------------------------------- |
-| sql      | SQL dates, times, and datetimes            | `2017-05-15 09:24:15`             |
-| iso      | ISO 8601 date time string                  | `2018-01-06T13:07:04.054`         |
-| rfc2822  | RFC 2822                                   | `Tue, 01 Nov 2016 13:23:12 +0630` |
-| http     | HTTP header specs (RFC 850 and 1123)       | `Sun, 06 Nov 1994 08:49:37 GMT`   |
-| seconds  | Unix timestamp                             | `1542674993`                      |
-| millis   | Unix timestamp milliseconds                | `1542674993410`                   |
-| _tokens_ | see: tokens                                |                                   |
-| locale   | see: [localeFormat](#localeFormat-options) | Thursday, April 20, 2017          |
 
 
+### Formats
 
-## localeLang
+#### Input and Output formats
 
-`null` default value, this will use the client's language.
+These formats can be used as `input.format` and `output.format`
+
+| format         | description                          | in- or output | example                           |
+| -------------- | ------------------------------------ | ------------- | --------------------------------- |
+| sql            | SQL dates, times, and datetimes      | both          | `2017-05-15 09:24:15`             |
+| iso            | ISO 8601 date time string            | both          | `2018-01-06T13:07:04.054`         |
+| rfc2822        | RFC 2822                             | both          | `Tue, 01 Nov 2016 13:23:12 +0630` |
+| http           | HTTP header specs (RFC 850 and 1123) | both          | `Sun, 06 Nov 1994 08:49:37 GMT`   |
+| seconds        | Unix timestamp                       | both          | `1542674993`                      |
+| millis         | Unix timestamp milliseconds          | both          | `1542674993410`                   |
+| relative       | see: [Relative](#relative)           | output only   | `10 days ago`                     |
+| _tokens_       | see: tokens                          | both          | `yyyy-MM-dd`                      |
+| *templateName* | see: [Templates](#templates)         | both          |                                   |
+
+#### Output formats
+
+These formats can only be used as `output.format`
+
+| format           | example _(with lang `en_US`)_                              |
+| ---------------- | ---------------------------------------------------------- |
+| short            | 10/14/1983, 1:30 PM                                        |
+| shorts           | 10/14/1983, 1:30:23 PM                                     |
+| med              | Oct 14, 1983, 1:30 PM                                      |
+| meds             | Oct 14, 1983, 9:30:33 AM                                   |
+| full             | October 14, 1983, 9:30 AM EDT                              |
+| fulls            | October 14, 1983, 9:30:33 AM EDT                           |
+| huge             | Friday, October 14, 1983, 9:30 AM Eastern Daylight Time    |
+| huges            | Friday, October 14, 1983, 9:30:33 AM Eastern Daylight Time |
+| time             | 9:30 AM                                                    |
+| times            | 09:30:23 AM                                                |
+| time24           | 09:30                                                      |
+| time24s          | 09:30:23                                                   |
+| time24longoffset | 09:30:23 Eastern Daylight Time                             |
+| date_full        | October 14, 1983                                           |
+| date_huge        | Tuesday, October 14, 1983                                  |
+| date_med         | Oct 14, 1983                                               |
+| date_medd        | Fri, Oct 14, 1983                                          |
+| date_short       | 10/14/1983                                                 |
+
+`output.format` can also be an object:
+
+```javascript
+// using an object:
+format: {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+}
+```
+
+| Property     | Possible values                             | Description                              |
+| ------------ | ------------------------------------------- | ---------------------------------------- |
+| weekday      | `narrow` `short` `long`                     | The representation of the weekday        |
+| era          | `narrow` `short` `long`                     | The representation of the era            |
+| year         | `numeric` `2-digit`                         | The representation of the year           |
+| month        | `numeric` `2-digit` `narrow` `short` `long` | The representation of the month          |
+| day          | `numeric` `2-digit`                         | The representation of the day            |
+| hour         | `numeric` `2-digit`                         | The representation of the hour           |
+| minute       | `numeric` `2-digit`                         | The representation of the minute         |
+| second       | `numeric` `2-digit`                         | The representation of the second         |
+| timeZoneName | `short` `long`                              | The representation of the time zone name |
+
+
+
+### settings.input
+
+ `object` or `string`
+
+An `object`containing a [zone](#zone) and [format](#format) or a `string` of a [template](#format-and-zone-templates) name.
+
+```js
+{
+	zone: "utc",
+	format: "iso"
+}
+```
+
+
+
+### settings.output
+
+ `object` or `string`
+
+An `object`containing a [zone](#zone) and [format](#format) or a `string` of a [template](#format-and-zone-templates) name.
+
+```js
+{
+	zone: "local",
+	format: "locale",
+    lang: "",
+    relative: {} // see settings.relative
+}
+```
+
+`lang` language tag set to `null` will use the client's language.
+
+`relative` Read about the [relative format below](#relativeFormat)
+
+
+
+### settings.output.lang
+
+`string`
+
+**`null` default value, this will use the client's language.**
 
 Or use a language tag to set a client location.
 
@@ -188,79 +248,31 @@ Examples:
 `de-AT`: German as used in Austria (primary language with country code).  
 `zh-Hans-CN`: Chinese written in simplified
 
-## localeFormat
 
-localeFormat can be an object or a string.
 
-```javascript
-// using an object:
-{
-  localeFormat: {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }
-}
+### settings.output.relative
 
-// or using a template:
-{ localeFormat: "short" }
+Set the `output.format` to `relative` to use the relative format. Or use the `luxonRelative` filter.
+
+```
+{{ datetime | luxonRelative }}
+{{ datetime | luxonRelative({ style: "short" }) }}
+this.$luxon({ output: { format: "relative" } })
 ```
 
-**weekday**  
-The representation of the weekday. Possible values are `narrow`, `short`, `long`.
-
-**era**  
-The representation of the era. Possible values are `narrow`, `short`, `long`.
-
-**year**  
-The representation of the year. Possible values are `numeric`, `2-digit`.
-
-**month**  
-The representation of the month. Possible values are `numeric`, `2-digit`, `narrow`, `short`, `long`.
-
-**day**  
-The representation of the day. Possible values are `'numeric'`, `'2-digit'`.
-
-**hour**  
-The representation of the hour. Possible values are `'numeric'`, `'2-digit'`.
-
-**minute**  
-The representation of the minute. Possible values are `'numeric'`, `'2-digit'`.
-
-**second**  
-The representation of the second. Possible values are `'numeric'`, `'2-digit'`.
-
-**timeZoneName**  
-The representation of the time zone name. Possible values are `'short'`, `'long'`.
-
-##### Templates for localFormat
-
-You can also use one of the templates, just set the `localFormat` to a string of the name of the template.
-
-| localFormat  | example _(with localeLang `en_US`)_                     |
-| ------------ | ------------------------------------------------------- |
-| short        | 10/14/1983, 1:30 PM                                     |
-| shorts       | 10/14/1983, 1:30:23 PM                                  |
-| med          | Oct 14, 1983, 1:30 PM                                   |
-| full         | October 14, 1983, 1:30 PM EDT                           |
-| huge         | Friday, October 14, 1983, 1:30 PM Eastern Daylight Time |
-| time_simple  | 1:30 PM                                                 |
-| time24simple | 13:30                                                   |
-| date_full    | October 14, 1983                                        |
-| date_huge    | Tuesday, October 14, 1983                               |
-
-
-
-## relativeFormat
+You can change the behavior with the `relativeFormat` settings object in the `output` .
 
 ```javascript
 {
-  relativeFormat: {
-    style: "long",
-    unit: null,
-    round: true,
-    padding: 0
-  },
+    output: {
+        format: "relative"
+        relative: {
+            style: "long",
+            unit: null,
+            round: true,
+            padding: 0
+        },
+    }
 }
 ```
 
@@ -270,6 +282,77 @@ You can also use one of the templates, just set the `localFormat` to a string of
 | unit     | use a specific unit; if omitted, the method will pick the unit. Use one of "years", "quarters", "months", "weeks", "days", "hours", "minutes", or "seconds" | `null`  |
 | round    | whether to round the numbers in the output.                  | `true`  |
 | padding  | padding in milliseconds. This allows you to round up the result if it fits inside the threshold. Don't use in combination with {round: false} because the decimal output will include the padding. | `0`     |
+
+
+
+
+
+#### Templates
+
+You can predefine setting templates.
+
+By default there is a `server` and a `client` template, but you can add your own to the options object.
+
+```js
+templates: {
+    server: {
+        zone: "utc",
+        format: "iso"
+    },
+    client: {
+        zone: "local",
+        format: "short"
+    }
+}
+```
+
+There are multiple ways to use a template:
+
+```js
+// This will use the templates zone and format
+{{ "2020-10-05T14:48:00.000Z" | luxon({ input: "server" }) }}
+
+// This will use the templates zone
+{{ "2020-10-05T14:48:00.000Z" | luxon({ input: { zone: "client" } }) }}
+```
+
+Or you can set the default input and output in the `Vue.use` function to use these templates by default:
+
+```js
+Vue.use(VueLuxon, {
+    input: "server",
+    output: "client",
+});
+```
+
+Or create custom templates to use everywhere:
+
+```js
+Vue.use(VueLuxon, {
+	templates: {
+		serverAMS: {
+			zone: "Europe/Amsterdam",
+			format: "dd-MM-yyyy HH:mm:ss"
+		},
+        serverUTC: {
+			zone: "UTC",
+			format: "yyyy-MM-dd HH:mm:ss"
+		},
+        clientAMS: {
+            zone: "Europe/Amsterdam",
+			format: "med"
+        }
+	},
+    input: "serverUTC",
+    output: "clientAMS",
+});
+```
+
+
+
+
+
+----
 
 
 
@@ -349,11 +432,22 @@ You can use the following tokens:
 
 
 
+------
+
+
+
+#### Change the `$luxon` method name
+
+Provide a `methodName` in the settings object.
+
+
+
+--------
+
+
+
 ### Tips
 
-- Save and serve your datetimes from the server in the `utc` timezone and the `iso` or `sql` format. Then use the client's locale format.
+- Save and serve your datetimes from the server in the `utc` timezone and the `iso` or `sql` format. Then use the client's local locale format.
 
-  
-
-### Changelog
 

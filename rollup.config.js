@@ -3,7 +3,7 @@ import {
   terser
 } from "rollup-plugin-terser";
 export default {
-  input: 'src/vue-luxon.js',
+  input: 'src/main.js',
   external: ['luxon'],
   plugins: [
     buble()
