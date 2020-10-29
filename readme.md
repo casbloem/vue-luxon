@@ -1,4 +1,4 @@
-# vue-luxon 
+# vue-luxon
 
 Easy use of Luxon in Vue, datetime parsing and formating.
 
@@ -258,11 +258,13 @@ Set the `output.format` to `relative` to use the relative format. Or use the `lu
 
 ```
 {{ datetime | luxonRelative }}
-{{ datetime | luxonRelative({ style: "short" }) }}
 this.$luxon({ output: { format: "relative" } })
+
+{{ datetime | luxonRelative({ style: "short" }) }}
+this.$luxon({ output: { format: "relative", relative: { style: "short" } } })
 ```
 
-You can change the behavior with the `relativeFormat` settings object in the `output` .
+You can change the behavior with the `relative settings object in the `output` .
 
 ```javascript
 {
