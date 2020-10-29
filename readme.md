@@ -112,7 +112,7 @@ Vue.use(VueLuxon, {
 });
 ```
 
-You can also override the default settings per method/filter easily.
+You can also override the default settings per method/filter easily:
 
 ```javascript
 {{ datetimeString | luxon({ settings }) }}
