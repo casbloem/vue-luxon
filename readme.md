@@ -222,8 +222,8 @@ An `object`containing a [zone](#zone) and [format](#format) or a `string` of a [
 
 ```js
 {
-	zone: "local",
-	format: "locale",
+    zone: "local",
+    format: "locale",
     lang: "",
     relative: {} // see settings.relative
 }
