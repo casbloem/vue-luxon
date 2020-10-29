@@ -1,7 +1,7 @@
 {
   "name": "vue-luxon",
   "version": "0.9.0",
-  "description": "Easy use of DateTime Formating in Vue using Luxon",
+  "description": "Easy use of DateTime formatting & parsing in Vue using Luxon",
   "main": "dist/vue-luxon.min.js",
   "repository": {
     "type": "git",
