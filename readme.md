@@ -145,7 +145,6 @@ These formats can be used as `input.format` and `output.format`
 | http           | HTTP header specs (RFC 850 and 1123) | both          | `Sun, 06 Nov 1994 08:49:37 GMT`   |
 | seconds        | Unix timestamp                       | both          | `1542674993`                      |
 | millis         | Unix timestamp milliseconds          | both          | `1542674993410`                   |
-| relative       | see: [Relative](#relative)           | output only   | `10 days ago`                     |
 | _tokens_       | see: tokens                          | both          | `yyyy-MM-dd`                      |
 | *templateName* | see: [Templates](#templates)         | both          |                                   |
 
@@ -155,6 +154,7 @@ These formats can only be used as `output.format`
 
 | format           | example _(with lang `en_US`)_                              |
 | ---------------- | ---------------------------------------------------------- |
+| relative         | see: [Relative](#relative)                                 |
 | short            | 10/14/1983, 1:30 PM                                        |
 | shorts           | 10/14/1983, 1:30:23 PM                                     |
 | med              | Oct 14, 1983, 1:30 PM                                      |
