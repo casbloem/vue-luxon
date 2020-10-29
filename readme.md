@@ -16,10 +16,12 @@ npm install vue-luxon
 
 ```javascript
 import VueLuxon from "vue-luxon";
-Vue.use(VueLuxon, {});
+Vue.use(VueLuxon);
 ```
 
-By default, vue-luxon expect the given datetime string to be time zone `utc` and format `iso` . The output will be based on the client's locale. Of course these defaults can be changed:
+By default, vue-luxon expect the given datetime string to be time zone `utc` and format `iso` . The output will be based on the client's locale. 
+
+Change the default settings:
 
 ```javascript
 Vue.use(VueLuxon, {
@@ -31,7 +33,7 @@ Vue.use(VueLuxon, {
 });
 ```
 
-[Learn more about the settings](#settings)
+[Learn more about settings](#settings)
 
 
 
@@ -61,7 +63,7 @@ this.$luxon("2020-10-05 22:36", "relative")
 // 22 days ago
 ```
 
-And many other settings:
+And other settings:
 
 ```js
 this.$luxon("2020-10-05 22:36", {
