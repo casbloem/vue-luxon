@@ -293,7 +293,9 @@ You can change the behavior with the `relativeFormat` settings object in the `ou
 
 You can predefine setting templates.
 
-By default there is a `server` and a `client` template, but you can add your own to the options object.
+By default there is a `server`, `client` and a `inputdate` template, but you can add your own to the options object.
+
+It's also possible to use a template in a template, as the `inputdate` uses the `client` template's zone for example.
 
 ```js
 templates: {
@@ -304,6 +306,10 @@ templates: {
     client: {
         zone: "local",
         format: "short"
+    },
+    inputdate: {
+        zone: "client",
+        format: "yyyy-MM-dd"
     }
 }
 ```

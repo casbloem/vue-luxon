@@ -55,7 +55,7 @@ var formats = {
     },
     client: {
         zone: "local",
-        format: "locale"
+        format: "med"
     },
     inputdate: {
         zone: "client",
