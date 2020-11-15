@@ -26,7 +26,7 @@ export default (settings) => {
     }
 
     if (settings.relative) settings.output.relative = settings.relative;
-    if (settings.local) settings.output.local = settings.local;
+    if (settings.locale) settings.output.locale = settings.locale;
 
     const getFormat = obj => {
         if (typeof obj == 'object') return obj;
