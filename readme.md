@@ -103,7 +103,7 @@ Vue.use(VueLuxon, {
             month: "long",
             day: "numeric"
         },
-        lang: null,
+        locale: null,
         relative: {
             round: true,
             unit: null
@@ -152,7 +152,7 @@ These formats can be used as `input.format` and `output.format`
 
 These formats can only be used as `output.format`
 
-| format           | example _(with lang `en_US`)_                              |
+| format           | example _(with locale `en_US`)_                            |
 | ---------------- | ---------------------------------------------------------- |
 | relative         | see: [Relative](#relative)                                 |
 | short            | 10/14/1983, 1:30 PM                                        |
@@ -224,24 +224,24 @@ An `object`containing a [zone](#zone) and [format](#format) or a `string` of a [
 {
     zone: "local",
     format: "short",
-    lang: "",
+    locale: null,
     relative: {} // see settings.relative
 }
 ```
 
-`lang` language tag set to `null` will use the client's language.
+`locale` set to `null` will use the client's locale.
 
 `relative` Read about the [relative format below](#relativeFormat)
 
 
 
-### settings.output.lang
+### settings.output.locale
 
 `string`
 
-**`null` default value, this will use the client's language.**
+**`null` default value, this will use the client's locale.**
 
-Or use a language tag to set a client location.
+Or use a locale tag to set a client location.
 
 Examples:
 
@@ -458,6 +458,22 @@ Provide a `methodName` in the settings object.
 
 ### Tips
 
-- Save and serve your datetimes from the server in the `utc` timezone and the `iso` or `sql` format. Then use the client's local locale format.
+- Save and serve your datetimes from the server in the `utc` time zone and the `iso` or `sql` format. Then use the client's locale format.
 
 
+
+------
+
+
+
+
+### Changelog
+
+**0.10.0**
+
+- `output.lang` is changed to `output.locale` and the locale is now always set.
+- ESM version added
+
+**0.9.0**
+
+- New API
