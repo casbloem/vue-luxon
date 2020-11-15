@@ -265,6 +265,8 @@ var main = {
         var method_name = optionsUser && optionsUser.methodName ? optionsUser.methodName : "$luxon";
         Vue.prototype[method_name] = vueluxon;
 
+
+
         Vue.filter("luxon", function () {
             if (typeof arguments[1] == 'string')
                 { return vueluxon(arguments[0], arguments[2], {
@@ -275,6 +277,7 @@ var main = {
             return vueluxon(arguments[0], arguments[1]);
         });
 
+
         var RelativeFormat = function () {
             return vueluxon(arguments[0], arguments[2], {
                 output: {
@@ -282,9 +285,7 @@ var main = {
                     relative: arguments[1]
                 }
             });
-        };
-        
-        Vue.filter("luxonRelative", RelativeFormat);
+        };        Vue.filter("luxonRelative", RelativeFormat);
     }
 };
 
