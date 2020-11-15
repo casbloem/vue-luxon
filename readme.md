@@ -469,7 +469,7 @@ Provide a `methodName` in the settings object.
 
 ### Changelog
 
-**0.9.1**
+**0.10.0**
 
 - `output.lang` is changed to `output.locale` and the locale is now always set.
 - ESM version added
