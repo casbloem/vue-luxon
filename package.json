@@ -3,7 +3,7 @@
   "version": "0.9.1",
   "description": "Easy use of DateTime formatting & parsing in Vue using Luxon",
   "main": "dist/vue-luxon.cjs.min.js",
-  "module": "dist/vue-luxon.esm.min.js",
+  "module": "dist/vue-luxon.esm.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/casbloem/vue-luxon.git"
@@ -17,8 +17,7 @@
     "time",
     "moment",
     "momentjs",
-    "2018",
-    "2020"
+    "2018"
   ],
   "author": "Cas Bloem",
   "license": "MIT",
