@@ -1,7 +1,7 @@
 import parse from "./parse";
 export default (str, options) => {
 
-    const parseLocale = str => {
+    const parseLocaleLang = str => {
         if (!str || str == "locale" || str == "local") return null;
         return str;
     };
@@ -14,7 +14,7 @@ export default (str, options) => {
     var a = str,
         cf = options.output.format,
         cz = options.output.zone,
-        ll = parseLocale(options.output.locale ? options.output.locale : null);
+        ll = parseLocaleLang(options.output.lang ? options.output.lang : null);
 
 
     if (dt == 'never') return null;
@@ -22,13 +22,13 @@ export default (str, options) => {
     if (cz != "locale" && cz != "local") dt = dt.setZone(cz);
     else dt = dt.setZone("local");
 
-    dt = dt.setLocale(ll);
+    if (typeof cf == 'object') return dt.setLocale(ll).toLocaleString(cf);
 
-    if (typeof cf == 'object') return dt.toLocaleString(cf);
+
 
     switch (cf.toLowerCase()) {
         case "relative":
-            return dt.toRelative(options.output.relative);
+            return dt.setLocale(ll).toRelative(options.output.relative);
         case "sql":
             return dt.toSQL(a);
         case "iso":

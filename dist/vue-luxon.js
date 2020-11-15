@@ -81,7 +81,7 @@ var defaultSettings = {
             month: "long",
             day: "numeric"
         },
-        locale: null,
+        lang: null,
         relative: {
             round: true,
             unit: null
@@ -116,7 +116,7 @@ function formatSettings (settings) {
     }
 
     if (settings.relative) { settings.output.relative = settings.relative; }
-    if (settings.locale) { settings.output.locale = settings.locale; }
+    if (settings.local) { settings.output.local = settings.local; }
 
     var getFormat = function (obj) {
         if (typeof obj == 'object') { return obj; }
@@ -192,7 +192,7 @@ function parse (str, inputFormat, inputZone) {
 
 function format (str, options) {
 
-    var parseLocale = function (str) {
+    var parseLocaleLang = function (str) {
         if (!str || str == "locale" || str == "local") { return null; }
         return str;
     };
@@ -205,7 +205,7 @@ function format (str, options) {
     var a = str,
         cf = options.output.format,
         cz = options.output.zone,
-        ll = parseLocale(options.output.locale ? options.output.locale : null);
+        ll = parseLocaleLang(options.output.lang ? options.output.lang : null);
 
 
     if (dt == 'never') { return null; }
@@ -213,13 +213,13 @@ function format (str, options) {
     if (cz != "locale" && cz != "local") { dt = dt.setZone(cz); }
     else { dt = dt.setZone("local"); }
 
-    dt = dt.setLocale(ll);
+    if (typeof cf == 'object') { return dt.setLocale(ll).toLocaleString(cf); }
 
-    if (typeof cf == 'object') { return dt.toLocaleString(cf); }
+
 
     switch (cf.toLowerCase()) {
         case "relative":
-            return dt.toRelative(options.output.relative);
+            return dt.setLocale(ll).toRelative(options.output.relative);
         case "sql":
             return dt.toSQL(a);
         case "iso":

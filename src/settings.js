@@ -12,7 +12,7 @@ export default {
             month: "long",
             day: "numeric"
         },
-        locale: null,
+        lang: null,
         relative: {
             round: true,
             unit: null
